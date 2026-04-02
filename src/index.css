@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   FONT FACES (LOAD FIRST)
+========================= */
+
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("/src/assets/fonts/eurostile/EurostileRound-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("/src/assets/fonts/eurostile/EurostileRound-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("/src/assets/fonts/eurostile/EurostileRound-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("/src/assets/fonts/eurostile/EurostileRound-Black.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Goli";
+  src: url("/src/assets/fonts/goli/Goli-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Goli";
+  src: url("/src/assets/fonts/goli/Goli-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Goli";
+  src: url("/src/assets/fonts/goli/Goli-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Goli";
+  src: url("/src/assets/fonts/goli/Goli-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   BASE STYLES
+========================= */
+
+@layer base {
+  html,
+  body {
+    @apply bg-bg text-text font-body;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  p {
+    @apply text-muted;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* =========================
+   COMPONENT / EFFECT STYLES
+========================= */
+
+.card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* FIXED: don’t hijack Tailwind `.group` */
+.group-pulse:hover {
+  animation: borderPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* =========================
+   GRID ANIMATION
+========================= */
+
+@keyframes grid-move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 160px 160px;
+  }
+}
+
+.animate-grid-move {
+  animation: grid-move 22s linear infinite;
+}
+.mt-screen {
+  margin-top: -100vh;
+}
+
+/* =========================
+   HERO LINE ANIMATION
+========================= */
+
+/* CONTAINER — clamps animation */
+.hero-lines-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden; /* 🔒 HARD STOP */
+}
+
+/* ACTUAL LINE SHAPE */
+.hero-lines {
+  position: absolute;
+
+  /* NEVER exceed screen */
+  width: 110%;
+  height: 110%;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  border: 8px solid rgba(255, 225, 197, 0.22);
+  opacity: 0.6;
+
+  filter: blur(0.4px);
+  pointer-events: none;
+
+  /* ARC LOOK */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 22%,
+    black 78%,
+    transparent 100%
+  );
+}
+
+/* VARIANTS */
+.hero-lines-1 {
+  animation: hero-liquid-1 30s ease-in-out infinite;
+}
+
+.hero-lines-2 {
+  animation: hero-liquid-2 45s ease-in-out infinite;
+}
+
+@keyframes hero-liquid-1 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) skewX(0deg);
+  }
+  33% {
+    transform: translate(-45%, -55%) rotate(120deg) skewX(10deg);
+  }
+  66% {
+    transform: translate(-55%, -45%) rotate(240deg) skewX(-10deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) skewX(0deg);
+  }
+}
+
+@keyframes hero-liquid-2 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) skewY(0deg);
+  }
+  50% {
+    transform: translate(-52%, -48%) rotate(-180deg) skewY(15deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg) skewY(0deg);
+  }
+}
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff6b2b, #e31e24);
+  border-radius: 10px;
+  border: 3px solid #0b0b0b;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b2b;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff6b2b #0b0b0b;
+}

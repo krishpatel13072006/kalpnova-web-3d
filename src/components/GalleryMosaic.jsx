@@ -1,0 +1,158 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
+import { X, Expand } from 'lucide-react';
+
+const GalleryMosaic = ({ images }) => {
+  const { isLight } = useTheme();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  if (!images || images.length === 0) return null;
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } 
+    }
+  };
+
+  const themeStyles = {
+    container: isLight ? 'bg-white' : 'bg-[#0b0b0b]',
+    text: isLight ? 'text-black' : 'text-white',
+    accent: isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]',
+    subText: isLight ? 'text-zinc-500' : 'text-gray-500',
+  };
+
+  const chunks = [];
+  for (let i = 0; i < images.length; i += 3) {
+    chunks.push(images.slice(i, i + 3));
+  }
+
+  return (
+    <>
+      {/* ── LIGHTBOX OVERLAY ── */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            key="lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/92 backdrop-blur-md p-8 md:p-16"
+            onClick={() => setSelectedImage(null)}
+          >
+            {/* Close button */}
+            <button
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={20} />
+            </button>
+
+            {/* Full image — fully visible, no cropping, centered with space */}
+            <motion.img
+              src={selectedImage}
+              alt="Full view"
+              initial={{ scale: 0.88, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.88, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-[82vw] max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <section className={`py-16 md:py-24 ${themeStyles.container} overflow-hidden`}>
+        <div className="max-w-[1440px] mx-auto px-4 md:px-12 space-y-12 md:space-y-16">
+
+          {/* SECTION HEADER */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-10">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className={`text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-none ${themeStyles.text}`}>
+                Case <span className={themeStyles.accent}>Study</span>
+              </h2>
+            </motion.div>
+            <div className="max-w-xs md:text-right">
+              <p className={`text-xs md:text-sm font-bold uppercase tracking-[0.3em] leading-relaxed ${themeStyles.subText}`}>
+                Visual Narratives & <br />Product Excellence
+              </p>
+            </div>
+          </div>
+
+          {chunks.map((chunk, chunkIdx) => (
+            <React.Fragment key={chunkIdx}>
+
+              {/* ROW 1: HERO */}
+              {chunk[0] && (
+                <motion.div
+                  variants={fadeIn}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className={`w-full relative aspect-[4/3] md:aspect-[21/9] rounded-xl md:rounded-[3rem] overflow-hidden shadow-2xl group cursor-zoom-in ${isLight ? 'bg-zinc-100' : 'bg-[#111]'}`}
+                  onClick={() => setSelectedImage(chunk[0])}
+                >
+                  <img
+                    src={chunk[0]}
+                    alt={`Hero ${chunkIdx + 1}`}
+                    className="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  {/* Expand hint */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 backdrop-blur-sm rounded-full p-3 border border-white/20">
+                      <Expand size={22} className="text-white" />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* ROW 2: DUO */}
+              {(chunk[1] || chunk[2]) && (
+                <div className="grid grid-cols-2 gap-2 md:gap-12">
+                  {[chunk[1], chunk[2]].map((img, idx) => img && (
+                    <motion.div
+                      key={idx}
+                      variants={fadeIn}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-50px" }}
+                      className={`relative w-full rounded-xl md:rounded-[3rem] overflow-hidden group cursor-zoom-in ${isLight ? 'bg-zinc-50' : 'bg-[#111]'}`}
+                      onClick={() => setSelectedImage(img)}
+                    >
+                      <img
+                        src={img}
+                        alt={`Product Duo ${chunkIdx + 1}-${idx + 1}`}
+                        className="w-full h-auto block object-contain transition-transform duration-1000 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      {/* Expand hint */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500 flex items-center justify-center">
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 backdrop-blur-sm rounded-full p-3 border border-white/20">
+                          <Expand size={18} className="text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+            </React.Fragment>
+          ))}
+
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default GalleryMosaic;
