@@ -47,11 +47,11 @@ export default function WorkPortfolio() {
                     {/* Folder Body */}
                     <div className="w-full bg-[#1a1a1a] rounded-b-3xl rounded-tr-3xl p-3 md:p-5 relative z-0 border border-white/5 group-hover:border-white/10 shadow-lg group-hover:shadow-[0_20px_50px_-12px_rgba(255,107,43,0.15)] transition-all duration-500">
                       {/* Inset Image */}
-                      <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden relative bg-[#050505] shadow-inner">
+                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden relative bg-[#050505] shadow-inner">
                         <img 
                           src={item.heroImage || item.image} 
                           alt={item.title} 
-                          className="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-105 opacity-100"
+                          className="object-contain w-full h-full transition-transform duration-1000 ease-out group-hover:scale-105 opacity-100"
                           loading="lazy"
                         />
                         {/* Premium dark gradient overlay on hover */}
@@ -64,12 +64,12 @@ export default function WorkPortfolio() {
                     </div>
                   </div>
 
-                  {/* TYPOGRAPHY - Scaled up to match the larger box size */}
+                  {/* TYPOGRAPHY - Simplified to match ProjectDetail similar projects section */}
                   <div className="px-2">
-                    <h3 className="text-2xl md:text-[28px] font-black mb-2 text-white group-hover:text-[#ff6b2b] transition-colors leading-tight tracking-tight">
+                    <h3 className="text-xl md:text-2xl font-black mb-2 text-white group-hover:text-[#ff6b2b] transition-colors uppercase tracking-tighter">
                       {item.title}
                     </h3>
-                    <p className="text-sm md:text-base text-gray-400 font-medium leading-relaxed uppercase tracking-widest">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed text-gray-500">
                       {item.type || item.tags}
                     </p>
                   </div>

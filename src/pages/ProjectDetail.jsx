@@ -209,56 +209,7 @@ const ProjectDetail = () => {
           </motion.div>
         </section>
 
-        {/* --- VIDEO SECTION --- */}
-        <section className={`mt-24 md:mt-32 rounded-[1.5rem] md:rounded-[2.5rem] p-3 md:p-8 border relative group overflow-hidden transition-all duration-500 ${isLight ? 'bg-zinc-50 border-zinc-100' : 'bg-[#111] border-white/5'}`}>
-           <div className="aspect-video relative rounded-[1rem] md:rounded-2xl overflow-hidden flex items-center justify-center bg-black">
-              {!isPlaying ? (
-                <>
-                  <img 
-                    src={project.videoThumbnail} 
-                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 ${isLight ? 'opacity-90' : 'opacity-40 grayscale group-hover:grayscale-0'}`} 
-                    alt="Video Preview"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className={`absolute inset-0 transition-opacity duration-500 ${isLight ? 'bg-white/10 opacity-0 group-hover:opacity-100' : 'bg-black/20'}`}></div>
-                  
-                  <div className="absolute top-4 left-4 md:top-6 md:left-6 flex items-center gap-2 md:gap-3 pointer-events-none">
-                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center p-1.5 md:p-2 shadow-xl border transition-colors duration-500 ${themeStyles.accentBg} ${isLight ? 'border-black/5' : 'border-white/20'}`}>
-                      <span className="text-white font-black text-sm md:text-lg">K</span>
-                    </div>
-                    <p className={`font-black text-[10px] md:text-xs tracking-tight drop-shadow-md transition-colors duration-500 ${isLight ? 'text-zinc-900' : 'text-white'}`}>
-                       Kalpnova | From Concept to Execution | {project.client}...
-                    </p>
-                  </div>
-                  
-                  {project.videoUrl ? (
-                    <motion.button 
-                      onClick={() => setIsPlaying(true)}
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`relative z-10 w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group/play 
-                        ${isLight ? 'bg-zinc-900 text-white hover:bg-[#e31e24]' : 'bg-[#ff6b2b] text-white hover:bg-white hover:text-[#ff6b2b]'}`}
-                    >
-                      <Play fill="currentColor" size={20} className="md:size-28 translate-x-1" />
-                    </motion.button>
-                  ) : (
-                    <div className={`relative z-10 w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 
-                        ${isLight ? 'bg-zinc-900 text-white' : 'bg-[#ff6b2b] text-white'}`}>
-                      <Play fill="currentColor" size={20} className="md:size-28 translate-x-1" />
-                    </div>
-                  )}
-                </>
-              ) : (
-                <video 
-                  src={project.videoUrl} 
-                  autoPlay 
-                  controls 
-                  className="w-full h-full rounded-[1rem] md:rounded-2xl outline-none"
-                />
-              )}
-           </div>
-        </section>
+
 
         {/* --- SERVICES LIST --- */}
         <section className={`mt-24 md:mt-32 border-t pt-8 md:pt-12 transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
@@ -277,7 +228,7 @@ const ProjectDetail = () => {
         </section>
 
         {/* --- CUSTOM MOSAIC GALLERY --- */}
-        <GalleryMosaic images={project.gallery} />
+        <GalleryMosaic images={project.gallery} layout={project.galleryLayout} />
 
         {/* --- SIMILAR PROJECTS (INFINITE SCROLL) --- */}
         <section className={`mt-24 md:mt-32 pt-16 md:pt-20 border-t overflow-hidden transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
@@ -302,16 +253,30 @@ const ProjectDetail = () => {
                   key={i}
                   className="w-[280px] md:w-[480px] shrink-0 group cursor-pointer flex flex-col"
                 >
-                  <div className={`relative overflow-hidden aspect-[16/10] mb-6 md:mb-8 rounded-[1rem] md:rounded-[1.5rem] border transition-all duration-500 
-                    ${isLight ? 'bg-zinc-100 border-zinc-100' : 'bg-[#111] border-white/5'}`}>
-                    <img 
-                      src={proj.heroImage || proj.image} 
-                      className={`w-full h-full object-contain transition-all duration-1000 group-hover:scale-110 opacity-100`} 
-                      alt={proj.title} 
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60 ${isLight ? 'from-white/20' : 'from-[#0b0b0b]'}`} />
+                  {/* DARK FOLDER UI for Similar Projects */}
+                  <div className="relative flex flex-col mb-6 transition-transform duration-500 group-hover:-translate-y-2" style={{ willChange: 'transform' }}>
+                    {/* Folder Tab */}
+                    <div className={`w-[35%] md:w-[40%] h-8 rounded-t-[12px] relative z-10 flex items-center justify-center border-t border-l border-r transition-colors duration-500 ${isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-[#1a1a1a] border-white/5 group-hover:border-white/10'}`}>
+                      {/* Tab Handle */}
+                      <div className={`w-10 h-[3px] rounded-full transition-colors ${isLight ? 'bg-zinc-300 group-hover:bg-[#e31e24]' : 'bg-[#333] group-hover:bg-[#ff6b2b]'}`}></div>
+                      {/* Seamless connector to hide the body gap */}
+                      <div className={`absolute -bottom-[2px] left-[0px] right-[0px] h-[4px] ${isLight ? 'bg-zinc-100' : 'bg-[#1a1a1a]'}`}></div>
+                    </div>
+
+                    {/* Folder Body */}
+                    <div className={`w-full rounded-b-3xl rounded-tr-3xl p-3 md:p-5 relative z-0 border transition-all duration-500 shadow-lg ${isLight ? 'bg-zinc-50 border-zinc-200 group-hover:border-zinc-300' : 'bg-[#1a1a1a] border-white/5 group-hover:border-white/10 group-hover:shadow-[0_20px_50px_-12px_rgba(255,107,43,0.15)]'}`}>
+                      {/* Inset Image */}
+                      <div className={`w-full aspect-[16/10] rounded-2xl overflow-hidden relative shadow-inner ${isLight ? 'bg-zinc-200' : 'bg-[#050505]'}`}>
+                        <img 
+                          src={proj.heroImage || proj.image} 
+                          className={`w-full h-full object-contain transition-all duration-1000 group-hover:scale-110 opacity-100`} 
+                          alt={proj.title} 
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60 ${isLight ? 'from-white/20' : 'from-[#0b0b0b]'}`} />
+                      </div>
+                    </div>
                   </div>
                   <h4 className={`text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 
                     ${isLight ? 'text-black group-hover:text-[#e31e24]' : 'text-white group-hover:text-[#ff6b2b]'}`}>

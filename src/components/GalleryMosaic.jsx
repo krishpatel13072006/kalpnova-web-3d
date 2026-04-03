@@ -205,7 +205,7 @@ const renderMasonry = (items, cardBg, onOpen) => (
 // ─────────────────────────────────────────────
 // Main Component
 // ─────────────────────────────────────────────
-const GalleryMosaic = ({ images }) => {
+const GalleryMosaic = ({ images, layout = "auto" }) => {
   const { isLight } = useTheme();
   const [lightbox, setLightbox]   = useState(null);
   const [classified, setClassified] = useState([]);
@@ -323,18 +323,57 @@ const GalleryMosaic = ({ images }) => {
           {/* ── Adaptive rows ── */}
           {ready && (
             <div className="space-y-4 md:space-y-5">
-              {rows.map((row, rowIdx) => (
-                <div key={rowIdx}>
-                  {/* Layout A: Bento — landscape */}
-                  {row.type === 'landscape' && renderBento(row.items, rowIdx, Tile)}
-
-                  {/* Layout B: Duo — square */}
-                  {row.type === 'square' && renderDuo(row.items, Tile)}
-
-                  {/* Layout C: Masonry — portrait */}
-                  {row.type === 'portrait' && renderMasonry(row.items, cardBg, openLightbox)}
+              {layout === "2-col" ? (
+                <div className="grid grid-cols-2 gap-3 md:gap-8">
+                  {images.map((src, i) => (
+                    <div key={i} className="rounded-2xl md:rounded-[2.5rem] overflow-hidden aspect-square md:min-h-[300px]">
+                      {Tile(src, 'w-full h-full rounded-2xl md:rounded-[2.5rem] object-cover')}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : layout === "3-col" ? (
+                <div className="grid grid-cols-3 gap-2 md:gap-6">
+                  {images.map((src, i) => (
+                    <div key={i} className="rounded-2xl md:rounded-[2rem] overflow-hidden aspect-[3/4] md:min-h-[250px]">
+                      {Tile(src, 'w-full h-full rounded-2xl md:rounded-[2rem] object-cover')}
+                    </div>
+                  ))}
+                </div>
+              ) : layout === "mobile-2-col-auto" ? (
+                <>
+                  {/* Mobile 2-column grid */}
+                  <div className="md:hidden grid grid-cols-2 gap-3">
+                    {images.map((src, i) => (
+                      <div key={i} className="rounded-2xl overflow-hidden aspect-square">
+                        {Tile(src, 'w-full h-full rounded-2xl object-cover')}
+                      </div>
+                    ))}
+                  </div>
+                  {/* Desktop Mosaic */}
+                  <div className="hidden md:block space-y-5">
+                    {rows.map((row, rowIdx) => (
+                      <div key={rowIdx}>
+                        {row.type === 'landscape' && renderBento(row.items, rowIdx, Tile)}
+                        {row.type === 'square' && renderDuo(row.items, Tile)}
+                        {row.type === 'portrait' && renderMasonry(row.items, cardBg, openLightbox)}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                rows.map((row, rowIdx) => (
+                  <div key={rowIdx}>
+                    {/* Layout A: Bento — landscape */}
+                    {row.type === 'landscape' && renderBento(row.items, rowIdx, Tile)}
+
+                    {/* Layout B: Duo — square */}
+                    {row.type === 'square' && renderDuo(row.items, Tile)}
+
+                    {/* Layout C: Masonry — portrait */}
+                    {row.type === 'portrait' && renderMasonry(row.items, cardBg, openLightbox)}
+                  </div>
+                ))
+              )}
             </div>
           )}
 

@@ -157,6 +157,7 @@ const links = [
   { label: "About", to: "/about" },
   { label: "Work Portfolio", to: "/services" },
   { label: "Products", to: "/products" },
+  { label: "Virtual Exhibition", to: "/showcase" },
   { label: "Contact", to: "/contact" },
 ];
 

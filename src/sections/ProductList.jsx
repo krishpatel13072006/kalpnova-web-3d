@@ -1,9 +1,17 @@
 const products = [
-    {
-      name: "NFC Products",
-      desc: "We design and deliver modern and attractive NFC products.",
-    },
-  ];
+  {
+    name: "NFC Products",
+    desc: "We design and deliver modern and attractive NFC products.",
+  },
+  {
+    name: "Krushak",
+    desc: "Empowering farmers with smart technology and sustainable agricultural solutions.",
+  },
+  {
+    name: "London Coffee",
+    desc: "A premium brew experience bringing authentic British cafe culture globally.",
+  },
+];
   
   export default function ProductList() {
     return (

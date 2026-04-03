@@ -52,6 +52,9 @@ export default function Footer() {
             <NavLink to="/services" className="hover:text-orange-500 transition">
               Services
             </NavLink>
+            <NavLink to="/showcase" className="hover:text-orange-500 transition">
+              Virtual Exhibition
+            </NavLink>
             <NavLink to="/contact" className="hover:text-orange-500 transition">
               Contact
             </NavLink>
