@@ -1,161 +1,155 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "../lib/gsap";
-import ServiceModal from "../components/ServiceModal";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const services = [
   {
-    title: "Branding & Identity",
-    desc: "We shape your brand’s positioning, voice, and visual identity to create lasting recognition.",
+    id: "I",
+    title: "Branding",
+    description: "We build dynamic brands through thoughtful design and strategic positioning.",
+    image: "/clients/kalpnova/Artboard 1.jpg",
+    subServices: [
+      "Logo design", "Brand Strategy", "Print Collateral Designs", 
+      "Brand Imagery", "Brand Consultation", "Event Identity Design", "Launch Event Design"
+    ]
   },
   {
-    title: "Social Media Design",
-    desc: "Scroll-stopping creatives and content systems designed to grow engagement and brand recall.",
+    id: "II",
+    title: "Packaging",
+    description: "Creating physical and digital packaging that stands out on the shelf and in the mind.",
+    image: "/clients/London Coffee/14.jpg",
+    subServices: [
+      "Product Packaging", "Label & Box Design", "Unboxing Experience", 
+      "Sustainable Packaging", "3D Mockups"
+    ]
   },
   {
-    title: "Web & App",
-    desc: "High-performance, conversion-focused websites and apps with a cinematic user experience.",
-  },
-  {
-    title: "Print Media Design",
-    desc: "Impactful offline designs—from brochures to hoardings—crafted for clarity and recall.",
-  },
-  {
-    title: "Meta Ads",
-    desc: "Data-driven ad creatives optimized for attention, clicks, and measurable conversions.",
-  },
-  {
-    title: "Video Editing",
-    desc: "Dynamic video edits that tell your story, hold attention, and elevate your brand presence.",
-  },    
+    id: "III",
+    title: "Social Media",
+    description: "Engaging your audience with compelling content and strategic campaign execution.",
+    image: "/clients/Pixal Plus/2.jpg",
+    subServices: [
+      "Content Strategy", "Grid Design", "Motion Graphics", 
+      "Campaign Planning", "Community Management"
+    ]
+  }
 ];
 
-
 export default function Services() {
-  const cardsRef = useRef([]);
-  const [activeService, setActiveService] = useState(null);
-
-  // Entrance animation
-  useEffect(() => {
-    if (!cardsRef.current[0]) return;
-
-    gsap.from(cardsRef.current, {
-      y: 40,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: cardsRef.current[0],
-        start: "top 80%",
-      },
-    });
-  }, []);
-
-  // Magnetic hover (unchanged)
-  useEffect(() => {
-    cardsRef.current.forEach((card) => {
-      if (!card) return;
-
-      const onMove = (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        gsap.to(card, {
-          x: x * 12,
-          y: y * 12,
-          rotateX: -y * 6,
-          rotateY: x * 6,
-          duration: 0.4,
-          ease: "power3.out",
-        });
-      };
-
-      const onLeave = () => {
-        gsap.to(card, {
-          x: 0,
-          y: 0,
-          rotateX: 0,
-          rotateY: 0,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-      };
-
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
-
-      return () => {
-        card.removeEventListener("mousemove", onMove);
-        card.removeEventListener("mouseleave", onLeave);
-      };
-    });
-  }, []);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <>
-      <section className="section">
-        <div className="max-w-7xl mx-auto space-y-16">
-          {/* HEADER */}
-          <div className="max-w-2xl space-y-4">
-            <h2 className="text-section font-bold text-[#FFE1C5]">
-              WHAT WE <span className="accent">BUILD</span>
-            </h2>
-            <p className="text-[#FFE1C5]">
-              We partner with ambitious teams to design clarity,
-              momentum, and long-term growth.
-            </p>
-          </div>
-
-          {/* GRID */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((item, i) => (
-              <div
-                key={item.title}
-                ref={(el) => (cardsRef.current[i] = el)}
-                className="
-                  group card relative p-6 overflow-hidden cursor-pointer
-                  rounded-2xl
-                  bg-[#141414]
-                  border border-orange-500/20
-                  hover:border-orange-500/50
-                  transition-colors duration-500
-                "
-              >
-                {/* Inner glow */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                                bg-[radial-gradient(circle_at_top_left,rgba(226,74,43,0.25),transparent_60%)]" />
-
-                {/* Accent line */}
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full" />
-
-                <h3 className="text-xl font-semibold mb-2 text-[#FFE1C5]">
-                  {item.title}
-                </h3>
-
-                <p className="text-sm leading-relaxed text-[#FFE1C5]">
-                  {item.desc}
-                </p>
-
-                <button
-                  onClick={() => setActiveService(item)}
-                  className="block mt-6 text-sm accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                  Learn more →
-                </button>
-              </div>
-            ))}
-          </div>
+    <section className="bg-[#0a0a0a] text-zinc-100 min-h-screen lg:h-screen w-full flex flex-col justify-center px-6 md:px-12 py-20 lg:py-0 overflow-hidden font-sans relative">
+       {/* Background subtle texture/grid if needed, but keeping it clean as per request */}
+      <div className="max-w-[1440px] w-full mx-auto relative z-10">
+        
+        {/* Top Right Label */}
+        <div className="flex justify-end mb-8 lg:mb-12">
+          <p className="text-sm font-semibold tracking-widest uppercase text-white">
+            <span className="text-zinc-500 mr-2">{">>"}</span> OUR SERVICES
+          </p>
         </div>
-      </section>
 
-      {/* MODAL */}
-      {activeService && (
-        <ServiceModal
-          service={activeService}
-          onClose={() => setActiveService(null)}
-        />
-      )}
-    </>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+          
+          {/* LEFT COLUMN: Fixed Image & Details */}
+          <div className="lg:col-span-4 flex flex-col justify-center order-2 lg:order-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex flex-col"
+              >
+                {/* Image Container */}
+                <div className="w-full max-w-[320px] aspect-square rounded-[2rem] overflow-hidden mb-8 relative bg-zinc-900 shadow-2xl mx-auto lg:mx-0">
+                  <img 
+                    src={services[activeIndex].image} 
+                    alt={services[activeIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-6 left-0 w-full text-center">
+                    <p className="text-xs font-bold tracking-widest uppercase text-white/90">Kalpnova Group</p>
+                  </div>
+                </div>
+
+                {/* Sub-services List */}
+                <div className="min-h-[160px] text-center lg:text-left">
+                  <h3 className="text-lg font-medium text-white mb-4">
+                    {services[activeIndex].title}
+                  </h3>
+                  <ul className="space-y-3 inline-block lg:block text-left">
+                    {services[activeIndex].subServices.map((sub, i) => (
+                      <li key={i} className="text-zinc-300 text-sm md:text-base flex items-center gap-3 font-medium">
+                        <span className="text-[#ff6b2b]">→</span> {sub}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* RIGHT COLUMN: Fixed Height Accordion Items */}
+          <div className="lg:col-span-8 flex flex-col justify-center order-1 lg:order-2">
+            {services.map((service, index) => {
+              const isActive = index === activeIndex;
+
+              return (
+                <div 
+                  key={service.id}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => setActiveIndex(index)}
+                  className="flex flex-row items-center border-b border-zinc-800 h-[100px] md:h-[140px] cursor-pointer transition-all duration-500 w-full relative group"
+                >
+                  {/* Title & Roman Numeral */}
+                  <div className="flex items-start z-10 w-full lg:w-1/2">
+                    <h2 
+                      className={`transition-all duration-500 ease-in-out whitespace-nowrap ${
+                        isActive 
+                          ? 'text-white font-serif italic text-4xl md:text-6xl lg:text-[80px] tracking-tight transform translate-x-2' 
+                          : 'text-zinc-600 font-sans font-medium text-3xl md:text-5xl lg:text-7xl tracking-tighter group-hover:text-zinc-400'
+                      }`}
+                    >
+                      {service.title}
+                    </h2>
+                    
+                    <span 
+                      className={`ml-4 md:ml-8 text-[10px] md:text-sm font-semibold tracking-widest uppercase mt-2 md:mt-5 transition-all duration-500 ${
+                        isActive ? 'text-[#ff6b2b] opacity-100' : 'text-zinc-700 opacity-50'
+                      }`}
+                    >
+                      — {service.id}
+                    </span>
+                  </div>
+
+                  {/* Description - visible only on larger screens when active */}
+                  <div className="hidden lg:w-1/2 lg:flex justify-end">
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: 10 }}
+                          transition={{ duration: 0.4, delay: 0.1 }}
+                          className="max-w-xs"
+                        >
+                          <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal">
+                            {service.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }

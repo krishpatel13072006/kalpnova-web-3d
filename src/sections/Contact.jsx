@@ -73,8 +73,8 @@ export default function Contact() {
         </h2>
 
         <p className="max-w-2xl mx-auto text-gray-300">
-          If you’re looking for clarity, direction, and a partner
-          who thinks beyond templates — let’s talk.
+          Based out of Ahmedabad, serving brands worldwide. If you’re looking for 
+          clarity, direction, and a partner who thinks beyond templates — let’s talk.
         </p>
 
         <div className="flex justify-center">

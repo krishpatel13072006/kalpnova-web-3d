@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import AboutNarrative from "../sections/AboutNarrative";
+import AboutCards from "../components/AboutCards";
+import ConsultancySection from "../sections/ConsultancySection";
 
 export default function About() {
   return (
@@ -10,6 +12,8 @@ export default function About() {
       transition={{ duration: 0.6 }}
     >
       <AboutNarrative />
+      <ConsultancySection />
+      <AboutCards />
     </motion.main>
   );
 }

@@ -23,16 +23,15 @@ export default function AboutNarrative() {
           </h3>
 
           <p className="leading-relaxed text-[#FFE1C5]">
-            At Kalpnova, we believe that great design and technology
-            should work together seamlessly to create experiences that matter.
-            For over 8 years, we've been partnering with businesses of all sizes
-            to bring their visions to life.
+            Based out of Ahmedabad, India, Kalpnova is a creative and consultancy studio
+            specializing in branding, design, and social media. We serve a diverse range 
+            of clients worldwide, from ambitious startups to established global brands.
           </p>
 
           <p className="leading-relaxed text-[#FFE1C5]">
-            Our multidisciplinary team combines creativity, technical expertise,
-            and strategic thinking to deliver solutions that not only look
-            beautiful but also drive real business results.
+            With over 8 years of collective experience, our multidisciplinary team 
+            combines creativity, technical expertise, and strategic thinking to deliver
+            solutions that not only look beautiful but drive real growth.
           </p>
 
           <ul className="space-y-3 pt-6">
@@ -54,9 +53,9 @@ export default function AboutNarrative() {
 
           {[
             {
-              year: "2022",
-              title: "Founded",
-              desc: "Started with a small team and a big vision to transform digital solutions.",
+              year: "2016",
+              title: "The Beginning",
+              desc: "Started with a few passionate creators in Mumbai, focused on pure design excellence.",
             },
             {
               year: "2024",

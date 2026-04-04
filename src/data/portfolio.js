@@ -13,21 +13,21 @@ export const portfolioItems = [
     perceptionShift: "Move from 'traditional digital marketing' to 'predictive analytics and growth automation'.",
     endorsement: "Implemented custom mobile apps and an intelligent loyalty platform, increasing top-line revenue through targeted insight.",
     graphics: [
-      { 
-        title: "DATA-DRIVEN DECISIONS.", 
-        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png", 
+      {
+        title: "DATA-DRIVEN DECISIONS.",
+        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
         subtitle: "Analytics at the core.",
         badge: "Smart Growth"
       },
-      { 
-        title: "AUTOMATED ENGAGEMENT.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png", 
+      {
+        title: "AUTOMATED ENGAGEMENT.",
+        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png",
         subtitle: "Engage users at the right time.",
         badge: "AI Powered"
       },
-      { 
-        title: "SCALABLE ARCHITECTURE.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png", 
+      {
+        title: "SCALABLE ARCHITECTURE.",
+        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png",
         subtitle: "Built to handle high loads.",
         badge: "Enterprise Grade"
       }
@@ -72,21 +72,21 @@ export const portfolioItems = [
     perceptionShift: "Establish trust and authority strictly through aesthetic perfection and high-definition narrative.",
     endorsement: "The campaign redefined luxury presentation, leveraging 4K cinematography to capture every minute detail of the product's finish.",
     graphics: [
-      { 
-        title: "MINIMALIST PERFECTION.", 
-        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png", 
+      {
+        title: "MINIMALIST PERFECTION.",
+        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
         subtitle: "Less is undeniably more.",
         badge: "Aesthetic"
       },
-      { 
-        title: "CINEMATIC VISION.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png", 
+      {
+        title: "CINEMATIC VISION.",
+        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png",
         subtitle: "Every frame a painting.",
         badge: "4K Motion"
       },
-      { 
-        title: "ELITE CRAFTSMANSHIP.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png", 
+      {
+        title: "ELITE CRAFTSMANSHIP.",
+        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png",
         subtitle: "Details that matter.",
         badge: "Premium Focus"
       }
@@ -120,21 +120,21 @@ export const portfolioItems = [
     perceptionShift: "Transition the visual identity from 'heavy industry' to 'innovative eco-conscious engineering'.",
     endorsement: "The suite of assets provided a highly professional, pristine view into the heart of sustainable paper manufacturing and corporate branding.",
     graphics: [
-      { 
-        title: "SUSTAINABLE SCALE.", 
-        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png", 
+      {
+        title: "SUSTAINABLE SCALE.",
+        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
         subtitle: "Green solutions globally.",
         badge: "Eco-Friendly"
       },
-      { 
-        title: "PRECISION ENGINEERING.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png", 
+      {
+        title: "PRECISION ENGINEERING.",
+        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png",
         subtitle: "Heavy industry, refined.",
         badge: "Industrial Innovation"
       },
-      { 
-        title: "MODERN NARRATIVE.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png", 
+      {
+        title: "MODERN NARRATIVE.",
+        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png",
         subtitle: "Telling the corporate story.",
         badge: "B2B Excellence"
       }
@@ -174,21 +174,21 @@ export const portfolioItems = [
     perceptionShift: "From 'traditional agriculture' to 'data-driven modern farming'.",
     endorsement: "Implemented user-friendly digital tools for rural outreach.",
     graphics: [
-      { 
-        title: "SMART FARMING.", 
-        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png", 
+      {
+        title: "SMART FARMING.",
+        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
         subtitle: "Technology meets agriculture.",
         badge: "AgriTech"
       },
-      { 
-        title: "RURAL EMPOWERMENT.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png", 
+      {
+        title: "RURAL EMPOWERMENT.",
+        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png",
         subtitle: "Access to knowledge.",
         badge: "Community Flow"
       },
-      { 
-        title: "SUSTAINABLE GROWTH.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png", 
+      {
+        title: "SUSTAINABLE GROWTH.",
+        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png",
         subtitle: "Eco-friendly yields.",
         badge: "Eco-Focus"
       }
@@ -226,21 +226,21 @@ export const portfolioItems = [
     perceptionShift: "Establish a luxurious yet accessible daily coffee ritual.",
     endorsement: "Drove significant foot traffic and online sales through aesthetically rich packaging and campaigns.",
     graphics: [
-      { 
-        title: "PREMIUM ROASTS.", 
-        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png", 
+      {
+        title: "PREMIUM ROASTS.",
+        img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
         subtitle: "Sourced globally.",
         badge: "Quality"
       },
-      { 
-        title: "BRITISH HERITAGE.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png", 
+      {
+        title: "BRITISH HERITAGE.",
+        img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.png",
         subtitle: "Classic cafe culture.",
         badge: "Authentic"
       },
-      { 
-        title: "AESTHETIC PACKAGING.", 
-        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png", 
+      {
+        title: "AESTHETIC PACKAGING.",
+        img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.png",
         subtitle: "Designed to stand out.",
         badge: "Visual Appeal"
       }
@@ -298,7 +298,7 @@ export const portfolioItems = [
     type: "EdTech, App Design, Strategy",
     image: "/clients/SchoolG_Mokupe/Bag.jpg",
     heroImage: "/clients/SchoolG_Mokupe/Bag.jpg",
-    galleryLayout: "2-col",
+    galleryLayout: "schoolg",
     tags: "EdTech, App Design, Strategy",
     brandOverview: "SchoolG provides modern educational tools for students and institutions.",
     challenge: "Making complex administrative tools feel simple and intuitive.",

@@ -11,10 +11,10 @@ import GalleryMosaic from '../components/GalleryMosaic';
  */
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }
   }
 };
 
@@ -22,25 +22,20 @@ const ProjectDetail = () => {
   const { id } = useParams();
   const { isLight } = useTheme();
   const [isPlaying, setIsPlaying] = React.useState(false);
-  
-  // Find the project based on the URL ID parameter
+
   const project = useMemo(() => portfolioItems.find(p => p.id === parseInt(id)), [id]);
 
-  // Double the data for seamless looping in Framer Motion (Similar Projects)
   const similarProjects = useMemo(() => {
     const others = portfolioItems.filter(p => p.id !== parseInt(id));
-    // Ensure we have exactly two sets for a perfect 0% to -50% loop
     return [...others, ...others];
   }, [id]);
 
-  // Scroll to top on load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
   if (!project) return <div className="text-white text-center py-24 bg-[#0b0b0b] min-h-screen flex items-center justify-center font-bold text-2xl uppercase tracking-widest">Project not found</div>;
 
-  // Theme-specific colors
   const themeStyles = {
     bg: isLight ? 'bg-white' : 'bg-[#0b0b0b]',
     text: isLight ? 'text-[#1a1a1a]' : 'text-[#f4f4f4]',
@@ -54,7 +49,7 @@ const ProjectDetail = () => {
 
   return (
     <div className={`min-h-screen w-full ${themeStyles.bg} ${themeStyles.text} font-sans selection:${themeStyles.accentBg} selection:text-white overflow-x-hidden transition-colors duration-700 ease-in-out relative`}>
-      
+
       {/* Background Ambience */}
       <div className={`absolute top-[-10%] left-0 w-[40%] h-[40%] ${isLight ? 'bg-[#e31e24]/5' : 'bg-[#ff6b2b]/5'} blur-[120px] rounded-full pointer-events-none transition-colors duration-700`}></div>
       <div className={`absolute bottom-[10%] right-0 w-[30%] h-[30%] ${isLight ? 'bg-[#e31e24]/5' : 'bg-[#ff6b2b]/5'} blur-[120px] rounded-full pointer-events-none transition-colors duration-700`}></div>
@@ -71,7 +66,7 @@ const ProjectDetail = () => {
       {/* --- HEADER SECTION --- */}
       <header className="max-w-[1440px] mx-auto px-6 pt-24 md:pt-32 pb-4 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-           <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="relative inline-block"
@@ -85,8 +80,8 @@ const ProjectDetail = () => {
             </h1>
             <div className={`w-24 h-[3px] mt-6 transition-colors duration-500 ${themeStyles.accentBg}`}></div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -100,13 +95,14 @@ const ProjectDetail = () => {
 
       {/* --- HERO BANNER --- */}
       <section className="w-full px-4 md:px-6 mb-16 mt-8 relative z-10">
-        <div className={`max-w-[1440px] mx-auto relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] border shadow-2xl transition-all duration-500 ${isLight ? 'border-zinc-200 shadow-xl' : 'border-white/5 shadow-2xl'}`}>
-          <motion.img 
+        <div className={`max-w-[1440px] mx-auto relative h-[400px] md:h-[600px] lg:h-[750px] overflow-hidden flex items-center justify-center bg-[#0a0a0a] rounded-[1.5rem] md:rounded-[2rem] border shadow-2xl transition-all duration-500 ${isLight ? 'border-zinc-200 shadow-xl' : 'border-white/5 shadow-2xl'}`}>
+          <motion.img
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            src={project.heroImage} 
-            className={`w-full h-[40vh] md:h-[65vh] lg:h-[75vh] object-cover transition-all duration-1000 ${isLight ? 'opacity-100' : 'opacity-100'}`}
+            src={project.heroImage}
+            /* UPDATED: Changed object-contain to object-cover and w-full h-full to fill space */
+            className="w-full h-full object-cover block transition-all duration-1000"
             alt={project.title}
           />
           <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40 ${isLight ? 'from-white/20' : 'from-[#0b0b0b]'}`}></div>
@@ -150,66 +146,37 @@ const ProjectDetail = () => {
           </motion.div>
         </div>
 
-        {/* --- GRAPHIC GRID SECTION --- */}
-        <section className={`mt-24 md:mt-32 pt-16 md:pt-20 border-t relative overflow-hidden transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none transition-all duration-700" 
-            style={{ backgroundImage: themeStyles.gridLines, backgroundSize: '40px 40px' }} 
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 relative z-10 items-stretch">
-            {project.graphics.map((graphic, idx) => (
-              <div 
-                key={idx}
-                className={`space-y-6 md:space-y-8 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border flex flex-col items-center justify-between group transition-all duration-500 
-                  ${isLight ? 'bg-white border-zinc-100 hover:border-[#e31e24]/30 hover:shadow-xl' : 'bg-[#111] border-white/5 hover:border-[#ff6b2b]/30'}`}
-              >
-                <div className="space-y-4 md:space-y-6 flex-1 flex flex-col items-center text-center">
-                  <h4 className={`text-xl font-black uppercase tracking-tighter leading-none transition-colors duration-500 
-                    ${isLight ? 'text-black group-hover:text-[#e31e24]' : 'text-white group-hover:text-[#ff6b2b]'}`}>
-                    {graphic.title}
-                  </h4>
-                  <div className="flex justify-center py-2 md:py-4">
-                    <img src={graphic.img} className={`w-16 md:w-20 lg:w-24 transition-opacity ${isLight ? 'opacity-80' : 'opacity-60 invert'} group-hover:opacity-100`} alt={graphic.title} />
-                  </div>
-                  <p className={`text-xs md:text-sm font-bold uppercase tracking-widest group-hover:text-zinc-600 transition-colors ${isLight ? 'text-zinc-400' : 'text-gray-500'}`}>
-                    {graphic.subtitle}
-                  </p>
-                </div>
-                <div className="mt-auto pt-4 md:pt-6">
-                  <p className={`text-white py-1.5 px-6 inline-block text-[10px] font-extrabold uppercase tracking-widest rounded-full transition-colors duration-500 ${isLight ? 'bg-[#e31e24]' : 'bg-[#ff6b2b]'}`}>
-                    {graphic.badge}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* --- BILLBOARD SECTION --- */}
         <section className="mt-24 md:mt-32">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className={`w-full relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border transition-all duration-500 flex items-center justify-center bg-[#050505] min-h-[35vh] md:min-h-0 ${isLight ? 'border-zinc-200' : 'border-white/5 shadow-2xl'}`}
+            className={`relative mx-auto rounded-[1.5rem] md:rounded-[2rem] border transition-all duration-500 
+              w-full max-w-[1149.6px]
+              ${isLight ? 'border-zinc-200' : 'border-white/5 shadow-2xl'}`}
           >
-            <img 
-              src={project.billboardImage} 
-              className={`w-full h-auto object-contain max-h-[80vh] transition-opacity duration-500 opacity-100 p-2 md:p-0`} 
+            {/* The image itself drives the container height — no cropping ever possible */}
+            <img
+              src={project.billboardImage}
+              className="w-full h-auto block rounded-[1.5rem] md:rounded-[2rem]"
               alt="Billboard"
               loading="lazy"
               decoding="async"
             />
-            <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${isLight ? 'from-white/40' : 'from-[#0b0b0b]'}`}></div>
-            <div className="absolute bottom-6 md:bottom-12 left-0 w-full text-center px-4 md:px-6">
-              <h2 className={`text-base md:text-4xl lg:text-5xl font-black uppercase tracking-tighter drop-shadow-2xl transition-colors duration-500 px-2 leading-snug ${isLight ? 'text-zinc-900 drop-shadow-white' : 'text-white'}`}>
+
+            {/* Overlay Gradient (Bottom fade for text readability) */}
+            <div className={`absolute inset-0 z-20 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`}></div>
+
+            {/* Text Overlay */}
+            <div className="absolute bottom-6 md:bottom-10 left-0 w-full z-30 text-center px-4 md:px-6 pointer-events-none">
+              <h2 className={`text-base md:text-3xl lg:text-4xl font-black uppercase tracking-tighter drop-shadow-2xl transition-colors duration-500 px-2 leading-snug ${isLight ? 'text-zinc-900' : 'text-white'}`}>
                 {project.billboardTitle}
               </h2>
             </div>
           </motion.div>
         </section>
-
-
 
         {/* --- SERVICES LIST --- */}
         <section className={`mt-24 md:mt-32 border-t pt-8 md:pt-12 transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
@@ -227,7 +194,6 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* --- CUSTOM MOSAIC GALLERY --- */}
         <GalleryMosaic images={project.gallery} layout={project.galleryLayout} />
 
         {/* --- SIMILAR PROJECTS (INFINITE SCROLL) --- */}
@@ -236,41 +202,34 @@ const ProjectDetail = () => {
             <h2 className={`text-2xl md:text-5xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Related Works</h2>
           </div>
 
-          {/* FIX: ensure flex-nowrap and explicit children sizes to prevent overlapping */}
           <div className="relative w-full overflow-hidden py-10">
-            <motion.div 
+            <motion.div
               className="flex flex-nowrap gap-12 md:gap-20 w-max will-change-transform"
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ 
-                ease: "linear", 
-                duration: 40, 
-                repeat: Infinity 
+              transition={{
+                ease: "linear",
+                duration: 40,
+                repeat: Infinity
               }}
             >
               {similarProjects.map((proj, i) => (
-                <Link 
+                <Link
                   to={`/portfolio/${proj.id}`}
                   key={i}
                   className="w-[280px] md:w-[480px] shrink-0 group cursor-pointer flex flex-col"
                 >
-                  {/* DARK FOLDER UI for Similar Projects */}
                   <div className="relative flex flex-col mb-6 transition-transform duration-500 group-hover:-translate-y-2" style={{ willChange: 'transform' }}>
-                    {/* Folder Tab */}
                     <div className={`w-[35%] md:w-[40%] h-8 rounded-t-[12px] relative z-10 flex items-center justify-center border-t border-l border-r transition-colors duration-500 ${isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-[#1a1a1a] border-white/5 group-hover:border-white/10'}`}>
-                      {/* Tab Handle */}
                       <div className={`w-10 h-[3px] rounded-full transition-colors ${isLight ? 'bg-zinc-300 group-hover:bg-[#e31e24]' : 'bg-[#333] group-hover:bg-[#ff6b2b]'}`}></div>
-                      {/* Seamless connector to hide the body gap */}
                       <div className={`absolute -bottom-[2px] left-[0px] right-[0px] h-[4px] ${isLight ? 'bg-zinc-100' : 'bg-[#1a1a1a]'}`}></div>
                     </div>
 
-                    {/* Folder Body */}
                     <div className={`w-full rounded-b-3xl rounded-tr-3xl p-3 md:p-5 relative z-0 border transition-all duration-500 shadow-lg ${isLight ? 'bg-zinc-50 border-zinc-200 group-hover:border-zinc-300' : 'bg-[#1a1a1a] border-white/5 group-hover:border-white/10 group-hover:shadow-[0_20px_50px_-12px_rgba(255,107,43,0.15)]'}`}>
-                      {/* Inset Image */}
                       <div className={`w-full aspect-[16/10] rounded-2xl overflow-hidden relative shadow-inner ${isLight ? 'bg-zinc-200' : 'bg-[#050505]'}`}>
-                        <img 
-                          src={proj.heroImage || proj.image} 
-                          className={`w-full h-full object-contain transition-all duration-1000 group-hover:scale-110 opacity-100`} 
-                          alt={proj.title} 
+                        <img
+                          src={proj.heroImage || proj.image}
+                          className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 opacity-100`}
+                          alt={proj.title}
                           loading="lazy"
                           decoding="async"
                         />
@@ -294,33 +253,32 @@ const ProjectDetail = () => {
         </section>
 
         {/* --- COMPANY CONTACT DETAILS --- */}
-        {/* GAP FIX: Reduced mt-32 to mt-16 and pt-20 to pt-12 */}
         <section className={`mt-16 pt-12 border-t relative z-10 transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
-          <motion.div 
-            variants={fadeInUp} 
-            initial="hidden" 
-            whileInView="visible" 
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="space-y-6 md:space-y-8"
           >
             <h2 className={`text-2xl md:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>
-              Got big plans for your brand or a <br className="hidden md:block"/> new project? <span className={`transition-colors duration-500 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Let's chat!</span>
+              Got big plans for your brand or a <br className="hidden md:block" /> new project? <span className={`transition-colors duration-500 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Let's chat!</span>
             </h2>
-            
+
             <div className="space-y-8 md:space-y-12 pt-4 md:pt-6">
               <div>
-                <Link 
-                  to="mailto:business@kalpnova.com" 
+                <Link
+                  to="mailto:business@kalpnova.com"
                   className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
                 >
                   business@kalpnova.com
                 </Link>
               </div>
-              
+
               <div className="space-y-3 md:space-y-4">
                 <h3 className={`text-2x md:text-3xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Career</h3>
-                <Link 
-                  to="mailto:hr@kalpnova.com" 
+                <Link
+                  to="mailto:hr@kalpnova.com"
                   className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
                 >
                   hr@kalpnova.com

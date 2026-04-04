@@ -61,9 +61,9 @@ export default function PinnedStory() {
         .to(textRef.current, { opacity: 0, duration: 0.4 }, "<")
         .to(img1Ref.current, { opacity: 0, duration: 0.6 }, "<")
         .add(() => {
-          titleRef.current.textContent = "WHEN THINKING BECOMES CLEARER";
+          titleRef.current.textContent = "WHEN BRANDING CREATES AUTHORITY";
           textRef.current.textContent =
-            "Clarity removes noise and sharpens decisions.";
+            "Crafting narrative-driven identities that define excellence.";
         })
         .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6 })
         .to(textRef.current, { opacity: 1, duration: 0.4 }, "<")
@@ -76,9 +76,9 @@ export default function PinnedStory() {
         .to(textRef.current, { opacity: 0, duration: 0.4 }, "<")
         .to(img2Ref.current, { opacity: 0, duration: 0.6 }, "<")
         .add(() => {
-          titleRef.current.textContent = "IMAGINE WHAT IS GROWING";
+          titleRef.current.textContent = "IMAGINE IMPACT AT SCALE";
           textRef.current.textContent =
-            "Momentum isn’t accidental — it’s designed.";
+            "Momentum isn’t accidental — it’s designed by strategy.";
         })
         .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6 })
         .to(textRef.current, { opacity: 1, duration: 0.4 }, "<")
@@ -108,10 +108,10 @@ export default function PinnedStory() {
         {/* TEXT */}
         <div className="space-y-6">
           <h2 ref={titleRef} className="text-section font-bold text-[#FFE1C5]">
-            IMAGINE WHAT HAPPENS NEXT
+            WHERE TECHNOLOGY SCALES BRANDS
           </h2>
           <p ref={textRef} className="text-lg text-muted max-w-md text-[#FFE1C5]">
-            Growth begins when thinking becomes intentional.
+            Growth begins when thinking becomes intentional and data-driven.
           </p>
         </div>
 
@@ -120,9 +120,9 @@ export default function PinnedStory() {
           ref={cardRef}
           className="card relative h-[360px] md:h-[420px] overflow-hidden"
         >
-          <img ref={img1Ref} src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70" className="absolute inset-0 w-full h-full object-cover" />
-          <img ref={img2Ref} src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" className="absolute inset-0 w-full h-full object-cover" />
-          <img ref={img3Ref} src="https://images.unsplash.com/photo-1518770660439-4636190af475" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img1Ref} src="/projects/BoostIQ/1.jpg" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img2Ref} src="/projects/Mayota/Banner.png" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img3Ref} src="/projects/Westrock%20logo/1.jpg" className="absolute inset-0 w-full h-full object-cover" />
 
           <div
             ref={lightRef}

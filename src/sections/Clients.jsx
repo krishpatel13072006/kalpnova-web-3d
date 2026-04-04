@@ -29,51 +29,52 @@ export default function Clients() {
   }, []);
 
   return (
-    <section className="section overflow-hidden">
+    <section className="section overflow-hidden py-20 bg-bg">
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER */}
         <div className="mb-14 max-w-xl">
           <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
-                           rounded-full border border-orange-500/30
-                           text-orange-500">
+                           rounded-full border border-orange-500/30
+                           text-orange-500 font-medium">
             CLIENTS
           </span>
 
-          <h2 className="text-section font-bold text-[#FFE1C5]">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#FFE1C5] tracking-tight leading-tight">
             Trusted by teams
-            <span className="accent"> worldwide</span>
+            <span className="text-orange-500"> worldwide</span>
           </h2>
         </div>
 
         {/* SCROLLER */}
         <div className="relative">
           {/* Fade edges */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24
-                          bg-gradient-to-r from-bg to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-24
-                          bg-gradient-to-l from-bg to-transparent z-10" />
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-32
+                          bg-gradient-to-r from-bg via-bg/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-32
+                          bg-gradient-to-l from-bg via-bg/80 to-transparent z-10" />
 
           <div className="overflow-hidden">
             <div
               ref={trackRef}
-              className="flex gap-16 w-max items-center"
+              className="flex gap-20 w-max items-center py-4"
             >
               {[...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
                   className="flex items-center justify-center
-                             min-w-[160px]
-                             opacity-50
-                             transition-all duration-300
-                             hover:opacity-100"
+                             min-w-[180px]
+                             opacity-60
+                             transition-all duration-300
+                             hover:opacity-100 hover:scale-110"
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-10 object-contain
-                               grayscale
-                               hover:grayscale-0
-                               transition-all duration-300"
+                    className="h-12 object-contain
+                               grayscale
+                               hover:grayscale-0
+                               hover:drop-shadow-[0_0_25px_rgba(249,115,22,0.8)]
+                               transition-all duration-300"
                   />
                 </div>
               ))}

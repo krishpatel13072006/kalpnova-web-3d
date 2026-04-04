@@ -5,6 +5,8 @@ import Services from "../sections/Services";
 import Contact from "../sections/Contact";
 import Testimonials from "../sections/Testimonials";
 import Clients from "../sections/Clients";
+import AboutCards from "../components/AboutCards";
+import ConsultancySection from "../sections/ConsultancySection";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -24,7 +26,7 @@ export default function Home() {
   return (
     <>
 {/* HERO */}
-<section className="relative min-h-screen pt-32 flex items-start justify-center overflow-hidden">
+<section className="relative pt-32 pb-16 md:pt-40 md:pb-16 flex items-center justify-center overflow-hidden">
   {/* BACKGROUND */}
 {/* BACKGROUND */}
 <div className="absolute inset-0 z-0 pointer-events-none">
@@ -32,25 +34,15 @@ export default function Home() {
   {/* BASE (BOTTOM MOST) */}
   <div className="absolute inset-0 bg-[#0B0B0C]" />
 
-{/* LINE ANIMATION */}
-<div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
-  <div className="hero-lines-wrap">
-    <div className="hero-lines hero-lines-1" />
-    <div className="hero-lines hero-lines-2" />
-  </div>
-</div>
-
-
-
   {/* LEFT ORANGE */}
-  <div className="absolute left-[-30%] top-0 w-[65%] h-full
-    bg-[radial-gradient(circle_at_left,rgba(226,74,43,0.35),transparent_65%)]
+  <div className="absolute inset-0
+    bg-[radial-gradient(circle_at_-20%_50%,rgba(226,74,43,0.35),transparent_60%)]
     z-[3]"
   />
 
   {/* RIGHT ORANGE */}
-  <div className="absolute right-[-30%] top-0 w-[65%] h-full
-    bg-[radial-gradient(circle_at_right,rgba(226,74,43,0.35),transparent_65%)]
+  <div className="absolute inset-0
+    bg-[radial-gradient(circle_at_120%_50%,rgba(226,74,43,0.35),transparent_60%)]
     z-[3]"
   />
 
@@ -105,7 +97,7 @@ export default function Home() {
 
     {/* SUBTEXT */}
     <p className="mt-8 max-w-2xl mx-auto text-[#FFE1C5]/70 text-base md:text-lg">
-    A clean identity + consistent design can change perception instantly. We build systems that make your brand look serious.
+      Based in Ahmedabad and serving clients worldwide, we build high-end brand identities and consistent design systems that turn perceptions into premium experiences.
     </p>
 
     {/* CTA (VISIBILITY FIXED) */}
@@ -180,6 +172,8 @@ export default function Home() {
 
       <Testimonials />
       <Clients />
+      <ConsultancySection />
+      <AboutCards />
       {/* CONTACT */}
       <Contact />
 
