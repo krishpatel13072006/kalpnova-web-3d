@@ -66,17 +66,17 @@ const ConsultancySection = () => {
             <motion.div 
               key={index} 
               variants={fadeUp}
-              className={`flex flex-col items-start w-full md:w-1/3 ${
-                index !== 0 ? 'md:pl-12 lg:pl-16 md:border-l border-zinc-800' : 'pr-4'
+              className={`flex flex-col items-center md:items-start w-full md:w-1/3 ${
+                index !== 0 ? 'md:pl-12 lg:pl-16 md:border-l border-zinc-800' : 'md:pr-4'
               }`}
             >
-              <h3 className="text-2xl md:text-3xl font-normal text-[#ff6b2b] mb-1">
+              <h3 className="text-2xl md:text-3xl font-normal text-[#ff6b2b] mb-1 text-center md:text-left">
                 {stat.title}
               </h3>
-              <p className="text-sm md:text-base text-zinc-400 mb-8 md:mb-12">
+              <p className="text-sm md:text-base text-zinc-400 mb-8 md:mb-12 text-center md:text-left">
                 {stat.subtitle}
               </p>
-              <div className="text-7xl md:text-[100px] lg:text-[120px] font-light tracking-tighter leading-none">
+              <div className="text-7xl md:text-[100px] lg:text-[120px] font-light tracking-tighter leading-none text-center md:text-left">
                 {stat.value}
               </div>
             </motion.div>
