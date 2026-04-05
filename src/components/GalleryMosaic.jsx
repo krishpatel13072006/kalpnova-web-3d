@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import CubeGallery from './CubeGallery';
+import FoldingGallery from './FoldingGallery';
 
 // Mocked theme context to ensure successful standalone compilation
 const useTheme = () => ({ isLight: false });
@@ -231,7 +233,7 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
   if (!images?.length) return null;
 
   return (
-    <section className={`py-16 md:py-24 ${dark ? 'bg-[#0b0b0b]' : 'bg-white'} overflow-hidden`}>
+    <section className={`pt-16 md:pt-24 pb-8 md:pb-12 ${dark ? 'bg-[#0b0b0b]' : 'bg-white'} overflow-hidden`}>
       <div className="max-w-[1440px] mx-auto px-4 md:px-12">
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-gray-200 dark:border-white/5 pb-10 mb-12 md:mb-16">
@@ -255,8 +257,28 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
         {/* Rendered Layouts */}
         {ready && (
           <div className="space-y-[16px]">
-            {layout === "schoolg" ? ( // Check for the new custom layout
-              renderSchoolG(classified)
+            {layout === "krushak" ? (
+              <>
+                <div className="hidden lg:block">
+                  <CubeGallery images={images} />
+                </div>
+                <div className="lg:hidden space-y-[16px]">
+                  {rows.map((row, rowIdx) => (
+                    <div key={rowIdx}>
+                      {row.type === 'landscape' && renderBento(row.items, rowIdx)}
+                      {row.type === 'square' && renderDuo(row.items)}
+                      {row.type === 'portrait' && renderMasonry(row.items)}
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : layout === "schoolg" ? ( // Check for the new custom layout
+              <>
+                {renderSchoolG(classified)}
+                <div className="hidden lg:block mt-24 pt-16 border-t border-white/5">
+                  <FoldingGallery images={images} />
+                </div>
+              </>
             ) : layout === "2-col" ? (
               <div className="grid grid-cols-2 gap-[16px] items-start">
                 {images.map((src, i) => (

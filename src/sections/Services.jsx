@@ -42,12 +42,6 @@ export default function Services() {
        {/* Background subtle texture/grid if needed, but keeping it clean as per request */}
       <div className="max-w-[1440px] w-full mx-auto relative z-10">
         
-        {/* Top Right Label */}
-        <div className="flex justify-end mb-8 lg:mb-12">
-          <p className="text-sm font-semibold tracking-widest uppercase text-white">
-            <span className="text-zinc-500 mr-2">{">>"}</span> OUR SERVICES
-          </p>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
           

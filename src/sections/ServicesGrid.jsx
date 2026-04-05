@@ -9,7 +9,7 @@ const services = [
   
   export default function ServicesGrid() {
     return (
-      <section className="max-w-7xl mx-auto px-6">
+      <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
         <h1 className="text-section font-bold mb-16 text-[#FFE1C5]">
           Our <span className="accent">Services</span>
         </h1>

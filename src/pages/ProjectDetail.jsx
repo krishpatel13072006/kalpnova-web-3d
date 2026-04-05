@@ -147,36 +147,6 @@ const ProjectDetail = () => {
         </div>
 
 
-        {/* --- BILLBOARD SECTION --- */}
-        <section className="mt-24 md:mt-32">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className={`relative mx-auto rounded-[1.5rem] md:rounded-[2rem] border transition-all duration-500 
-              w-full max-w-[1149.6px]
-              ${isLight ? 'border-zinc-200' : 'border-white/5 shadow-2xl'}`}
-          >
-            {/* The image itself drives the container height — no cropping ever possible */}
-            <img
-              src={project.billboardImage}
-              className="w-full h-auto block rounded-[1.5rem] md:rounded-[2rem]"
-              alt="Billboard"
-              loading="lazy"
-              decoding="async"
-            />
-
-            {/* Overlay Gradient (Bottom fade for text readability) */}
-            <div className={`absolute inset-0 z-20 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none`}></div>
-
-            {/* Text Overlay */}
-            <div className="absolute bottom-6 md:bottom-10 left-0 w-full z-30 text-center px-4 md:px-6 pointer-events-none">
-              <h2 className={`text-base md:text-3xl lg:text-4xl font-black uppercase tracking-tighter drop-shadow-2xl transition-colors duration-500 px-2 leading-snug ${isLight ? 'text-zinc-900' : 'text-white'}`}>
-                {project.billboardTitle}
-              </h2>
-            </div>
-          </motion.div>
-        </section>
 
         {/* --- SERVICES LIST --- */}
         <section className={`mt-24 md:mt-32 border-t pt-8 md:pt-12 transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
@@ -197,7 +167,7 @@ const ProjectDetail = () => {
         <GalleryMosaic images={project.gallery} layout={project.galleryLayout} />
 
         {/* --- SIMILAR PROJECTS (INFINITE SCROLL) --- */}
-        <section className={`mt-24 md:mt-32 pt-16 md:pt-20 border-t overflow-hidden transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
+        <section className={`mt-8 md:mt-12 pt-8 md:pt-12 border-t overflow-hidden transition-colors duration-500 ${isLight ? 'border-zinc-100' : 'border-white/5'}`}>
           <div className="flex items-center justify-between mb-8 md:mb-16">
             <h2 className={`text-2xl md:text-5xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Related Works</h2>
           </div>

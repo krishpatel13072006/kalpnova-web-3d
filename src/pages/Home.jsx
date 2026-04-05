@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "../lib/gsap";
 import PinnedStory from "../sections/PinnedStory";
-import Services from "../sections/Services";
+import Services from "../sections/ServicesGrid";
 import Contact from "../sections/Contact";
 import Testimonials from "../sections/Testimonials";
 import Clients from "../sections/Clients";
