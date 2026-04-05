@@ -219,9 +219,10 @@ export const portfolioItems = [
     title: "London Coffee: Premium Brew Experience",
     client: "London Coffee",
     type: "Packaging, Brand Strategy, Social Media",
-    image: "/clients/London Coffee/14.jpg",
-    heroImage: "/clients/London Coffee/14.jpg",
+    image: "/clients/London Coffee/banner.png",
+    heroImage: "/clients/London Coffee/banner.png",
     tags: "Packaging, Brand Strategy, Social Media",
+    galleryLayout: "londoncoffee",
     brandOverview: "London Coffee brings the authentic British cafe experience to a global audience with premium roasts.",
     challenge: "Standing out in a highly saturated specialty coffee market.",
     perceptionShift: "Establish a luxurious yet accessible daily coffee ritual.",
@@ -246,7 +247,7 @@ export const portfolioItems = [
         badge: "Visual Appeal"
       }
     ],
-    billboardImage: "/clients/London Coffee/15.jpg",
+    billboardImage: "/clients/London Coffee/banner.png",
     billboardTitle: "London Coffee Brand Campaign",
     videoThumbnail: "/clients/London Coffee/20.jpg",
     videoText: "London Coffee | Authentic Brews...",
@@ -258,6 +259,7 @@ export const portfolioItems = [
       { label: "Social Growth", value: "50k+" }
     ],
     gallery: [
+      "/clients/London Coffee/banner.png",
       "/clients/London Coffee/14.jpg",
       "/clients/London Coffee/15.jpg",
       "/clients/London Coffee/20.jpg",

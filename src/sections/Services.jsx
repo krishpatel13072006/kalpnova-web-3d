@@ -16,7 +16,7 @@ const services = [
     id: "II",
     title: "Packaging",
     description: "Creating physical and digital packaging that stands out on the shelf and in the mind.",
-    image: "/clients/London Coffee/14.jpg",
+    image: "/clients/London Coffee/banner.png",
     subServices: [
       "Product Packaging", "Label & Box Design", "Unboxing Experience", 
       "Sustainable Packaging", "3D Mockups"

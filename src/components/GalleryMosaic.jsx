@@ -272,6 +272,20 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
                   ))}
                 </div>
               </>
+            ) : layout === "londoncoffee" ? (
+              <div className="space-y-[16px]">
+                {/* Standard grid first, followed by FoldingGallery */}
+                {rows.map((row, rowIdx) => (
+                  <div key={rowIdx}>
+                    {row.type === 'landscape' && renderBento(row.items, rowIdx)}
+                    {row.type === 'square' && renderDuo(row.items)}
+                    {row.type === 'portrait' && renderMasonry(row.items)}
+                  </div>
+                ))}
+                <div className="hidden lg:block mt-24 pt-16 border-t border-white/5">
+                  <FoldingGallery images={images} title="London Coffee Experience" accentColor="#ff6b2b" />
+                </div>
+              </div>
             ) : layout === "schoolg" ? ( // Check for the new custom layout
               <>
                 {renderSchoolG(classified)}
