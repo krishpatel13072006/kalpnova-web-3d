@@ -20,6 +20,7 @@ const fadeInUp = {
 const ProjectDetail = () => {
   const { id } = useParams();
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const isLight = false; // Fix: Website is now strictly dark mode, resolving ReferenceError
 
   const project = useMemo(() => portfolioItems.find(p => p.id === parseInt(id)), [id]);
 

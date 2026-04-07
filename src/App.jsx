@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
-import ComingSoon from "./pages/ComingSoon";
+import InsideKalpnova from './pages/InsideKalpnova';
 import VirtualExhibition from "./pages/VirtualExhibition";
 import WorkPortfolio from './pages/workportfolio';
 import ProjectDetail from './pages/ProjectDetail';
@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
 
         {/* The Hub Route */}
-        <Route path="/cs" element={<ComingSoon />} />
+        <Route path="/insidekalpnova" element={<InsideKalpnova />} />
 
         {/* Hub Experience Routes */}
         <Route path="/showcase" element={<VirtualExhibition />} />

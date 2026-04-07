@@ -167,14 +167,14 @@ export default function Navbar() {
   // Handle scroll to change navbar background
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const isScrolled = window.scrollY > 20;
+      setScrolled(prev => {
+        if (prev !== isScrolled) return isScrolled;
+        return prev;
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -207,10 +207,14 @@ export default function Navbar() {
     <>
       {/* NAV BAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-500 ease-in-out ${scrolled
-            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl"
+        className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled
+            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl"
             : "bg-transparent border-b border-transparent py-5"
           }`}
+        style={{ 
+          transition: 'background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease',
+          transform: 'translateZ(0)'
+        }}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* LOGO */}
@@ -253,7 +257,7 @@ export default function Navbar() {
           {/* RIGHT ACTIONS */}
           <div className="flex items-center gap-4">
             <a
-              href="/cs"
+              href="/insidekalpnova"
               className="hidden md:inline-flex items-center gap-2
               px-5 py-2 rounded-full
               bg-gradient-to-r from-[#FF8A00] to-[#E24A2B]
@@ -316,7 +320,7 @@ export default function Navbar() {
 
             {/* INSIDE KALPNOVA MOBILE link */}
             <div
-              onClick={() => handleNav("/cs")}
+              onClick={() => handleNav("/insidekalpnova")}
               style={{
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(40px)",

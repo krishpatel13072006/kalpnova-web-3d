@@ -243,7 +243,7 @@ export default function KalpnovaPavilion() {
 
   return (
     <div style={{ background: '#dce5ed', fontFamily: 'sans-serif' }}>
-      <button onClick={() => window.location.href = '/cs'} style={{ position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 9999, padding: '12px 30px', background: '#ea580c', color: 'white', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px', border: 'none' }}>⟵ BACK TO HUB</button>
+      <button onClick={() => window.location.href = '/insidekalpnova'} style={{ position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 9999, padding: '12px 30px', background: '#ea580c', color: 'white', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px', border: 'none' }}>⟵ BACK TO HUB</button>
       <div className="fixed top-28 left-6 md:left-10 z-[40] font-bold tracking-[0.4em] text-slate-800 uppercase text-xs">Kalpnova // Integrated Pavilion</div>
       <div ref={mountRef} />
       

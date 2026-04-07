@@ -107,10 +107,6 @@
    COMPONENT / EFFECT STYLES
 ========================= */
 
-.card {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
 
 /* FIXED: don’t hijack Tailwind `.group` */
 .group-pulse:hover {

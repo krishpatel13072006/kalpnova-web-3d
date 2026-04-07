@@ -4,15 +4,18 @@ import gsap from "gsap";
 
 export const lenis = new Lenis({
   duration: 1.2,
-  smooth: true,
+  lerp: 0.1,
+  smoothWheel: true,
+  wheelMultiplier: 1,
+  touchMultiplier: 1.5,
 });
 
 export function initLenis() {
-  // Sync Lenis with GSAP's requestAnimationFrame for butter-smooth scrolling
+  // Disable GSAP lag smoothing to prevent visual skipping against smooth scroll
+  gsap.ticker.lagSmoothing(0);
+
+  // Sync Lenis with GSAP's ticker for ultra-consistent frame timing
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
-  
-  // Disable GSAP lag smoothing to prevent visual skipping against smooth scroll
-  gsap.ticker.lagSmoothing(0);
 }

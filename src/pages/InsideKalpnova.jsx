@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hyperspeed from '../components/Hyperspeed';
 
-export default function ComingSoon() {
+export default function InsideKalpnova() {
   const navigate = useNavigate();
 
   const effectOptions = useMemo(() => {
@@ -31,14 +31,14 @@ export default function ComingSoon() {
       "carShiftX": [-0.8, 0.8],
       "carFloorSeparation": [0, 5],
       "colors": {
-        "roadColor": 526344,
-        "islandColor": 657930,
-        "background": 0,
-        "shoulderLines": 1250072,
-        "brokenLines": 1250072,
-        "leftCars": [14177983, 6770850, 12732332],
-        "rightCars": [242627, 941733, 3294549],
-        "sticks": 242627
+        "roadColor": 0x080808,
+        "islandColor": 0x0a0a0a,
+        "background": 0x000000,
+        "shoulderLines": 0xffffff,
+        "brokenLines": 0xffffff,
+        "leftCars": [0xff8a00, 0xe24a2b, 0xff6b2b],
+        "rightCars": [0xffffff, 0xffd700, 0xff8a00],
+        "sticks": 0xff8a00
       }
     };
   }, []);

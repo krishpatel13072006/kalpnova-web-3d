@@ -48,7 +48,7 @@ export default function Vision360() {
 
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       if (mountRef.current) mountRef.current.appendChild(renderer.domElement);
 
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
@@ -138,10 +138,46 @@ export default function Vision360() {
         renderer.setSize(window.innerWidth, window.innerHeight);
       };
 
+      const onTouchStart = (event) => {
+        isDragging = true;
+        dragDistance = 0;
+        previousMouseX = event.touches[0].clientX;
+      };
+
+      const onTouchMove = (event) => {
+        const touch = event.touches[0];
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+        if (isDragging) {
+          const deltaX = touch.clientX - previousMouseX;
+          dragDistance += Math.abs(deltaX);
+          targetRotation += deltaX * 0.003;
+        }
+        previousMouseX = touch.clientX;
+
+        // Visual feedback for touch is hard, but we can update HUD
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(panels);
+        if (intersects.length > 0) {
+          const p = intersects[0].object;
+          setHudTitle(p.userData.title);
+          setHudDesc(p.userData.desc);
+        }
+      };
+
+      const handleTouchEnd = () => {
+        isDragging = false;
+        if (dragDistance < 10) onMouseClick(); // Treat small drag as click
+      };
+
       window.addEventListener('mousedown', onMouseDown);
       window.addEventListener('mouseup', () => isDragging = false);
       window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('click', onMouseClick);
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('touchend', handleTouchEnd);
       window.addEventListener('resize', onWindowResize);
 
       const animate = () => {
@@ -156,6 +192,9 @@ export default function Vision360() {
         window.removeEventListener('mouseup', () => isDragging = false);
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('click', onMouseClick);
+        window.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', handleTouchEnd);
         window.removeEventListener('resize', onWindowResize);
         cancelAnimationFrame(animationId);
         renderer.dispose();
@@ -200,14 +239,14 @@ export default function Vision360() {
             <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-bold text-xl">V</div>
             <span className="tracking-[0.4em] font-bold text-xl md:text-2xl">VISION 为什么</span>
           </div>
-          <div className="flex items-center space-x-4">
-            <button onClick={() => window.location.href = '/cs'} className="px-4 py-2 bg-black/70 backdrop-blur border border-white/10 text-[10px] tracking-widest uppercase hover:bg-white hover:text-black transition-all">
-              ⟵ BACK TO HUB
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <button onClick={() => window.location.href = '/insidekalpnova'} className="px-2 md:px-4 py-2 bg-black/70 backdrop-blur border border-white/10 text-[8px] md:text-[10px] tracking-widest uppercase hover:bg-white hover:text-black transition-all">
+              ⟵ <span className="hidden md:inline">BACK TO HUB</span><span className="md:hidden">BACK</span>
             </button>
-            <button onClick={() => setIsChatOpen(!isChatOpen)} className="px-4 py-2 bg-black/70 backdrop-blur border border-white/10 text-[10px] tracking-widest uppercase hover:bg-white hover:text-black transition-all">
-              ✨ Ask Guide
+            <button onClick={() => setIsChatOpen(!isChatOpen)} className="px-2 md:px-4 py-2 bg-black/70 backdrop-blur border border-white/10 text-[8px] md:text-[10px] tracking-widest uppercase hover:bg-white hover:text-black transition-all">
+              ✨ <span className="hidden md:inline">Ask Guide</span><span className="md:hidden">ASK</span>
             </button>
-            <div className="text-[10px] tracking-[0.5em] text-gray-400 hidden md:block uppercase">Drag to rotate</div>
+            <div className="text-[10px] tracking-[0.5em] text-gray-400 hidden xl:block uppercase">Drag to rotate</div>
           </div>
         </div>
 
@@ -237,8 +276,8 @@ export default function Vision360() {
         {/* Info Panel */}
         <div className="flex justify-between items-end pointer-events-auto">
           <div className="max-w-md">
-            <h2 className="text-4xl font-light tracking-tighter mb-2 italic">{hudTitle}</h2>
-            <p className="text-gray-500 text-sm leading-relaxed">{hudDesc}</p>
+            <h2 className="text-2xl md:text-4xl font-light tracking-tighter mb-2 italic">{hudTitle}</h2>
+            <p className="text-gray-500 text-xs md:text-sm leading-relaxed">{hudDesc}</p>
           </div>
         </div>
       </div>
@@ -254,9 +293,9 @@ export default function Vision360() {
               </button>
             </div>
             <div className="flex-1 flex flex-col">
-              <h3 className="text-4xl font-bold mb-2 tracking-tight">{selectedItem.title}</h3>
-              <p className="text-emerald-500 text-xs mb-6 tracking-[0.3em] uppercase">{selectedItem.sub}</p>
-              <p className="text-gray-400 mb-8 leading-relaxed text-sm">{selectedItem.desc}</p>
+              <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">{selectedItem.title}</h3>
+              <p className="text-emerald-500 text-[10px] md:text-xs mb-4 md:mb-6 tracking-[0.3em] uppercase">{selectedItem.sub}</p>
+              <p className="text-gray-400 mb-4 md:mb-8 leading-relaxed text-xs md:text-sm">{selectedItem.desc}</p>
               
               {aiAnalysis && (
                 <div className="animate-fade-in">
