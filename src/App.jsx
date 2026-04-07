@@ -14,6 +14,8 @@ import ComingSoon from "./pages/ComingSoon";
 import VirtualExhibition from "./pages/VirtualExhibition";
 import WorkPortfolio from './pages/workportfolio';
 import ProjectDetail from './pages/ProjectDetail';
+import Vision360 from './pages/Vision360';
+import KalpnovaPavilion from './pages/KalpnovaPavilion';
 import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
@@ -32,8 +34,15 @@ export default function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
+
+        {/* The Hub Route */}
         <Route path="/cs" element={<ComingSoon />} />
+
+        {/* Hub Experience Routes */}
         <Route path="/showcase" element={<VirtualExhibition />} />
+        <Route path="/vision" element={<Vision360 />} />
+        <Route path="/pavilion" element={<KalpnovaPavilion />} />
+
         <Route path="/portfolio" element={<WorkPortfolio />} />
         <Route path="/portfolio/:id" element={<ProjectDetail />} />
       </Routes>

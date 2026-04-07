@@ -5,8 +5,8 @@ import { portfolioItems } from '../data/portfolio';
 
 // ─── Category map: match each project by id to a category ───────────────────
 const categoryMap = {
-  8:  'Digital',
-  9:  'Branding',
+  8: 'Digital',
+  9: 'Branding',
   10: 'Branding',
   12: 'Branding',
   13: 'Packaging',
@@ -54,20 +54,15 @@ export default function WorkPortfolio() {
   return (
     <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4] font-sans relative overflow-x-hidden pt-16 md:pt-24">
 
-      {/* Background Ambience */}
-      <div className="absolute top-[-20%] left-0 w-[50%] h-[50%] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(255,107,43,0.07) 0%, transparent 70%)' }} />
-      <div className="absolute top-[20%] right-0 w-[40%] h-[60%] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(255,107,43,0.07) 0%, transparent 70%)' }} />
+      {/* Background Ambience Removed as per request */}
 
       <div className="relative z-10 pb-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
 
           {/* ── DARK "FORMULA" BANNER — flush to top ─────────────────── */}
-          <div className="w-full rounded-b-[1.5rem] md:rounded-b-[2rem] overflow-hidden mb-10 relative -mx-6 md:-mx-12 px-0"
+          <div className="w-full rounded-b-[1.5rem] md:rounded-b-[2rem] overflow-hidden mb-10 relative -mx-6 md:-mx-12 px-0 bg-[#0f0f0f]"
             style={{
               width: 'calc(100% + 3rem)',
-              background: 'repeating-linear-gradient(90deg, #1a1a1a 0px, #1a1a1a 1px, #111 1px, #111 60px)',
             }}
           >
             <div className="relative z-10 py-8 md:py-10 px-8 md:px-20 text-center">
@@ -75,8 +70,8 @@ export default function WorkPortfolio() {
                 &gt;&gt; Our Work
               </p>
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-snug mb-4">
-                We don't just design.<br/>
-                We <em className="italic">build brands</em> that people<br/>
+                We don't just design.<br />
+                We <em className="italic">build brands</em> that people<br />
                 <em className="italic font-light">can't stop talking about.</em>
               </h2>
               <p className="text-base md:text-xl text-white/50 italic font-light tracking-wide">
@@ -145,7 +140,7 @@ export default function WorkPortfolio() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-12 md:gap-y-24"
+               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-12 md:gap-y-24 will-change-transform"
             >
               {filteredItems.map((item, i) => (
                 <motion.div
@@ -154,6 +149,7 @@ export default function WorkPortfolio() {
                   variants={cardVariants}
                   initial="hidden"
                   animate="visible"
+                  style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 500px' }}
                 >
                   <Link
                     to={`/portfolio/${item.id}`}
@@ -168,11 +164,11 @@ export default function WorkPortfolio() {
                       </div>
                       {/* Body */}
                       <div className="w-full bg-[#1a1a1a] rounded-b-3xl rounded-tr-3xl p-3 md:p-5 relative z-0 border border-white/5 group-hover:border-white/10 shadow-lg group-hover:shadow-[0_20px_50px_-12px_rgba(255,107,43,0.15)] transition-all duration-500">
-                        <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden relative bg-[#050505] shadow-inner">
+                        <div className="w-full aspect-video rounded-2xl overflow-hidden relative bg-[#050505] shadow-inner">
                           <img
                             src={item.heroImage || item.image}
                             alt={item.title}
-                            className="object-contain w-full h-full transition-transform duration-1000 ease-out group-hover:scale-105"
+                            className="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">

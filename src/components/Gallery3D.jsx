@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
-import { useTheme } from '../context/ThemeContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Gallery3D({ images }) {
-  const { isLight } = useTheme();
-  
   // Guard clause and mapping images to the ICarouselItem format
   if (!images || images.length <= 1) return null;
   const initialItems = images.map((img, idx) => ({ id: idx, title: `Image ${idx + 1}`, image: img }));
@@ -30,16 +27,16 @@ export default function Gallery3D({ images }) {
   const visibleItems = visibleIndices.map((index) => initialItems[index]);
 
   return (
-    <section className={`py-16 md:py-24 relative z-10 w-full overflow-hidden ${isLight ? 'bg-zinc-50' : 'bg-[#0b0b0b]'}`}>
+    <section className="py-16 md:py-24 relative z-10 w-full overflow-hidden bg-[#0b0b0b]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-8 md:mb-12">
-        <h2 className={`text-3xl md:text-5xl font-black uppercase tracking-tighter ${isLight ? 'text-black' : 'text-white'}`}>
-           Project <span className={isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}>Gallery</span>
+        <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">
+           Project <span className="text-[#ff6b2b]">Gallery</span>
         </h2>
       </div>
 
       <div className="flex justify-center items-center px-4 md:px-0 w-full">
         {/* User-provided Carousel Implementation */}
-        <div className={`carousel-container relative h-[400px] md:h-[600px] w-full max-w-[1000px] overflow-hidden rounded-2xl md:rounded-[2rem] border-2 ${isLight ? 'border-zinc-200 bg-white' : 'border-white/10 bg-[#111]'} p-2 shadow-2xl`}>
+        <div className="carousel-container relative h-[400px] md:h-[600px] w-full max-w-[1000px] overflow-hidden rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-[#111] p-2 shadow-2xl">
           
           <div
             onClick={handlePrev}

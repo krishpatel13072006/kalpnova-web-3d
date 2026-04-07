@@ -51,7 +51,7 @@
 //       {/* NAV BAR */}
 //       <nav className="fixed top-0 left-0 w-full z-50 px-6 py-4">
 //   <div className="max-w-7xl mx-auto flex items-center justify-between">
-    
+
 //     {/* LOGO */}
 //     <button
 //       onClick={() => handleNav("/")}
@@ -147,9 +147,8 @@
 
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import logo from "../assets/kalpnova.png"; // 👈 update path if needed
 
 const links = [
@@ -164,11 +163,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isLight, toggleTheme } = useTheme();
   const location = useLocation();
-
-  const isProjectPage = location.pathname.startsWith('/portfolio/');
-
   // Handle scroll to change navbar background
   useEffect(() => {
     const handleScroll = () => {
@@ -211,41 +206,48 @@ export default function Navbar() {
   return (
     <>
       {/* NAV BAR */}
-      <nav 
-        className={`fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-500 ease-in-out ${
-          scrolled 
-            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl" 
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-500 ease-in-out ${scrolled
+            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl"
             : "bg-transparent border-b border-transparent py-5"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-           {/* LOGO */}
-    <button
-      onClick={() => handleNav("/")}
-      className="flex items-center gap-2"
-    >
-      <img
-        src={logo}
-        alt="Imagine logo"
-        className="h-8 md:h-10 w-auto"
-      />
-    </button>
+          {/* LOGO */}
+          <button
+            onClick={() => handleNav("/")}
+            className="flex items-center gap-2"
+          >
+            <img
+              src={logo}
+              alt="Imagine logo"
+              className="h-8 md:h-10 w-auto"
+            />
+          </button>
 
 
           {/* DESKTOP LINKS */}
-          <div className="hidden md:flex items-center gap-8 text-sm text-[#FFE1C5]">
-            {links.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleNav(item.to)}
-                className="group flex items-center gap-1 hover:text-orange-600 transition"
-              >
-                {item.label}
-                <span className="text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  ↗
-                </span>
-              </button>
-            ))}
+          <div className="hidden md:flex items-center gap-2 text-sm text-[#FFE1C5]">
+            {links.map((item) => {
+              const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
+              
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => handleNav(item.to)}
+                  className={`group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300 ${
+                    isActive 
+                      ? "bg-white/10 text-orange-500" 
+                      : "hover:text-orange-400"
+                  }`}
+                >
+                  {item.label}
+                  <span className={`text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isActive ? 'text-orange-500' : 'opacity-70 group-hover:opacity-100'}`}>
+                    ↗
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* RIGHT ACTIONS */}
@@ -263,43 +265,7 @@ export default function Navbar() {
               <span className="text-xs"></span>
             </a>
 
-            {/* THEME TOGGLE (Only on Project Pages) */}
-            {isProjectPage && (
-              <motion.button 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleTheme}
-                className={`flex items-center justify-center p-2 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 ${
-                  isLight ? 'bg-white/80 border-zinc-200 text-black' : 'bg-white/10 border-white/10 text-white'
-                }`}
-              >
-                <AnimatePresence mode="wait">
-                  {isLight ? (
-                    <motion.div
-                      key="moon"
-                      initial={{ opacity: 0, rotate: -45 }}
-                      animate={{ opacity: 1, rotate: 0 }}
-                      exit={{ opacity: 0, rotate: 45 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Moon size={18} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="sun"
-                      initial={{ opacity: 0, rotate: -45 }}
-                      animate={{ opacity: 1, rotate: 0 }}
-                      exit={{ opacity: 0, rotate: 45 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Sun size={18} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            )}
+
 
             {/* MOBILE MENU */}
             <button
@@ -325,24 +291,28 @@ export default function Navbar() {
             CLOSE
           </button>
 
-          <div className="text-center space-y-6">
-            {links.map((item, i) => (
-              <div
-                key={item.label}
-                onClick={() => handleNav(item.to)}
-                style={{
-                  opacity: mounted ? 1 : 0,
-                  transform: mounted ? "translateY(0)" : "translateY(40px)",
-                  transition: `all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) ${0.1 + i * 0.12}s`
-                }}
-                className="
-                  text-4xl md:text-5xl font-semibold cursor-pointer
-                  text-[#FFE1C5] hover:text-orange-500
-                "
-              >
-                {item.label}
-              </div>
-            ))}
+          <div className="text-center space-y-6 flex flex-col items-center">
+            {links.map((item, i) => {
+              const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
+              
+              return (
+                <div
+                  key={item.label}
+                  onClick={() => handleNav(item.to)}
+                  style={{
+                    opacity: mounted ? 1 : 0,
+                    transform: mounted ? "translateY(0)" : "translateY(40px)",
+                    transition: `all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) ${0.1 + i * 0.12}s`
+                  }}
+                  className={`
+                    text-4xl md:text-5xl font-semibold cursor-pointer px-6 py-2 rounded-2xl
+                    ${isActive ? "bg-white/10 text-orange-500" : "text-[#FFE1C5] hover:text-orange-500"}
+                  `}
+                >
+                  {item.label}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

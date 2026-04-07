@@ -112,6 +112,7 @@ export const portfolioItems = [
     title: "Westrock: Sustainable Packaging Leadership",
     client: "Westrock",
     type: "Industrial Branding, Packaging Design, B2B Strategy",
+    galleryLayout: "masonry-2-col",
     image: "/projects/Westrock%20logo/1.jpg",
     heroImage: "/projects/Westrock%20logo/1.jpg",
     tags: "Industrial Branding, Packaging Design, B2B Strategy",
@@ -157,7 +158,12 @@ export const portfolioItems = [
       "/projects/Westrock%20logo/4.jpg",
       "/projects/Westrock%20logo/5.jpg",
       "/projects/Westrock%20logo/6.jpg",
-      "/projects/Westrock%20logo/7.jpg"
+      "/projects/Westrock%20logo/7.jpg",
+      "/clients/westrock food/0 (2).jpg",
+      "/clients/westrock food/0 (3).jpg",
+      "/clients/westrock food/0 (4).jpg",
+      "/clients/westrock food/0 (5).jpg",
+      "/clients/westrock food/0 (6).jpg"
     ]
   },
 
@@ -196,7 +202,7 @@ export const portfolioItems = [
     ],
     billboardImage: "/clients/Krushak/1 (2).jpeg",
     billboardTitle: "Krushak Brand Identity",
-    videoThumbnail: "/clients/Krushak/1 (3).jpeg",
+    videoThumbnail: "/clients/Krushak/1 (2).jpeg",
     videoText: "Krushak | The Future of AgriTech...",
     services: "Brand Identity, UI/UX, Web Dev",
     industry: "Agriculture",
@@ -208,7 +214,6 @@ export const portfolioItems = [
     gallery: [
       "/clients/Krushak/1 (1).jpeg",
       "/clients/Krushak/1 (2).jpeg",
-      "/clients/Krushak/1 (3).jpeg",
       "/clients/Krushak/1 (4).jpeg",
       "/clients/Krushak/1 (5).jpeg",
       "/clients/Krushak/1 (6).jpeg"
@@ -263,7 +268,13 @@ export const portfolioItems = [
       "/clients/London Coffee/14.jpg",
       "/clients/London Coffee/15.jpg",
       "/clients/London Coffee/20.jpg",
+      "/clients/London Coffee/25.jpg",
       "/clients/London Coffee/26.jpg",
+      "/clients/London Coffee/27.jpg",
+      "/clients/London Coffee/28.jpg",
+      "/clients/London Coffee/29.jpg",
+      "/clients/London Coffee/30.jpg",
+      "/clients/London Coffee/31.jpg",
       "/clients/London Coffee/67.jpg",
       "/clients/London Coffee/72.jpg"
     ]
@@ -341,7 +352,7 @@ export const portfolioItems = [
     type: "Industrial Design, B2B, Print",
     image: "/clients/marutii/Artboard 1.jpg",
     heroImage: "/clients/marutii/Artboard 1.jpg",
-    galleryLayout: "mobile-2-col-auto",
+    galleryLayout: "maruti",
     tags: "Industrial Design, B2B, Print",
     brandOverview: "Maruti represents legacy and precision in the industrial sector.",
     challenge: "Modernizing a legacy brand for contemporary B2B markets.",
@@ -419,6 +430,7 @@ export const portfolioItems = [
     title: "Lotus Salon: Premium Care",
     client: "Lotus Salon",
     type: "Brand Refresh, Social Media, Print",
+    galleryLayout: "lotus-salon",
     image: "/clients/lotus Salon/1 (1).jpg",
     heroImage: "/clients/lotus Salon/1 (1).jpg",
     tags: "Brand Refresh, Social Media, Print",
@@ -438,6 +450,18 @@ export const portfolioItems = [
     services: "Brand Refresh, Social Media, Print",
     industry: "Beauty & Wellness",
     stats: [{ label: "Appointments", value: "+40%" }, { label: "Followers", value: "10k+" }, { label: "Retention", value: "85%" }],
-    gallery: ["/clients/lotus Salon/1 (1).jpg", "/clients/lotus Salon/1 (2).jpg", "/clients/lotus Salon/1 (3).jpg", "/clients/lotus Salon/1 (4).jpg", "/clients/lotus Salon/1 (5).jpg"]
+    gallery: [
+      "/clients/lotus Salon/1 (1).jpg",
+      "/clients/lotus Salon/1 (2).jpg",
+      "/clients/lotus Salon/1 (3).jpg",
+      "/clients/lotus Salon/1 (4).jpg",
+      "/clients/lotus Salon/1 (5).jpg",
+      "/clients/lotus Salon/1.jpg",
+      "/clients/lotus Salon/2.jpg",
+      "/clients/lotus Salon/3.jpg",
+      "/clients/lotus Salon/4.jpg",
+      "/clients/lotus Salon/5.jpg",
+      "/clients/lotus Salon/6.jpg"
+    ]
   }
 ];

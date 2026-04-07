@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useTexture } from "@react-three/drei";
-import { 
-  Text, 
-  Image, 
-  Environment, 
-  Sparkles, 
-  useCursor, 
-  Float, 
+import {
+  Text,
+  Image,
+  Environment,
+  Sparkles,
+  useCursor,
+  Float,
   OrbitControls,
   PerspectiveCamera,
   Html
@@ -25,7 +25,7 @@ const projects = [
     description: "A complete logistics solution connecting vendors with local delivery partners.",
     tech: "REACT • NODE.JS • POSTGRESQL",
     // Dark grey background with Cyan text
-    imgUrl: "https://i.postimg.cc/FHw6pdw1/image.png", 
+    imgUrl: "https://i.postimg.cc/FHw6pdw1/image.png",
     posters: {
       back: "https://i.postimg.cc/QtFky07v/image.png",
       left: "https://i.postimg.cc/FHw6pdw1/image.png",
@@ -44,7 +44,7 @@ const projects = [
     description: "High-performance native application built for scalability and offline usage.",
     tech: "KOTLIN • JETPACK COMPOSE • FIREBASE",
     // Dark grey background with Pink text
-    imgUrl: "https://i.postimg.cc/QtFky07v/image.png", 
+    imgUrl: "https://i.postimg.cc/QtFky07v/image.png",
     posters: {
       back: "https://i.postimg.cc/FHw6pdw1/image.png",
       left: "https://i.postimg.cc/QtFky07v/image.png",
@@ -220,7 +220,7 @@ function ProjectRoom({ project }) {
 //         <boxGeometry args={[12, 7, 12]} />
 //         <meshStandardMaterial color="#050505" side={THREE.BackSide} roughness={0.3} metalness={0.8} />
 //       </mesh>
-      
+
 //       {/* Grid Floor */}
 //       <gridHelper args={[12, 12, 0x444444, 0x111111]} position={[0, -3.4, 0]} />
 
@@ -277,7 +277,7 @@ function GalleryCard({ project, onSelect, ...props }) {
     if (ref.current) {
       const targetScale = hovered ? 1.15 : 1;
       ref.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
-      
+
       // Look at mouse
       // const x = state.pointer.x * 0.2;
       const x = state.pointer.x * 0.12;
@@ -288,26 +288,26 @@ function GalleryCard({ project, onSelect, ...props }) {
   });
 
   return (
-    <group 
-      ref={ref} 
-      {...props} 
-      onPointerOver={() => setHover(true)} 
+    <group
+      ref={ref}
+      {...props}
+      onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
       onClick={() => onSelect(project)}
     >
-<Image
-  url={project.imgUrl}
-  scale={[2.2, 1.45]}
-  opacity={0.85}
-  toneMapped={false}
-/>
+      <Image
+        url={project.imgUrl}
+        scale={[2.2, 1.45]}
+        opacity={0.85}
+        toneMapped={false}
+      />
 
       {/* Glow frame behind image */}
       <mesh position={[0, 0, -0.02]}>
         <planeGeometry args={[2.55, 1.75]} />
         <meshBasicMaterial color={hovered ? project.color : "#222"} />
       </mesh>
-      
+
       <Text position={[0, -1.0, 0.1]} fontSize={0.15} color="white" font="https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxM.woff">
         {project.title}
       </Text>
@@ -345,50 +345,50 @@ export default function VirtualExhibition() {
 
       <Canvas>
         <color attach="background" args={['#050505']} />
-        
+
         {/* Safe Loader */}
         <Suspense fallback={<Loader />}>
-          
+
           {/* Post Processing */}
           <EffectComposer disableNormalPass>
             {/* <Bloom luminanceThreshold={0.1} mipmapBlur intensity={1.5} radius={0.5} /> */}
             <Bloom
-  luminanceThreshold={0.6}
-  intensity={0.6}
-  radius={0.4}
-/>
+              luminanceThreshold={0.6}
+              intensity={0.6}
+              radius={0.4}
+            />
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
 
           {activeProject ? (
-  <>
-    <PerspectiveCamera
-      makeDefault
-      position={[0, 0, 8]}
-      fov={38}
-    />
-    <ProjectRoom project={activeProject} />
-    <OrbitControls enableZoom={false} enablePan={false} />
-  </>
-) : (
+            <>
+              <PerspectiveCamera
+                makeDefault
+                position={[0, 0, 8]}
+                fov={38}
+              />
+              <ProjectRoom project={activeProject} />
+              <OrbitControls enableZoom={false} enablePan={false} />
+            </>
+          ) : (
             // GALLERY MODE
             <>
               <ambientLight intensity={0.5} />
               <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} color="#00d8ff" />
               <pointLight position={[-10, -10, -10]} intensity={2} color="#ff0055" />
-              
+
               <Sparkles count={120} scale={10} size={3} speed={0.4} opacity={0.5} color="#ffffff" />
-              
+
               {/* <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
                */}
-               <Float speed={2} rotationIntensity={0} floatIntensity={0.15}>
+              <Float speed={2} rotationIntensity={0} floatIntensity={0.15}>
                 <group position={[0, -0.2, 0]}>
                   {projects.map((proj) => (
-                    <GalleryCard 
-                      key={proj.id} 
-                      project={proj} 
+                    <GalleryCard
+                      key={proj.id}
+                      project={proj}
                       onSelect={setActiveProject}
-                      position={proj.position} 
+                      position={proj.position}
                       rotation={proj.rotation}
                     />
                   ))}
@@ -398,14 +398,14 @@ export default function VirtualExhibition() {
               {/* <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} /> */}
               <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={60} />
               <OrbitControls
-  enableZoom={false}
-  enablePan={false}
-  rotateSpeed={0.6}
-  dampingFactor={0.08}
-  enableDamping
-  maxPolarAngle={Math.PI / 2}
-  minPolarAngle={Math.PI / 2}
-/>
+                enableZoom={false}
+                enablePan={false}
+                rotateSpeed={0.6}
+                dampingFactor={0.08}
+                enableDamping
+                maxPolarAngle={Math.PI / 2}
+                minPolarAngle={Math.PI / 2}
+              />
 
             </>
           )}

@@ -3,22 +3,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [isLight, setIsLight] = useState(false);
-
-  // Optional: persist theme to localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('project_theme');
-    if (savedTheme) {
-      setIsLight(savedTheme === 'light');
-    }
-  }, []);
+  // Website is now strictly Dark Mode
+  const isLight = false;
 
   const toggleTheme = () => {
-    setIsLight(prev => {
-      const next = !prev;
-      localStorage.setItem('project_theme', next ? 'light' : 'dark');
-      return next;
-    });
+    // No-op: theme switching is disabled
+    console.log('Theme switching is disabled. Dark mode only.');
   };
 
   return (
