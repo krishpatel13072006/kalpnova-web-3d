@@ -100,8 +100,8 @@ const ProjectDetail = () => {
             animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             src={project.heroImage}
-            /* UPDATED: Changed object-contain to object-cover and w-full h-full to fill space */
-            className="w-full h-full object-cover block transition-all duration-1000"
+            /* UPDATED: Changed object-cover to object-contain to show the complete image without cropping */
+            className="w-full h-full object-contain block transition-all duration-1000"
             alt={project.title}
           />
           <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40 from-[#0b0b0b]"></div>

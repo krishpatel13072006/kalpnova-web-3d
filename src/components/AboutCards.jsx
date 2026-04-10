@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import GridScan from './GridScan';
 
 const AboutCards = () => {
   const cards = [
@@ -54,14 +55,23 @@ const AboutCards = () => {
   };
 
   return (
-    <section className="relative bg-[#111111] text-white py-24 px-6 md:px-12 overflow-hidden font-sans">
-      {/* Background Vertical Stripes */}
-      <div 
-        className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-        style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 48px, #ffffff 48px, #ffffff 96px)' }}
-      />
+    <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden font-sans">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" style={{ width: '100%', height: '100%' }}>
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#392e4e"
+          gridScale={0.1}
+          scanColor="#cc7533"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+        />
+      </div>
 
-      <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center">
+      <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
         
         {/* Header */}
         <motion.h2 
@@ -69,7 +79,7 @@ const AboutCards = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-medium text-center mb-16 tracking-tight max-w-2xl"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium text-center mb-12 tracking-tight max-w-2xl"
         >
           Few things you <span className="font-serif italic text-[#ff6b2b]">should</span> <br className="hidden md:block"/> 
           <span className="font-serif italic text-[#ff6b2b]">know</span> about us.
@@ -87,15 +97,15 @@ const AboutCards = () => {
             <motion.div 
               key={index}
               variants={itemVariants}
-              className="bg-[#e6e4dc] text-zinc-900 rounded-[2rem] overflow-hidden flex flex-col shadow-xl"
+              className="bg-[#e6e4dc] text-zinc-900 rounded-[1.5rem] overflow-hidden flex flex-col shadow-xl"
             >
               {/* Card Top Half */}
-              <div className="p-8 pb-6 bg-[#eeeadd] flex justify-between items-start">
+              <div className="p-6 pb-4 bg-[#eeeadd] flex justify-between items-start">
                 <div>
-                  <span className="block text-xl font-medium text-zinc-800 mb-2">{card.id}</span>
-                  <h3 className="text-2xl font-serif italic">{card.title}</h3>
+                  <span className="block text-lg font-medium text-zinc-800 mb-1">{card.id}</span>
+                  <h3 className="text-xl font-serif italic">{card.title}</h3>
                 </div>
-                <div className="mt-1">
+                <div className="mt-1 scale-90 origin-top-right">
                   {card.icon}
                 </div>
               </div>
@@ -104,8 +114,8 @@ const AboutCards = () => {
               <div className="h-[1px] w-full bg-zinc-300/60"></div>
 
               {/* Card Bottom Half */}
-              <div className="p-8 pt-6 flex-grow">
-                <p className="text-sm md:text-[15px] text-zinc-800 leading-relaxed font-medium">
+              <div className="p-6 pt-4 flex-grow">
+                <p className="text-sm text-zinc-800 leading-relaxed font-medium">
                   {card.description}
                 </p>
               </div>

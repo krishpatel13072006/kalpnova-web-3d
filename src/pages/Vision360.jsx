@@ -228,7 +228,7 @@ export default function Vision360() {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-screen overflow-hidden bg-black text-white font-sans z-[99999]">
+    <div className="fixed inset-0 w-full h-screen h-[100dvh] overflow-hidden bg-black text-white font-sans z-[99999]">
       <div ref={mountRef} className="absolute inset-0" />
 
       {/* UI Overlay */}

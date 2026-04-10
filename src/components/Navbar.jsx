@@ -163,6 +163,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [clickedPath, setClickedPath] = useState(null);
   const location = useLocation();
   // Handle scroll to change navbar background
   useEffect(() => {
@@ -195,12 +196,20 @@ export default function Navbar() {
   };
 
   const handleNav = (to) => {
-    setMounted(false);
+    if (open) {
+      setMounted(false);
+      setTimeout(() => {
+        setOpen(false);
+        // Direct navigation to avoid requiring a <Router> provider
+        window.location.href = to;
+      }, 300);
+      return;
+    }
+
+    setClickedPath(to);
     setTimeout(() => {
-      setOpen(false);
-      // Direct navigation to avoid requiring a <Router> provider
       window.location.href = to;
-    }, 300);
+    }, 800); // Wait 800ms to allow the slow background expansion animation out to full width
   };
 
   return (
@@ -208,10 +217,10 @@ export default function Navbar() {
       {/* NAV BAR */}
       <nav
         className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled
-            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl"
-            : "bg-transparent border-b border-transparent py-5"
+          ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl"
+          : "bg-transparent border-b border-transparent py-5"
           }`}
-        style={{ 
+        style={{
           transition: 'background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease',
           transform: 'translateZ(0)'
         }}
@@ -231,22 +240,43 @@ export default function Navbar() {
 
 
           {/* DESKTOP LINKS */}
-          <div className="hidden md:flex items-center gap-2 text-sm text-[#FFE1C5]">
+          <div className="hidden md:flex items-center gap-2 text-sm relative z-10 p-1">
+            {/* The expanded background container */}
+            {clickedPath && (
+              <motion.div
+                layoutId="active-bg"
+                className="absolute inset-0 bg-[#1a1a1a] border border-[#FF8A00] shadow-[0_0_20px_rgba(255,138,0,0.3)] rounded-full z-0"
+                transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+              />
+            )}
+
             {links.map((item) => {
               const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
-              
+              const isClicked = clickedPath === item.to;
+
+              let textColorClass = "text-[#FFE1C5] hover:text-orange-400";
+              if (clickedPath) {
+                textColorClass = isClicked ? "text-orange-500" : "text-white";
+              } else if (isActive) {
+                textColorClass = "text-orange-500";
+              }
+
               return (
                 <button
                   key={item.label}
                   onClick={() => handleNav(item.to)}
-                  className={`group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300 ${
-                    isActive 
-                      ? "bg-white/10 text-orange-500" 
-                      : "hover:text-orange-400"
-                  }`}
+                  className={`group relative flex items-center gap-1 px-4 py-2 rounded-full transition-colors duration-300 ${textColorClass} z-10`}
                 >
-                  {item.label}
-                  <span className={`text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isActive ? 'text-orange-500' : 'opacity-70 group-hover:opacity-100'}`}>
+                  {/* The single link background */}
+                  {(isActive && !clickedPath) && (
+                    <motion.div
+                      layoutId="active-bg"
+                      className="absolute inset-0 bg-[#1a1a1a] border border-[#FF8A00] shadow-[0_0_20px_rgba(255,138,0,0.3)] rounded-full z-0"
+                      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                  <span className={`relative z-10 text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isActive || isClicked ? 'text-orange-500' : 'opacity-70 group-hover:opacity-100'}`}>
                     ↗
                   </span>
                 </button>
@@ -298,7 +328,7 @@ export default function Navbar() {
           <div className="text-center space-y-6 flex flex-col items-center">
             {links.map((item, i) => {
               const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
-              
+
               return (
                 <div
                   key={item.label}
