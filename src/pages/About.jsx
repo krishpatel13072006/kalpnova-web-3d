@@ -26,6 +26,7 @@ export default function About() {
       {/* Butterflies float over the full page on large screens only */}
       <MagicalButterfly scrollYProgress={scrollYProgress} colorTheme="orange" />
       <MagicalButterfly scrollYProgress={scrollYProgress} colorTheme="blue" />
+      <MagicalButterfly scrollYProgress={scrollYProgress} colorTheme="pink" />
 
       <AboutNarrative />
       <TeamSection />
