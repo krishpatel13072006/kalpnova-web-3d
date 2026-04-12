@@ -42,21 +42,28 @@ export default function MagicalButterfly({ colorTheme = 'orange' }) {
   const imageBounds = useRef([]);
 
   useEffect(() => {
-    // Update image bounds every second to avoid checking DOM 60 times a second
+    // Update image bounds absolute positions every 2 seconds to avoid checking DOM on scroll
     const updateBounds = () => {
       const imgs = document.querySelectorAll('img');
-      imageBounds.current = Array.from(imgs).map(img => img.getBoundingClientRect());
+      const sy = window.scrollY;
+      imageBounds.current = Array.from(imgs).map(img => {
+        const rect = img.getBoundingClientRect();
+        return {
+          left: rect.left,
+          right: rect.right,
+          absTop: rect.top + sy,
+          absBottom: rect.bottom + sy
+        };
+      });
     };
     
     updateBounds();
-    const interval = setInterval(updateBounds, 1000);
+    const interval = setInterval(updateBounds, 2000);
     window.addEventListener('resize', updateBounds);
-    window.addEventListener('scroll', updateBounds, { passive: true });
     
     return () => {
       clearInterval(interval);
       window.removeEventListener('resize', updateBounds);
-      window.removeEventListener('scroll', updateBounds);
     };
   }, []);
 
@@ -149,17 +156,22 @@ export default function MagicalButterfly({ colorTheme = 'orange' }) {
     s.py = Math.max(0, Math.min(vh, s.py));
 
     // ─── DEPTH SCALING (Over Images) ───
-    // Check against cached bounds instead of querying the DOM (fixes the lag)
+    // Check against cached bounds using absolute positioning to avoid checking DOM on scroll (fixes scroll lag)
     let isOverImage = false;
+    const sy = window.scrollY;
     for (let i = 0; i < imageBounds.current.length; i++) {
       const rect = imageBounds.current[i];
-      if (s.px >= rect.left && s.px <= rect.right && s.py >= rect.top && s.py <= rect.bottom) {
+      const screenTop = rect.absTop - sy;
+      const screenBottom = rect.absBottom - sy;
+      if (s.px >= rect.left && s.px <= rect.right && s.py >= screenTop && s.py <= screenBottom) {
         isOverImage = true;
         break;
       }
     }
     
-    s.targetScale = isOverImage ? baseScale * 0.45 : baseScale;
+    // Scale down for smaller screens to fit nicely on phones and tablets
+    const currentBaseScale = vw < 768 ? baseScale * 0.55 : (vw < 1024 ? baseScale * 0.8 : baseScale);
+    s.targetScale = isOverImage ? currentBaseScale * 0.45 : currentBaseScale;
     s.currentScale += (s.targetScale - s.currentScale) * 0.1 * dt;
 
     // ─── UPDATE FRAMER MOTION VALUES ───
@@ -205,8 +217,10 @@ export default function MagicalButterfly({ colorTheme = 'orange' }) {
           animation: flap-right-${ct} 0.75s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
         }
 
-        .bfly-root-${ct} { display: none; }
-        @media (min-width: 768px) { .bfly-root-${ct} { display: block; } }
+        .bfly-root-${ct} { 
+          display: block; 
+          will-change: transform;
+        }
       `}</style>
 
       <motion.div
