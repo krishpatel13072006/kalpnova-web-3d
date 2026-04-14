@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring, useAnimationFrame } from 'framer-motion';
+import BlueButterfly from '../components/BlueButterfly';
+import TimelineButterfly from '../components/TimelineButterfly';
 
 // ─── Social Icon SVGs ────────────────────────────────────────────────────────
 
@@ -250,10 +252,18 @@ function SocialPill({ platform, url, accent }) {
 
 // ─── Member Card ──────────────────────────────────────────────────────────────
 
-function MemberCard({ member, index }) {
+function MemberCard({ member, index, activeCard, setActiveCard }) {
   const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
+  
+  // Trigger card activation when it enters the middle 60% of the viewport
+  const inView = useInView(sectionRef, { margin: '-20% 0px -20% 0px' });
   const isEven = index % 2 === 0;
+
+  React.useEffect(() => {
+    if (inView) {
+      setActiveCard(index);
+    }
+  }, [inView, index, setActiveCard]);
 
   const accent = member.accentFrom;
 
@@ -315,7 +325,7 @@ function MemberCard({ member, index }) {
         {/* Image column */}
         <motion.div
           variants={isEven ? leftVariants : rightVariants}
-          style={{ order: isEven ? 0 : 1 }}
+          style={{ order: isEven ? 0 : 1, position: 'relative' }}
           className="team-img-col"
         >
           <TiltImage src={member.image} alt={member.name} accent={accent} />
@@ -370,6 +380,25 @@ function MemberCard({ member, index }) {
               }}
             >
               {member.name}
+              
+              {/* Pink Butterfly Name Hopper placed safely inside an inline span */}
+              <span style={{ display: 'inline-block', position: 'relative', width: 0, height: 0, marginLeft: '10px' }}>
+                {activeCard === index && (
+                  <motion.div
+                    layoutId="name-hopper"
+                    transition={{ type: 'spring', damping: 12, stiffness: 40 }}
+                    style={{
+                      position: 'absolute',
+                      bottom: '5px',
+                      left: '0px',
+                      zIndex: 20,
+                      rotate: 25,
+                    }}
+                  >
+                    <TimelineButterfly scale={0.45} />
+                  </motion.div>
+                )}
+              </span>
             </h3>
           </motion.div>
 
@@ -442,6 +471,48 @@ function SectionHeader() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
 
+  // Blue Butterfly Figure-8 (Infinity) Animation Logic
+  const butterflyX = useMotionValue(0);
+  const butterflyY = useMotionValue(0);
+  const butterflyRotate = useMotionValue(90); // default pointing right
+  const timeRef = useRef(0);
+
+  useAnimationFrame((time, delta) => {
+    // Normalize time to handle different display rates gracefully
+    const dt = delta / 16.6;
+    timeRef.current += 0.015 * dt; // Speed of the loop
+    const t = timeRef.current;
+
+    // Infinity figure parametric equations
+    const A = 350; // Horizontal Width radius
+    const B = 100; // Vertical Height radius
+
+    const x = A * Math.sin(t);
+    const y = B * Math.sin(t) * Math.cos(t);
+    butterflyX.set(x);
+    butterflyY.set(y);
+
+    // Calculate exact tangent angle to the path for correct facing
+    // Derivatives of the path
+    const dx = A * Math.cos(t);
+    // Derivative of sin(t)*cos(t) is cos^2(t) - sin^2(t) = cos(2t)
+    const dy = B * Math.cos(2 * t);
+
+    // atan2 gives angle from standard Right horizontal. 
+    // Since SVG 0 degree is UP, we add 90 to align its head with the tangent.
+    const angleRad = Math.atan2(dy, dx);
+    const angleDeg = (angleRad * 180) / Math.PI;
+    
+    // Smooth angle interpolation to prevent snapping
+    const currentRot = butterflyRotate.get();
+    let diff = (angleDeg + 90) - currentRot;
+    
+    // Normalize diff to -180 to +180 to avoid full circle spins
+    diff = ((diff + 180) % 360 + 360) % 360 - 180;
+    
+    butterflyRotate.set(currentRot + diff * 0.15 * dt);
+  });
+
   return (
     <motion.div
       ref={ref}
@@ -450,6 +521,24 @@ function SectionHeader() {
       transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative' }}
     >
+      {/* Animated Infinity Blue Butterfly */}
+      <motion.div
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "50%",
+          x: butterflyX,
+          y: butterflyY,
+          rotate: butterflyRotate,
+          marginLeft: -45, // Half of SVG width
+          marginTop: -32.5, // Half of SVG height
+          zIndex: -1, // Fly slightly behind main text but over the background
+          opacity: 0.7,
+          pointerEvents: "none"
+        }}
+      >
+        <BlueButterfly scale={1.2} />
+      </motion.div>
       {/* Overline */}
       <motion.div
         initial={{ scaleX: 0 }}
@@ -536,6 +625,9 @@ function MemberSeparator({ index }) {
 // ─── Main Export ──────────────────────────────────────────────────────────────
 
 export default function TeamSection() {
+  const sectionRef = useRef(null);
+  const [activeCard, setActiveCard] = useState(0);
+
   return (
     <>
       {/* Scoped CSS for responsive layout */}
@@ -563,6 +655,7 @@ export default function TeamSection() {
       `}</style>
 
       <section
+        ref={sectionRef}
         style={{
           background: '#080808',
           color: '#ffe1c5',
@@ -584,9 +677,6 @@ export default function TeamSection() {
         />
 
         {/* Large ambient orbs */}
-        <div style={{ position: 'absolute', top: 0, left: '20%', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(227,30,36,0.05) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
-
         <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <SectionHeader />
 
@@ -594,13 +684,16 @@ export default function TeamSection() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '7rem' }}>
             {teamMembers.map((member, index) => (
               <React.Fragment key={member.id}>
-                <MemberCard member={member} index={index} />
+                <MemberCard 
+                  member={member} 
+                  index={index} 
+                  activeCard={activeCard} 
+                  setActiveCard={setActiveCard} 
+                />
                 {index < teamMembers.length - 1 && <MemberSeparator index={index} />}
               </React.Fragment>
             ))}
           </div>
-
-
         </div>
       </section>
     </>

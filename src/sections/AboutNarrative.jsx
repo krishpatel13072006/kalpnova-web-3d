@@ -1,4 +1,68 @@
+import { useRef } from 'react';
+import { motion, useScroll, useVelocity, useSpring, useAnimationFrame, useMotionValue } from 'framer-motion';
+import TimelineButterfly from '../components/TimelineButterfly';
+
 export default function AboutNarrative() {
+  const timelineRef = useRef(null);
+  
+  // Butterfly Physics State
+  const butterflyY = useMotionValue(0); 
+  const butterflyRotate = useMotionValue(180); // 180 = DOWN, 0 = UP
+  
+  // Scroll tracking for user interaction vs auto-patrol
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+
+  const state = useRef({
+    dir: 1, // 1 = moving down, -1 = moving up
+    speed: 1.5, // gentle patrol speed
+  });
+
+  useAnimationFrame((time, delta) => {
+    if (!timelineRef.current) return;
+    // We want the butterfly to travel the exact height of the line
+    const maxH = timelineRef.current.offsetHeight;
+    
+    // Normalize delta for steady speed across different monitor refresh rates
+    const dt = delta / 16.66;
+    
+    // Read smoothed scroll velocity
+    const sv = smoothVelocity.get();
+    
+    let moveDelta = 0;
+    let currentDir = state.current.dir;
+
+    // Check if user is actively scrolling
+    if (Math.abs(sv) > 10) {
+       // if scroll velocity is positive (scrolling down page), face butterfly down
+       if (sv > 0) currentDir = 1; else currentDir = -1;
+       // Temporarily adjust speed when user scrolls (reduced scrolling multiplier for slower effect)
+       moveDelta = currentDir * (state.current.speed + Math.abs(sv)/120) * dt;
+    } else {
+       // Continuous auto patrol when NOT scrolling
+       moveDelta = state.current.dir * state.current.speed * dt;
+    }
+
+    let nextY = butterflyY.get() + moveDelta;
+
+    // Automatic bounce at the ends of the timeline
+    if (nextY >= maxH) {
+      nextY = maxH;
+      state.current.dir = -1; // hit bottom, bounce up
+    } else if (nextY <= 0) {
+      nextY = 0;
+      state.current.dir = 1; // hit top, bounce down
+    }
+
+    butterflyY.set(nextY);
+
+    // Smooth Rotation: if current motion is down -> 180deg (face down), if up -> 0deg (face up)
+    const targetRot = (currentDir === 1) ? 180 : 0;
+    const currentRot = butterflyRotate.get();
+    butterflyRotate.set(currentRot + (targetRot - currentRot) * (0.1 * dt));
+  });
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-24">
       {/* HEADER */}
@@ -47,9 +111,25 @@ export default function AboutNarrative() {
         </div>
 
         {/* RIGHT TIMELINE */}
-        <div className="relative pl-10 space-y-10">
+        <div className="relative pl-10 space-y-10" ref={timelineRef}>
           {/* Vertical line */}
           <div className="absolute left-3 top-0 bottom-0 w-px bg-orange-500/30" />
+
+          {/* Timeline Butterfly auto-patrolling and scrolling */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              left: "-33px", // 12px (left-3) - 45px (half of butterfly's 90px width)
+              top: 0,
+              y: butterflyY,
+              rotate: butterflyRotate,
+              scale: 1.0, // Increased size slightly (from 0.8 to 1.0)
+              marginTop: "-32px", // Perfect center over the exact pixel position
+              zIndex: 10,
+            }}
+          >
+            <TimelineButterfly />
+          </motion.div>
 
           {[
             {
