@@ -6,7 +6,6 @@ import Contact from "../sections/Contact";
 import Testimonials from "../sections/Testimonials";
 import Clients from "../sections/Clients";
 import AboutCards from "../components/AboutCards";
-import TypingText from "../components/TypingText";
 import Silk from "../components/Silk";
 
 export default function Home() {
@@ -62,19 +61,13 @@ export default function Home() {
             className="font-bold tracking-tight leading-[1.08]
       text-[2.2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem]"
           >
-            <TypingText
-              text="Stop Looking Random."
-              className="block text-white mb-3 drop-shadow-md"
-              delay={0.5}
-              speed={0.08}
-            />
+            <span className="block text-white mb-3 drop-shadow-md">
+              Stop Looking Random.
+            </span>
 
-            <TypingText
-              text="Start Looking Premium."
-              className="block text-[#f5f7f6] drop-shadow-lg"
-              delay={2.2}
-              speed={0.08}
-            />
+            <span className="block text-[#f5f7f6] drop-shadow-lg">
+              Start Looking Premium.
+            </span>
           </h1>
 
           {/* SUBTEXT */}

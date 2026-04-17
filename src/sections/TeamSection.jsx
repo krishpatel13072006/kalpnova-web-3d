@@ -50,22 +50,10 @@ const EmailIcon = () => (
 
 const teamMembers = [
   {
-    id: 1,
-    role: 'Owner & Creative Director',
-    name: 'Shivam Patel',
-    image: '/clients/Team/ceo.jpeg',
-    quote: '"Kalpnova" is more than just a name — it\'s a promise to reflect a brand\'s essence and vision through thoughtful, creative solutions.',
-    bio: 'I believe brands, like people, have unique stories and personalities. We work as an extended in-house team, fostering deep collaboration — because building something meaningful takes time and collective effort.',
-    stats: [{ label: 'Projects Led', value: '50+' }, { label: 'Brands Built', value: '30+' }, { label: 'Years Vision', value: '5+' }],
-    accentFrom: '#ff6b2b',
-    accentTo: '#e31e24',
-    socials: { linkedin: '#', instagram: '#', whatsapp: '#', twitter: '#', github: '#', email: 'mailto:#' },
-  },
-  {
     id: 2,
-    role: 'Operations Manager',
+    role: 'Graphics designer',
     name: 'Vishal Patel',
-    image: '/clients/Team/manager.jpeg',
+    image: '/clients/Team/Graphics designer.png',
     quote: '"Efficiency is doing things right; effectiveness is doing the right things. I strive to bring both to our daily operations."',
     bio: 'Managing our daily operations is about empowering our creative minds. By streamlining workflows and optimizing resources, I ensure our team can focus entirely on creating exceptional brand experiences.',
     stats: [{ label: 'Teams Managed', value: '8+' }, { label: 'Deadlines Met', value: '100%' }, { label: 'Client Retentions', value: '95%' }],
@@ -77,7 +65,7 @@ const teamMembers = [
     id: 3,
     role: 'Lead Developer',
     name: 'Krish Patel',
-    image: '/clients/Team/developer.jpeg',
+    image: '/clients/Team/lead Developer.png',
     quote: '"Code is poetry written for machines to build human experiences. Functionality should always feel natural and intuitive."',
     bio: 'Translating beautiful designs into robust, functional code is my passion. Performance, accessibility, and scalability are always at the forefront — a great brand deserves a digital presence that performs flawlessly.',
     stats: [{ label: 'Apps Shipped', value: '20+' }, { label: 'Technologies', value: '15+' }, { label: 'Commits', value: '2K+' }],
