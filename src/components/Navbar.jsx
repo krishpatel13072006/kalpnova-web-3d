@@ -216,7 +216,7 @@ export default function Navbar() {
     <>
       {/* NAV BAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled
+        className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled || location.pathname === '/pavilion'
           ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl"
           : "bg-transparent border-b border-transparent py-5"
           }`}

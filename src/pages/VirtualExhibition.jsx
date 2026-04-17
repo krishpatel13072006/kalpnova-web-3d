@@ -337,9 +337,13 @@ export default function VirtualExhibition() {
         </p>
       </div> */}
 
-      {activeProject && (
+      {activeProject ? (
         <button onClick={() => setActiveProject(null)} style={btnStyle}>
-          RETURN TO HUB
+          RETURN TO GALLERY
+        </button>
+      ) : (
+        <button onClick={() => window.location.href = '/insidekalpnova'} style={btnStyle}>
+          ⟵ BACK TO HUB
         </button>
       )}
 

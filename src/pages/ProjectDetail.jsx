@@ -24,10 +24,29 @@ const ProjectDetail = () => {
 
   const project = useMemo(() => portfolioItems.find(p => p.id === parseInt(id)), [id]);
 
-  const similarProjects = useMemo(() => {
-    const others = portfolioItems.filter(p => p.id !== parseInt(id));
-    return [...others, ...others];
+  const othersProjects = useMemo(() => {
+    return portfolioItems.filter(p => p.id !== parseInt(id));
   }, [id]);
+
+  const scrollRef = React.useRef(null);
+  const halfContainerRef = React.useRef(null);
+  const isHovered = React.useRef(false);
+
+  useEffect(() => {
+    let animationFrameId;
+    const scroll = () => {
+      if (scrollRef.current && halfContainerRef.current && !isHovered.current) {
+        scrollRef.current.scrollLeft += 1;
+        if (scrollRef.current.scrollLeft >= halfContainerRef.current.offsetWidth) {
+          scrollRef.current.scrollLeft -= halfContainerRef.current.offsetWidth;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+    animationFrameId = requestAnimationFrame(scroll);
+    
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -171,17 +190,17 @@ const ProjectDetail = () => {
             <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tighter transition-colors duration-500 text-white">Related Works</h2>
           </div>
 
-          <div className="relative w-full overflow-hidden py-10">
-            <motion.div
-              className="flex flex-nowrap gap-12 md:gap-20 w-max will-change-transform"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                ease: "linear",
-                duration: 40,
-                repeat: Infinity
-              }}
-            >
-              {similarProjects.map((proj, i) => (
+          <div 
+            ref={scrollRef}
+            className="relative w-full overflow-x-auto py-10 flex flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing"
+            onMouseEnter={() => (isHovered.current = true)}
+            onMouseLeave={() => (isHovered.current = false)}
+            onTouchStart={() => (isHovered.current = true)}
+            onTouchEnd={() => (isHovered.current = false)}
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            <div ref={halfContainerRef} className="flex flex-nowrap gap-12 md:gap-20 w-max pr-12 md:pr-20 shrink-0">
+              {othersProjects.map((proj, i) => (
                 <Link
                   to={`/portfolio/${proj.id}`}
                   key={i}
@@ -215,7 +234,44 @@ const ProjectDetail = () => {
                   </p>
                 </Link>
               ))}
-            </motion.div>
+            </div>
+
+            <div className="flex flex-nowrap gap-12 md:gap-20 w-max pr-12 md:pr-20 shrink-0">
+              {othersProjects.map((proj, i) => (
+                <Link
+                  to={`/portfolio/${proj.id}`}
+                  key={`clone-${i}`}
+                  className="w-[280px] md:w-[480px] shrink-0 group cursor-pointer flex flex-col"
+                >
+                  <div className="relative flex flex-col mb-6 transition-transform duration-500 group-hover:-translate-y-2" style={{ willChange: 'transform' }}>
+                    <div className="w-[35%] md:w-[40%] h-8 rounded-t-[12px] relative z-10 flex items-center justify-center border-t border-l border-r transition-colors duration-500 bg-[#1a1a1a] border-white/5 group-hover:border-white/10">
+                      <div className="w-10 h-[3px] rounded-full transition-colors bg-[#333] group-hover:bg-[#ff6b2b]"></div>
+                      <div className="absolute -bottom-[2px] left-[0px] right-[0px] h-[4px] bg-[#1a1a1a]"></div>
+                    </div>
+
+                    <div className="w-full rounded-b-3xl rounded-tr-3xl p-3 md:p-5 relative z-0 border transition-all duration-500 shadow-lg bg-[#1a1a1a] border-white/5 group-hover:border-white/10 group-hover:shadow-[0_20px_50px_-12px_rgba(255,107,43,0.15)]">
+                      <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden relative shadow-inner bg-[#050505]">
+                        <img
+                          src={proj.heroImage || proj.image}
+                          className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 opacity-100"
+                          alt={proj.title}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60 from-[#0b0b0b]" />
+                      </div>
+                    </div>
+                  </div>
+                  <h4 className="text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 text-white group-hover:text-[#ff6b2b]">
+                    {proj.title}
+                    <ArrowUpRight size={24} className="hidden md:block translate-y-2 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                  </h4>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed whitespace-normal pr-8 transition-colors duration-500 text-gray-500">
+                    {proj.type}
+                  </p>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 

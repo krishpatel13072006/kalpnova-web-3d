@@ -177,6 +177,11 @@ export default function KalpnovaPavilion() {
          targetCam.x = 0; targetCam.ry = 0;
          targetCam.z = lerp(-40, -100, p);
       }
+      
+      const prompt = document.getElementById('scroll-prompt');
+      if (prompt) {
+        prompt.style.opacity = progress > 0.02 ? '0' : '1';
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -245,6 +250,14 @@ export default function KalpnovaPavilion() {
     <div style={{ background: '#dce5ed', fontFamily: 'sans-serif' }}>
       <button onClick={() => window.location.href = '/insidekalpnova'} style={{ position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 9999, padding: '12px 30px', background: '#ea580c', color: 'white', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px', border: 'none' }}>⟵ BACK TO HUB</button>
       <div className="fixed top-28 left-6 md:left-10 z-[40] font-bold tracking-[0.4em] text-slate-800 uppercase text-xs">Kalpnova // Integrated Pavilion</div>
+      
+      <div 
+        id="scroll-prompt" 
+        className="fixed top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[45] font-black md:text-7xl lg:text-8xl text-5xl text-black tracking-[0.2em] uppercase transition-opacity duration-700 pointer-events-none whitespace-nowrap w-max"
+      >
+        SCROLL DOWN
+      </div>
+
       <div ref={mountRef} />
       
       <div id="kalp-scroll-container" className="relative z-10 pointer-events-none">
