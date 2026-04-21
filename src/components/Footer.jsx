@@ -33,8 +33,8 @@ export default function Footer() {
           </button>
 
           <p className="text-sm max-w-xs text-[#FFE1C5]">
-            We help ambitious teams turn clarity into momentum through
-            thoughtful design and technology.
+            Stop Looking Random. Start Looking Premium. <br/><br/>
+            Kalpnova Design Studio — Ahmedabad, Gujarat, India
           </p>
         </div>
 

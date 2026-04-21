@@ -47,8 +47,8 @@ export default {
       },
 
       fontFamily: {
-        body: ["Goli", "system-ui", "sans-serif"],
-        heading: ["Eurostile Round", "system-ui", "sans-serif"],
+        body: ["Eurostile Round", "system-ui", "sans-serif"],
+        heading: ["Goli", "system-ui", "sans-serif"],
       },
 
       fontSize: {

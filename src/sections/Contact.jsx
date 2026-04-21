@@ -69,12 +69,11 @@ export default function Contact() {
         className="relative z-10 max-w-5xl mx-auto text-center space-y-10"
       >
         <h2 className="text-section font-bold text-[#FFE1C5]">
-          READY TO <span className="text-orange-500">BUILD</span> WHAT’S NEXT?
+          READY TO <span className="text-orange-500">LOOK</span> PREMIUM?
         </h2>
 
         <p className="max-w-2xl mx-auto text-gray-300">
-          Based out of Ahmedabad, serving brands worldwide. If you’re looking for 
-          clarity, direction, and a partner who thinks beyond templates — let’s talk.
+          Let's talk about your brand. Whether you're starting from zero or need a design upgrade — we'll put together a plan that makes sense for your business and your budget. Based in Ahmedabad. Working with clients across India.
         </p>
 
         <div className="flex justify-center">
@@ -88,7 +87,7 @@ export default function Contact() {
                        hover:-translate-y-1
                        hover:shadow-[0_0_90px_rgba(226,74,43,1)]"
           >
-            Start a conversation →
+            Book a Free Discovery Call
           </a>
         </div>
       </div>

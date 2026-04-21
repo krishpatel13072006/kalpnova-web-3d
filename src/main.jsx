@@ -16,3 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </HelmetProvider>
 );
+
+// ✅ Trigger for pre-renderer
+window.__PRERENDER_READY__ = true;
+document.dispatchEvent(new Event('custom-render-trigger'));

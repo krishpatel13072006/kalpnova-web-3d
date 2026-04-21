@@ -82,20 +82,21 @@ export default function AboutNarrative() {
       <div className="grid md:grid-cols-2 gap-20">
         {/* LEFT CONTENT */}
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-[#FFE1C5]">
-            Crafting Digital Excellence
+          <h3 className="text-2xl md:text-3xl font-semibold text-[#FFE1C5]">
+            We make your brand impossible to ignore
           </h3>
 
           <p className="leading-relaxed text-[#FFE1C5]">
-            Based out of Ahmedabad, India, Kalpnova is a creative and consultancy studio
-            specializing in branding, design, and social media. We serve a diverse range 
-            of clients worldwide, from ambitious startups to established global brands.
+            Kalpnova is a design and marketing growth studio based in Ahmedabad, Gujarat. 
+            We work with founders, startups, and growing businesses who are tired of looking like everyone else.
           </p>
 
           <p className="leading-relaxed text-[#FFE1C5]">
-            With over 8 years of collective experience, our multidisciplinary team 
-            combines creativity, technical expertise, and strategic thinking to deliver
-            solutions that not only look beautiful but drive real growth.
+            Our studio handles everything from brand identity and social media design to Meta Ads creatives, UI/UX, print media, and video editing — all under one roof, with the speed and focus of a boutique team.
+          </p>
+
+          <p className="leading-relaxed text-[#FFE1C5]">
+            We believe great design is not decoration. It is strategy made visible.
           </p>
 
           <ul className="space-y-3 pt-6">

@@ -2,8 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 export default function SEO({ title, description, url, image, type = 'website', jsonLd }) {
-  const siteName = "Kalpnova | Premium Design & Brand Growth Agency";
-  const defaultDesc = "Kalpnova helps ambitious brands scale with high-impact design, strategic identity, and high-performance digital solutions.";
+  const siteName = "Branding & Social Media Design Agency in Ahmedabad | Kalpnova";
+  const defaultDesc = "Kalpnova is an Ahmedabad-based design studio specialising in branding, social media design, Meta Ads creatives and UI/UX design. Stop looking random. Start looking premium.";
   
   const formattedTitle = title ? `${title} | Kalpnova` : siteName;
   const formattedDesc = description || defaultDesc;

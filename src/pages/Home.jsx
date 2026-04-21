@@ -24,27 +24,12 @@ export default function Home() {
     });
   }, []);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Agency",
-    "name": "Kalpnova",
-    "url": "https://kalpnova.com",
-    "logo": "https://kalpnova.com/public/kalpnova.svg",
-    "description": "Kalpnova helps ambitious brands scale with high-impact design, strategic identity, and high-performance digital solutions.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Ahmedabad",
-      "addressCountry": "IN"
-    }
-  };
-
   return (
     <>
       <SEO 
         title="Home"
-        description="Kalpnova helps ambitious brands scale with high-impact design, strategic identity, and high-performance digital solutions."
+        description="Kalpnova is an Ahmedabad-based design studio specialising in branding, social media design, Meta Ads creatives and UI/UX design. Stop looking random. Start looking premium."
         url="/"
-        jsonLd={jsonLd}
       />
       {/* HERO */}
       <section className="relative min-h-screen min-h-[100dvh] pt-32 pb-16 md:pt-40 md:pb-16 flex items-center justify-center overflow-hidden">
@@ -83,17 +68,17 @@ export default function Home() {
       text-[2.2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem]"
           >
             <span className="block text-white mb-3 drop-shadow-md">
-              Stop Looking Random.
+              Premium Design &
             </span>
 
             <span className="block text-[#f5f7f6] drop-shadow-lg">
-              Start Looking Premium.
+              Branding Studio in Ahmedabad
             </span>
           </h1>
 
           {/* SUBTEXT */}
           <p className="mt-8 max-w-2xl mx-auto text-white/90 font-medium text-base md:text-lg drop-shadow-md">
-            Based in Ahmedabad and serving clients worldwide, we build high-end brand identities and consistent design systems that turn perceptions into premium experiences.
+            We help growing businesses in Gujarat and across India build brands that look premium, feel intentional, and convert better — through design that actually works.
           </p>
 
           {/* CTA (VISIBILITY FIXED) */}
@@ -125,7 +110,7 @@ export default function Home() {
   bg-white text-black font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)]
   hover:scale-[1.04] transition text-center"
             >
-              Get A Quote →
+              See Our Work
             </a>
 
           </div>

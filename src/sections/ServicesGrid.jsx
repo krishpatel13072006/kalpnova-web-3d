@@ -1,17 +1,17 @@
 const services = [
-    { title: "Branding & Identity", desc: "We shape your brand’s positioning, voice, and visual identity to create lasting recognition." },
-    { title: "Social Media Design", desc: "Scroll-stopping creatives and content systems designed to grow engagement and brand recall." },
-    { title: "Web & App", desc: "High-performance, conversion-focused websites and apps with a cinematic user experience." },
-    { title: "Print Media Design", desc: "Impactful offline designs—from brochures to hoardings—crafted for clarity and recall." },
-    { title: "Meta Ads", desc: "Data-driven ad creatives optimized for attention, clicks, and measurable conversions." },
-    { title: "Video Editing", desc: "Dynamic video edits that tell your story, hold attention, and elevate your brand presence." },
+    { title: "Branding & Identity", desc: "Logos, brand guidelines, colour palettes, and typography systems — everything you need to look consistent and premium across every platform." },
+    { title: "Social Media Design", desc: "Scroll-stopping posts, carousels, reels thumbnails, and story templates designed to grow your brand and your audience." },
+    { title: "Meta Ads Creative Design", desc: "High-converting ad creatives for Facebook and Instagram campaigns — designed to stop the scroll and drive real results." },
+    { title: "Web & App UI/UX Design", desc: "Clean, intuitive interfaces designed for real users. From wireframes to final screens — we design experiences that convert." },
+    { title: "Print Media", desc: "Business cards, brochures, hoarding designs, and packaging — professional print collateral that leaves a lasting impression." },
+    { title: "Video Editing", desc: "Brand videos, product reels, social cuts — edited for impact and optimised for the platforms your audience actually uses." },
   ];
   
   export default function ServicesGrid() {
     return (
       <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
         <h1 className="text-section font-bold mb-16 text-[#FFE1C5]">
-          Our <span className="accent">Services</span>
+          What we do <span className="accent">best</span>
         </h1>
   
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
