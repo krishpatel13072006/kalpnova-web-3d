@@ -123,24 +123,24 @@
    GLOBAL BASE — applied immediately, no class needed
 ========================================================= */
 @layer base {
-  /* Every heading ALWAYS uses Goli SemiBold by default.
-     h1 gets Bold (700). h2/h3 get SemiBold (600). */
+  /* Every heading ALWAYS uses Eurostile Round by default.
+     h1 gets Bold (700). h2/h3 get SemiBold/Medium (mapped to closest Eurostile weights). */
   h1 {
-    font-family: "Goli", system-ui, sans-serif;
+    font-family: "Eurostile Round", system-ui, sans-serif;
     font-weight: 700;
   }
   h2, h3 {
-    font-family: "Goli", system-ui, sans-serif;
-    font-weight: 600;
+    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-weight: 500; /* Medium for sub-headings */
   }
   h4, h5, h6 {
-    font-family: "Goli", system-ui, sans-serif;
-    font-weight: 600;
+    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-weight: 500;
   }
 
-  /* Every other element (body, p, span, div, button, a…) uses Eurostile Round */
+  /* Every other element (body, p, span, div, button, a…) uses Goli */
   html, body {
-    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-family: "Goli", system-ui, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     background-color: #0B0B0C;
@@ -153,7 +153,7 @@
   }
 
   p {
-    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-family: "Goli", system-ui, sans-serif;
     font-weight: 400;
     color: #A1A1AA;
   }
@@ -174,9 +174,9 @@
 /* =========================================================
    UTILITY HELPERS — use these classes anywhere for fine control
 ========================================================= */
-.font-heading   { font-family: "Goli", system-ui, sans-serif; }
-.font-body      { font-family: "Eurostile Round", system-ui, sans-serif; }
-.font-tagline   { font-family: "Goli", system-ui, sans-serif; font-weight: 600; letter-spacing: 0.04em; }
+.font-heading   { font-family: "Eurostile Round", system-ui, sans-serif; }
+.font-body      { font-family: "Goli", system-ui, sans-serif; }
+.font-tagline   { font-family: "Eurostile Round", system-ui, sans-serif; font-weight: 700; letter-spacing: 0.04em; }
 
 
 /* =========================

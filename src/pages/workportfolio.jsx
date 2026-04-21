@@ -119,8 +119,9 @@ const PortfolioCard = memo(({ item }) => {
   );
 });
 
-export default function WorkPortfolio() {
+export default function WorkPortfolio({ headingLevel = "h1" }) {
   const [activeCategory, setActiveCategory] = useState('All');
+  const HeadingTag = headingLevel;
 
   const filteredItems = useMemo(() => {
     if (activeCategory === 'All') return portfolioItems;
@@ -140,9 +141,9 @@ export default function WorkPortfolio() {
             <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[#ff6b2b] mb-3">
               Work Portfolio
             </p>
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white">
+            <HeadingTag className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white">
               Our Work
-            </h1>
+            </HeadingTag>
           </motion.div>
 
           {/* ── CATEGORY FILTER TABS ────────────────────────────────── */}

@@ -31,20 +31,6 @@ export default function Contact() {
         />
       </div>
 
-      {/* ANIMATED GRID */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[1]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(226,74,43,0.55) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(226,74,43,0.55) 1px, transparent 1px)
-          `,
-          backgroundSize: "44px 44px",
-          animation: "grid-move 24s linear infinite",
-          opacity: 0.45,
-        }}
-      />
-
       {/* TOP FADE */}
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 h-[120px] z-[2]"
@@ -69,11 +55,11 @@ export default function Contact() {
         className="relative z-10 max-w-5xl mx-auto text-center space-y-10"
       >
         <h2 className="font-heading font-bold text-section text-[#FFE1C5]">
-          READY TO <span className="text-orange-500">LOOK</span> PREMIUM?
+          READY TO <span className="text-orange-500">START?</span>
         </h2>
 
         <p className="max-w-2xl mx-auto text-gray-300">
-          Let's talk about your brand. Whether you're starting from zero or need a design upgrade — we'll put together a plan that makes sense for your business and your budget. Based in Ahmedabad. Working with clients across India.
+          Let's talk about what your brand needs. Book a free 20-minute discovery call and we will tell you exactly what we can do for you — no pressure, no fluff.
         </p>
 
         <div className="flex justify-center">

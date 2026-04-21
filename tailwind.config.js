@@ -47,14 +47,14 @@ export default {
       },
 
       fontFamily: {
-        // Goli — headings, titles, taglines
-        heading: ["Goli", "system-ui", "sans-serif"],
-        // Eurostile Round — body text, paragraphs, UI, buttons, labels
-        body:    ["Eurostile Round", "system-ui", "sans-serif"],
+        // Eurostile Round — headings, titles, taglines
+        heading: ["Eurostile Round", "system-ui", "sans-serif"],
+        // Goli — body text, paragraphs, UI, buttons, labels
+        body:    ["Goli", "system-ui", "sans-serif"],
         // Override Tailwind defaults so legacy font-sans/font-serif classes also use brand fonts
-        sans:    ["Eurostile Round", "system-ui", "sans-serif"],
-        serif:   ["Goli", "system-ui", "sans-serif"],
-        mono:    ["Eurostile Round", "system-ui", "sans-serif"],
+        sans:    ["Goli", "system-ui", "sans-serif"],
+        serif:   ["Eurostile Round", "system-ui", "sans-serif"],
+        mono:    ["Goli", "system-ui", "sans-serif"],
       },
 
       fontSize: {

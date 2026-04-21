@@ -82,7 +82,7 @@ const projects = [
 function Loader() {
   return (
     <Html center>
-      <div style={{ color: '#00d8ff', fontFamily: 'Goli, sans-serif', fontWeight: 'bold', letterSpacing: '2px' }}>
+      <div style={{ color: '#00d8ff', fontFamily: '"Eurostile Round", sans-serif', fontWeight: 'bold', letterSpacing: '2px' }}>
         INITIALIZING...
       </div>
     </Html>

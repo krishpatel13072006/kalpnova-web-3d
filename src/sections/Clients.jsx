@@ -2,13 +2,17 @@ import { useEffect, useRef } from "react";
 import gsap from "../lib/gsap";
 
 const clients = [
-  { name: "LionCut", logo: "/clients/lioncut.webp" },
-  { name: "Nilambuj Mandapam", logo: "/clients/nilambuj.svg" },
-  { name: "innovative", logo: "/clients/innovattive.webp" },
-  { name: "sivahdam", logo: "/clients/sivahdam.webp" },
-  { name: "krushak", logo: "/clients/krushak.webp" },
+  { name: "BoostIQ", logo: "/clients/Boostiq white logo.webp" },
+  { name: "Westrock", logo: "/clients/Westrock logo.webp" },
+  { name: "Krushak", logo: "/clients/krushak.webp" },
   { name: "London Coffee", logo: "/clients/London Coffee logo.webp" },
-  { name: "The Safar", logo: "/clients/thesafar.webp" },
+  { name: "Pixal Plus", logo: "/clients/PP logo.webp" },
+  { name: "SchoolG", logo: "/clients/LOGO.webp" },
+  { name: "Maruti", logo: "/clients/maruti.webp" },
+  { name: "Lioncut", logo: "/clients/lioncut.webp" },
+  { name: "Mayota", logo: "/clients/Asset 5@4x-8.webp" },
+  { name: "Kalpnova", logo: "/kalpnova.svg" },
+  { name: "Lotus Salon", logo: "/clients/lotus salon.webp" },
 ];
 
 export default function Clients() {
@@ -59,7 +63,7 @@ export default function Clients() {
               ref={trackRef}
               className="flex gap-20 w-max items-center py-4"
             >
-              {[...clients, ...clients].map((client, i) => (
+              {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
                   className="flex items-center justify-center

@@ -102,14 +102,12 @@ export default function Home() {
               Chat Now
             </a>
             <a
-              target="_blank"
-              href="tel:+919662479165"
-              rel="noopener noreferrer"
+              href="/services"
               className="relative z-[9999] px-7 py-3 rounded-full
   bg-white text-black font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)]
   hover:scale-[1.04] transition text-center"
             >
-              See Our Work
+              Our Services
             </a>
 
           </div>
@@ -140,6 +138,7 @@ export default function Home() {
         {/* BOTTOM FADE — HERO TO NEXT SECTION */}
 
       </section>
+      <Clients />
 
 
 
@@ -150,7 +149,6 @@ export default function Home() {
       <Services />
 
       <Testimonials />
-      <Clients />
       <AboutCards />
       {/* CONTACT */}
       <Contact />
