@@ -63,7 +63,7 @@ export default function Testimonials() {
             TESTIMONIALS
           </span>
 
-          <h2 className="text-section font-bold text-section text-[#FFE1C5]">
+          <h2 className="font-heading text-section font-bold text-section text-[#FFE1C5]">
             Trusted by teams who
             <span className="accent"> value clarity</span>
           </h2>

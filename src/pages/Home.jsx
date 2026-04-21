@@ -62,16 +62,15 @@ export default function Home() {
             <span className="h-px w-20 bg-white/30" />
           </div>
 
-          {/* HEADING */}
+          {/* HEADING — always exactly 2 lines */}
           <h1
-            className="font-bold tracking-tight leading-[1.08]
-      text-[2.2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem]"
+            className="font-heading font-bold tracking-tight leading-[1.1]"
+            style={{ fontSize: "clamp(0.9rem, 3.5vw, 5rem)" }}
           >
-            <span className="block text-white mb-3 drop-shadow-md">
-              Premium Design &
+            <span className="block text-white drop-shadow-md whitespace-nowrap">
+              Premium Design &amp;
             </span>
-
-            <span className="block text-[#f5f7f6] drop-shadow-lg">
+            <span className="block text-[#f5f7f6] drop-shadow-lg whitespace-nowrap">
               Branding Studio in Ahmedabad
             </span>
           </h1>

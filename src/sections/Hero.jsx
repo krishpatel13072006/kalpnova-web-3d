@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section className="h-screen flex items-center justify-center relative z-10">
       <div ref={heroRef} className="text-center space-y-6">
-        <h1 className="text-6xl md:text-8xl font-bold tracking-tight">
+        <h1 className="font-heading text-6xl md:text-8xl font-bold tracking-tight">
           IMAGINE <br />
           WHAT HAPPENS <br />
           <span className="text-accent">NEXT</span>

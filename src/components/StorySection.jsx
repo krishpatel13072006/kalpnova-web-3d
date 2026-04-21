@@ -60,7 +60,7 @@ export default function StorySection({ title, subtitle, image, reverse }) {
 
         {/* Text */}
         <div ref={textRef} className="space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <h2 className="font-heading text-4xl md:text-5xl font-bold">
             {title}
           </h2>
           <p className="text-muted text-lg max-w-md">

@@ -10,7 +10,7 @@ const services = [
   export default function ServicesGrid() {
     return (
       <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-        <h1 className="text-section font-bold mb-16 text-[#FFE1C5]">
+        <h1 className="font-heading text-section font-bold mb-16 text-[#FFE1C5]">
           What we do <span className="accent">best</span>
         </h1>
   
@@ -23,7 +23,7 @@ const services = [
                          hover:border-orange-500/40
                          transition"
             >
-              <h3 className="font-semibold mb-2 text-[#FFE1C5]">{s.title}</h3>
+              <h3 className="font-heading font-semibold mb-2 text-[#FFE1C5]">{s.title}</h3>
               <p className="text-sm text-[#FFE1C5]">{s.desc}</p>
             </div>
           ))}

@@ -73,7 +73,7 @@ export default function AboutNarrative() {
           ABOUT US
         </span>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-[#FFE1C5]">
+        <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#FFE1C5]">
           Our <span className="text-orange-500">Journey</span>
         </h2>
       </div>
@@ -82,7 +82,7 @@ export default function AboutNarrative() {
       <div className="grid md:grid-cols-2 gap-20">
         {/* LEFT CONTENT */}
         <div className="space-y-6">
-          <h3 className="text-2xl md:text-3xl font-semibold text-[#FFE1C5]">
+          <h3 className="font-heading text-2xl md:text-3xl font-semibold text-[#FFE1C5]">
             We make your brand impossible to ignore
           </h3>
 
@@ -162,7 +162,7 @@ export default function AboutNarrative() {
                 {item.year}
               </span>
 
-              <h4 className="text-[#FFE1C5] font-semibold mt-1">
+              <h4 className="font-heading text-[#FFE1C5] font-semibold mt-1">
                 {item.title}
               </h4>
 

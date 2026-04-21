@@ -38,7 +38,7 @@ export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="bg-[#0a0a0a] text-zinc-100 min-h-screen lg:h-screen w-full flex flex-col justify-center px-6 md:px-12 py-20 lg:py-0 overflow-hidden font-sans relative">
+    <section className="bg-[#0a0a0a] text-zinc-100 min-h-screen lg:h-screen w-full flex flex-col justify-center px-6 md:px-12 py-20 lg:py-0 overflow-hidden  relative">
        {/* Background subtle texture/grid if needed, but keeping it clean as per request */}
       <div className="max-w-[1440px] w-full mx-auto relative z-10">
         
@@ -71,7 +71,7 @@ export default function Services() {
 
                 {/* Sub-services List */}
                 <div className="min-h-[160px] text-center lg:text-left">
-                  <h3 className="text-lg font-medium text-white mb-4">
+                  <h3 className="font-heading text-lg font-medium text-white mb-4">
                     {services[activeIndex].title}
                   </h3>
                   <ul className="space-y-3 inline-block lg:block text-left">
@@ -103,8 +103,8 @@ export default function Services() {
                     <h2 
                       className={`transition-all duration-500 ease-in-out whitespace-nowrap ${
                         isActive 
-                          ? 'text-white font-serif italic text-4xl md:text-6xl lg:text-[80px] tracking-tight transform translate-x-2' 
-                          : 'text-zinc-600 font-sans font-medium text-3xl md:text-5xl lg:text-7xl tracking-tighter group-hover:text-zinc-400'
+                          ? 'text-white font-heading italic text-4xl md:text-6xl lg:text-[80px] tracking-tight transform translate-x-2' 
+                          : 'text-zinc-600 font-heading font-medium text-3xl md:text-5xl lg:text-7xl tracking-tighter group-hover:text-zinc-400'
                       }`}
                     >
                       {service.title}
@@ -147,3 +147,4 @@ export default function Services() {
     </section>
   );
 }
+

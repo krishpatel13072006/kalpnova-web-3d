@@ -359,7 +359,7 @@ function MemberCard({ member, index, activeCard, setActiveCard }) {
             <h3
               style={{
                 fontSize: 'clamp(2rem, 3.5vw, 3rem)',
-                fontFamily: '"Playfair Display", "Goli", serif',
+                fontFamily: '"Goli", sans-serif',
                 fontStyle: 'italic',
                 fontWeight: 500,
                 color: '#fff',
@@ -551,7 +551,7 @@ function SectionHeader() {
       <h2
         style={{
           fontSize: 'clamp(2.8rem, 7vw, 6rem)',
-          fontFamily: '"Playfair Display", serif',
+          fontFamily: '"Goli", sans-serif',
           fontWeight: 500,
           color: '#fff',
           lineHeight: 1,
@@ -647,7 +647,7 @@ export default function TeamSection() {
         style={{
           background: '#080808',
           color: '#ffe1c5',
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Eurostile Round", sans-serif',
           padding: '8rem 1.5rem',
           position: 'relative',
           overflow: 'hidden',

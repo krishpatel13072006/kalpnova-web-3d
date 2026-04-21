@@ -1,7 +1,7 @@
 export default function ContactForm() {
     return (
       <section className="max-w-xl mx-auto px-6">
-        <h1 className="text-section font-bold mb-10 text-[#FFE1C5]">
+        <h1 className="font-heading text-section font-bold mb-10 text-[#FFE1C5]">
           Let’s <span className="accent">Talk</span>
         </h1>
   

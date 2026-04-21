@@ -66,7 +66,7 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className={`min-h-screen w-full ${themeStyles.bg} ${themeStyles.text} font-sans selection:${themeStyles.accentBg} selection:text-white overflow-x-hidden transition-colors duration-700 ease-in-out relative`}>
+    <div className={`min-h-screen w-full ${themeStyles.bg} ${themeStyles.text}  selection:${themeStyles.accentBg} selection:text-white overflow-x-hidden transition-colors duration-700 ease-in-out relative`}>
 
       {/* Background Ambience */}
       <div className="absolute top-[-10%] left-0 w-[40%] h-[40%] bg-[#ff6b2b]/5 blur-[120px] rounded-full pointer-events-none transition-colors duration-700"></div>
@@ -93,7 +93,7 @@ const ProjectDetail = () => {
               <ArrowLeft size={16} />
               <span className="text-[10px] font-bold uppercase tracking-widest">Back to Portfolio</span>
             </Link>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] transition-colors duration-500 text-white">
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] transition-colors duration-500 text-white">
               {project.title}
             </h1>
             <div className={`w-24 h-[3px] mt-6 transition-colors duration-500 ${themeStyles.accentBg}`}></div>
@@ -131,7 +131,7 @@ const ProjectDetail = () => {
       <main className="max-w-[1440px] mx-auto px-6 md:px-12 pb-16 relative z-10">
         <div className="space-y-16 md:space-y-20 max-w-6xl">
           <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-xl md:text-2xl font-black mb-4 uppercase tracking-widest leading-tight transition-colors duration-500 text-[#ff6b2b]">Brand Overview</h2>
+            <h2 className="font-heading text-xl md:text-2xl font-black mb-4 uppercase tracking-widest leading-tight transition-colors duration-500 text-[#ff6b2b]">Brand Overview</h2>
             <p className="text-lg md:text-2xl lg:text-3xl leading-snug font-medium transition-colors duration-500 text-gray-300">
               {project.brandOverview}
             </p>
@@ -139,14 +139,14 @@ const ProjectDetail = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <h3 className="text-lg font-black mb-4 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Challenge</h3>
+              <h3 className="font-heading text-lg font-black mb-4 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Challenge</h3>
               <p className={`text-base md:text-lg leading-relaxed transition-colors duration-500 ${themeStyles.subText}`}>
                 {project.challenge}
               </p>
             </motion.div>
 
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <h3 className="text-lg font-black mb-4 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Perception Shift</h3>
+              <h3 className="font-heading text-lg font-black mb-4 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Perception Shift</h3>
               <p className={`text-base md:text-lg leading-relaxed transition-colors duration-500 ${themeStyles.subText}`}>
                 {project.perceptionShift}
               </p>
@@ -154,7 +154,7 @@ const ProjectDetail = () => {
           </div>
 
           <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] border transition-all duration-500 ${themeStyles.card}`}>
-            <h3 className="text-base md:text-xl font-black mb-6 uppercase tracking-widest flex items-center gap-4 transition-colors duration-500 text-white">
+            <h3 className="font-heading text-base md:text-xl font-black mb-6 uppercase tracking-widest flex items-center gap-4 transition-colors duration-500 text-white">
               <span className="w-8 md:w-12 h-px bg-[#ff6b2b]"></span>
               Strategic Endorsement
             </h3>
@@ -170,13 +170,13 @@ const ProjectDetail = () => {
         <section className="mt-24 md:mt-32 border-t pt-8 md:pt-12 transition-colors duration-500 border-white/5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
             <div className="md:col-span-8">
-              <h3 className="text-[10px] font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Services Provided</h3>
+              <h3 className="font-heading text-[10px] font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Services Provided</h3>
               <p className="text-lg md:text-xl font-bold leading-relaxed tracking-tight transition-colors duration-500 text-white">
                 {project.services}
               </p>
             </div>
             <div className="md:col-span-4">
-              <h3 className="text-[10px] font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Sector</h3>
+              <h3 className="font-heading text-[10px] font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Sector</h3>
               <p className="text-xl font-bold uppercase tracking-tighter transition-colors duration-500 text-white">{project.industry}</p>
             </div>
           </div>
@@ -187,7 +187,7 @@ const ProjectDetail = () => {
         {/* --- SIMILAR PROJECTS (INFINITE SCROLL) --- */}
         <section className="mt-8 md:mt-12 pt-8 md:pt-12 border-t overflow-hidden transition-colors duration-500 border-white/5">
           <div className="flex items-center justify-between mb-8 md:mb-16">
-            <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tighter transition-colors duration-500 text-white">Related Works</h2>
+            <h2 className="font-heading text-2xl md:text-5xl font-black uppercase tracking-tighter transition-colors duration-500 text-white">Related Works</h2>
           </div>
 
           <div 
@@ -225,7 +225,7 @@ const ProjectDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <h4 className="text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 text-white group-hover:text-[#ff6b2b]">
+                  <h4 className="font-heading text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 text-white group-hover:text-[#ff6b2b]">
                     {proj.title}
                     <ArrowUpRight size={24} className="hidden md:block translate-y-2 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                   </h4>
@@ -262,7 +262,7 @@ const ProjectDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <h4 className="text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 text-white group-hover:text-[#ff6b2b]">
+                  <h4 className="font-heading text-xl md:text-2xl font-black mb-2 flex items-center justify-between uppercase tracking-tighter pr-4 transition-colors duration-500 text-white group-hover:text-[#ff6b2b]">
                     {proj.title}
                     <ArrowUpRight size={24} className="hidden md:block translate-y-2 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                   </h4>
@@ -284,7 +284,7 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             className="space-y-6 md:space-y-8"
           >
-            <h2 className={`text-2xl md:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>
+            <h2 className={`font-heading text-2xl md:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>
               Got big plans for your brand or a <br className="hidden md:block" /> new project? <span className={`transition-colors duration-500 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Let's chat!</span>
             </h2>
 
@@ -299,7 +299,7 @@ const ProjectDetail = () => {
               </div>
 
               <div className="space-y-3 md:space-y-4">
-                <h3 className={`text-2x md:text-3xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Career</h3>
+                <h3 className={`font-heading text-2x md:text-3xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Career</h3>
                 <Link
                   to="mailto:hr@kalpnova.com"
                   className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
@@ -316,3 +316,4 @@ const ProjectDetail = () => {
 };
 
 export default ProjectDetail;
+

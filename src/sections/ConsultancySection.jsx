@@ -40,7 +40,7 @@ const ConsultancySection = () => {
   };
 
   return (
-    <section className="bg-[#0a0a0a] text-zinc-100 py-24 md:py-32 px-6 md:px-12 overflow-hidden font-sans">
+    <section className="bg-[#0a0a0a] text-zinc-100 py-24 md:py-32 px-6 md:px-12 overflow-hidden ">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
 
         {/* Main Heading */}
@@ -49,9 +49,9 @@ const ConsultancySection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-3xl md:text-5xl lg:text-[56px] leading-[1.2] md:leading-[1.15] font-light text-center max-w-5xl tracking-tight mb-20 md:mb-32"
+          className="font-heading text-3xl md:text-5xl lg:text-[56px] leading-[1.2] md:leading-[1.15] font-light text-center max-w-5xl tracking-tight mb-20 md:mb-32"
         >
-          We are a <span className="font-serif italic text-[#ff6b2b] font-medium">creative & consultancy</span> studio based out of Ahmedabad, India, specializing in branding, design, and social media, serving clients <span className="font-serif italic text-[#ff6b2b] font-medium">worldwide.</span>
+          We are a <span className="font-heading italic text-[#ff6b2b] font-medium">creative & consultancy</span> studio based out of Ahmedabad, India, specializing in branding, design, and social media, serving clients <span className="font-heading italic text-[#ff6b2b] font-medium">worldwide.</span>
         </motion.h2>
 
         {/* Stats Row */}
@@ -69,7 +69,7 @@ const ConsultancySection = () => {
               className={`flex flex-col items-center md:items-start w-full md:w-1/3 ${index !== 0 ? 'md:pl-12 lg:pl-16 md:border-l border-zinc-800' : 'md:pr-4'
                 }`}
             >
-              <h3 className="text-2xl md:text-3xl font-normal text-[#ff6b2b] mb-1 text-center md:text-left">
+              <h3 className="font-heading text-2xl md:text-3xl font-normal text-[#ff6b2b] mb-1 text-center md:text-left">
                 {stat.title}
               </h3>
               <p className="text-sm md:text-base text-zinc-400 mb-8 md:mb-12 text-center md:text-left">
@@ -104,3 +104,4 @@ const ConsultancySection = () => {
 };
 
 export default ConsultancySection;
+

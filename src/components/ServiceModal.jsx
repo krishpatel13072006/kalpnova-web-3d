@@ -89,7 +89,7 @@ export default function ServiceModal({ service, onClose }) {
             Service
           </span>
 
-          <h3 className="text-3xl font-bold text-orange-500">
+          <h3 className="font-heading text-3xl font-bold text-orange-500">
             {service.title}
           </h3>
 

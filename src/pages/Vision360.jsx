@@ -228,7 +228,7 @@ export default function Vision360() {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-screen h-[100dvh] overflow-hidden bg-black text-white font-sans z-[99999]">
+    <div className="fixed inset-0 w-full h-screen h-[100dvh] overflow-hidden bg-black text-white  z-[99999]">
       <div ref={mountRef} className="absolute inset-0" />
 
       {/* UI Overlay */}
@@ -253,7 +253,7 @@ export default function Vision360() {
         {/* AI Chat */}
         {isChatOpen && (
           <div className="absolute right-8 top-24 w-80 bg-black/80 backdrop-blur border border-white/10 p-6 rounded-sm pointer-events-auto">
-            <h4 className="text-xs tracking-[0.3em] font-bold mb-4 flex justify-between">
+            <h4 className="font-heading text-xs tracking-[0.3em] font-bold mb-4 flex justify-between">
               GUIDE ✨ <button onClick={() => setIsChatOpen(false)}>×</button>
             </h4>
             <div className="h-64 overflow-y-auto mb-4 text-[11px] text-gray-400 space-y-4">
@@ -276,7 +276,7 @@ export default function Vision360() {
         {/* Info Panel */}
         <div className="flex justify-between items-end pointer-events-auto">
           <div className="max-w-md">
-            <h2 className="text-2xl md:text-4xl font-light tracking-tighter mb-2 italic">{hudTitle}</h2>
+            <h2 className="font-heading text-2xl md:text-4xl font-light tracking-tighter mb-2 italic">{hudTitle}</h2>
             <p className="text-gray-500 text-xs md:text-sm leading-relaxed">{hudDesc}</p>
           </div>
         </div>
@@ -293,14 +293,14 @@ export default function Vision360() {
               </button>
             </div>
             <div className="flex-1 flex flex-col">
-              <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">{selectedItem.title}</h3>
+              <h3 className="font-heading text-2xl md:text-4xl font-bold mb-2 tracking-tight">{selectedItem.title}</h3>
               <p className="text-emerald-500 text-[10px] md:text-xs mb-4 md:mb-6 tracking-[0.3em] uppercase">{selectedItem.sub}</p>
               <p className="text-gray-400 mb-4 md:mb-8 leading-relaxed text-xs md:text-sm">{selectedItem.desc}</p>
               
               {aiAnalysis && (
                 <div className="animate-fade-in">
                   <div className="h-px bg-white/10 w-full my-6"></div>
-                  <h4 className="text-[10px] tracking-[0.3em] text-emerald-400 font-bold uppercase mb-4">✨ VISION Neural Insight</h4>
+                  <h4 className="font-heading text-[10px] tracking-[0.3em] text-emerald-400 font-bold uppercase mb-4">✨ VISION Neural Insight</h4>
                   <p className="text-gray-300 text-sm leading-relaxed italic">{aiAnalysis}</p>
                 </div>
               )}
@@ -313,3 +313,4 @@ export default function Vision360() {
     </div>
   );
 }
+

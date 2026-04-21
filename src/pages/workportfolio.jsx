@@ -107,7 +107,7 @@ const PortfolioCard = memo(({ item }) => {
 
         {/* Title */}
         <div className="px-2">
-          <h3 className="text-xl md:text-2xl font-black mb-1 text-white group-hover:text-[#ff6b2b] transition-colors uppercase tracking-tighter">
+          <h3 className="font-heading text-xl md:text-2xl font-black mb-1 text-white group-hover:text-[#ff6b2b] transition-colors uppercase tracking-tighter">
             {item.title}
           </h3>
           <p className="text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed text-gray-500">
@@ -128,7 +128,7 @@ export default function WorkPortfolio() {
   }, [activeCategory]);
 
   return (
-    <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4] font-sans relative overflow-x-hidden pt-0 selection:bg-[#ff6b2b] selection:text-white">
+    <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4]  relative overflow-x-hidden pt-0 selection:bg-[#ff6b2b] selection:text-white">
       <div className="relative z-10 pb-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
 
@@ -140,7 +140,7 @@ export default function WorkPortfolio() {
             <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[#ff6b2b] mb-3">
               Work Portfolio
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white">
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white">
               Our Work
             </h1>
           </motion.div>
@@ -175,7 +175,7 @@ export default function WorkPortfolio() {
               transition={{ duration: 0.35 }}
               className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end gap-4 md:gap-16 border-b border-white/5 pb-10"
             >
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none text-white shrink-0 italic">
+              <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none text-white shrink-0 italic">
                 {activeCategory}
               </h2>
               <p className="text-sm md:text-base text-white/50 max-w-xl leading-relaxed">
@@ -207,7 +207,7 @@ export default function WorkPortfolio() {
               viewport={{ once: true, amount: 0.1 }}
               className="space-y-8"
             >
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-tighter">
+              <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-tighter">
                 Got big plans for your brand or a <br className="hidden md:block" /> new project?{' '}
                 <span className="text-[#ff6b2b]">Let's chat!</span>
               </h2>
@@ -218,7 +218,7 @@ export default function WorkPortfolio() {
                   </Link>
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Career</h3>
+                  <h3 className="font-heading text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Career</h3>
                   <Link to="mailto:hr@kalpnova.com" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight">
                     hr@kalpnova.com
                   </Link>
@@ -232,3 +232,4 @@ export default function WorkPortfolio() {
     </div>
   );
 }
+

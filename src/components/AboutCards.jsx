@@ -55,7 +55,7 @@ const AboutCards = () => {
   };
 
   return (
-    <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden font-sans">
+    <section className="relative bg-black text-white py-24 px-6 md:px-12 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" style={{ width: '100%', height: '100%' }}>
         <GridScan
           sensitivity={0.55}
@@ -79,10 +79,10 @@ const AboutCards = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-4xl lg:text-5xl font-medium text-center mb-12 tracking-tight max-w-2xl"
+          className="font-heading font-semibold text-3xl md:text-4xl lg:text-5xl text-center mb-12 tracking-tight max-w-2xl"
         >
-          Few things you <span className="font-serif italic text-[#ff6b2b]">should</span> <br className="hidden md:block"/> 
-          <span className="font-serif italic text-[#ff6b2b]">know</span> about us.
+          Few things you <span className="font-heading italic text-[#ff6b2b]">should</span> <br className="hidden md:block"/> 
+          <span className="font-heading italic text-[#ff6b2b]">know</span> about us.
         </motion.h2>
 
         {/* Cards Grid */}
@@ -103,7 +103,7 @@ const AboutCards = () => {
               <div className="p-6 pb-4 bg-[#eeeadd] flex justify-between items-start">
                 <div>
                   <span className="block text-lg font-medium text-zinc-800 mb-1">{card.id}</span>
-                  <h3 className="text-xl font-serif italic">{card.title}</h3>
+                  <h3 className="text-xl font-heading italic">{card.title}</h3>
                 </div>
                 <div className="mt-1 scale-90 origin-top-right">
                   {card.icon}

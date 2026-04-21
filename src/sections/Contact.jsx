@@ -68,7 +68,7 @@ export default function Contact() {
         ref={sectionRef}
         className="relative z-10 max-w-5xl mx-auto text-center space-y-10"
       >
-        <h2 className="text-section font-bold text-[#FFE1C5]">
+        <h2 className="font-heading font-bold text-section text-[#FFE1C5]">
           READY TO <span className="text-orange-500">LOOK</span> PREMIUM?
         </h2>
 

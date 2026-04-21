@@ -32,12 +32,12 @@ const FoldingGallery = ({
   if (items.length === 0) return null;
 
   return (
-    <div className="w-full py-20 bg-transparent flex flex-col items-center justify-center font-sans selection:bg-[#ff6b2b] selection:text-white">
+    <div className="w-full py-20 bg-transparent flex flex-col items-center justify-center  selection:bg-[#ff6b2b] selection:text-white">
 
       {/* HEADER & STATUS INDICATOR */}
       <div className="w-full max-w-7xl flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-4">
         <div>
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+          <h2 className="font-heading text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
             Digital <span className="text-[#ff6b2b]">Showcase</span>
           </h2>
         </div>
@@ -122,3 +122,4 @@ const FoldingGallery = ({
 };
 
 export default FoldingGallery;
+

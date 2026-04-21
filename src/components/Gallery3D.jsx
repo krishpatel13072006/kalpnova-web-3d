@@ -29,7 +29,7 @@ export default function Gallery3D({ images }) {
   return (
     <section className="py-16 md:py-24 relative z-10 w-full overflow-hidden bg-[#0b0b0b]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-8 md:mb-12">
-        <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">
+        <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">
            Project <span className="text-[#ff6b2b]">Gallery</span>
         </h2>
       </div>

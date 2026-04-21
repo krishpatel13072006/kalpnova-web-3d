@@ -264,28 +264,28 @@ export default function KalpnovaPavilion() {
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '300vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">The Entrance</span>
-            <h1 className="text-5xl font-bold mb-4 tracking-tighter text-slate-900 uppercase">The Hub</h1>
+            <h1 className="font-heading text-5xl font-bold mb-4 tracking-tighter text-slate-900 uppercase">The Hub</h1>
             <p className="text-slate-600 leading-relaxed text-lg">Approach the monolith. A single architectural statement. Scroll to proceed.</p>
           </div>
         </section>
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Wing A // Logic</span>
-            <h1 className="text-4xl font-bold mb-4 tracking-tight text-slate-900">Lateral Analysis</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Lateral Analysis</h1>
             <p className="text-slate-600 leading-relaxed">Structural foundation of the digital experience.</p>
           </div>
         </section>
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Wing B // Pulse</span>
-            <h1 className="text-4xl font-bold mb-4 tracking-tight text-slate-900">Creative Flow</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Creative Flow</h1>
             <p className="text-slate-600 leading-relaxed">Where branding dictates the light and rhythm.</p>
           </div>
         </section>
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Main Atrium</span>
-            <h1 className="text-4xl font-bold mb-4 tracking-tight text-slate-900">Unified Sync</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Unified Sync</h1>
             <p className="text-slate-600 leading-relaxed">The final destination where all streams unite.</p>
           </div>
         </section>

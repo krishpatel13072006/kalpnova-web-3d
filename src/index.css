@@ -1,118 +1,150 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+/* =========================================================
+   FONT DECLARATIONS — Goli & Eurostile Round (brand fonts)
+   NO Google Fonts. Zero conflicts.
+========================================================= */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  .font-serif {
-    font-family: 'Playfair Display', serif;
-  }
-  .font-sans {
-    font-family: 'Inter', sans-serif;
-  }
-}
-
-/* =========================
-   FONT FACES (LOAD FIRST)
-========================= */
-
-@font-face {
-  font-family: "Eurostile Round";
-  src: url("/src/assets/fonts/eurostile/EurostileRound-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Eurostile Round";
-  src: url("/src/assets/fonts/eurostile/EurostileRound-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Eurostile Round";
-  src: url("/src/assets/fonts/eurostile/EurostileRound-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Eurostile Round";
-  src: url("/src/assets/fonts/eurostile/EurostileRound-Black.woff2") format("woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Fallback mappings for missing weights/styles from brief */
-@font-face {
-  font-family: "Eurostile Round";
-  src: url("/src/assets/fonts/eurostile/EurostileRound-Regular.woff2") format("woff2");
-  font-weight: 300; /* For Light */
-  font-style: normal;
-}
-
-
+/* --- GOLI (Headings: h1–h6, titles, taglines) --- */
+/* Weight guide:
+   300 = Goli Light       → large elegant hero text only
+   400 = Goli Regular     → casual headings, breadcrumbs
+   500 = Goli Medium      → sub-labels, nav links
+   600 = Goli SemiBold    → section headers, card titles  ← primary heading weight
+   700 = Goli Bold        → h1, primary page titles, key CTAs ← strongest heading
+*/
 @font-face {
   font-family: "Goli";
-  src: url("/src/assets/fonts/goli/Goli-Light.otf") format("opentype");
+  src: url("./assets/fonts/goli/Goli-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Goli";
-  src: url("/src/assets/fonts/goli/Goli-Regular.otf") format("opentype");
+  src: url("./assets/fonts/goli/Goli-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Goli";
-  src: url("/src/assets/fonts/goli/Goli-Medium.otf") format("opentype");
+  src: url("./assets/fonts/goli/Goli-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Goli";
-  src: url("/src/assets/fonts/goli/Goli-SemiBold.otf") format("opentype");
+  src: url("./assets/fonts/goli/Goli-SemiBold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Goli";
-  src: url("/src/assets/fonts/goli/Goli-Bold.otf") format("opentype");
+  src: url("./assets/fonts/goli/Goli-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-  }
+/* --- EUROSTILE ROUND (Body, paragraphs, UI, labels, buttons) --- */
+/* Available local files:
+   Regular (400) → main body text, paragraphs
+   Medium  (500) → UI labels, buttons, nav
+   Bold    (700) → bold body emphasis, strong tags
+   Black   (900) → extra-heavy UI labels, uppercase tags
+   Italic weights fallback to their normal equivalents.
+*/
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Eurostile Round";
+  src: url("./assets/fonts/eurostile/EurostileRound-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
-/* =========================
-   BASE STYLES
-========================= */
+/* =========================================================
+   TAILWIND DIRECTIVES
+========================================================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* =========================================================
+   GLOBAL BASE — applied immediately, no class needed
+========================================================= */
 @layer base {
-  html,
-  body {
-    @apply bg-bg text-text font-body;
+  /* Every heading ALWAYS uses Goli SemiBold by default.
+     h1 gets Bold (700). h2/h3 get SemiBold (600). */
+  h1 {
+    font-family: "Goli", system-ui, sans-serif;
+    font-weight: 700;
+  }
+  h2, h3 {
+    font-family: "Goli", system-ui, sans-serif;
+    font-weight: 600;
+  }
+  h4, h5, h6 {
+    font-family: "Goli", system-ui, sans-serif;
+    font-weight: 600;
+  }
+
+  /* Every other element (body, p, span, div, button, a…) uses Eurostile Round */
+  html, body {
+    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    background-color: #0B0B0C;
+    color: #F5F5F5;
     overflow-x: hidden;
     width: 100%;
     min-height: 100%;
@@ -121,20 +153,31 @@
   }
 
   p {
-    @apply text-muted;
+    font-family: "Eurostile Round", system-ui, sans-serif;
+    font-weight: 400;
+    color: #A1A1AA;
+  }
+
+  button, a, input, textarea, label, span {
+    font-family: inherit;
   }
 
   * {
     -webkit-tap-highlight-color: transparent;
     caret-color: transparent;
   }
-
-  input,
-  textarea,
-  [contenteditable="true"] {
+  input, textarea, [contenteditable="true"] {
     caret-color: auto;
   }
 }
+
+/* =========================================================
+   UTILITY HELPERS — use these classes anywhere for fine control
+========================================================= */
+.font-heading   { font-family: "Goli", system-ui, sans-serif; }
+.font-body      { font-family: "Eurostile Round", system-ui, sans-serif; }
+.font-tagline   { font-family: "Goli", system-ui, sans-serif; font-weight: 600; letter-spacing: 0.04em; }
+
 
 /* =========================
    COMPONENT / EFFECT STYLES

@@ -107,7 +107,7 @@ export default function PinnedStory() {
       <div className="grid md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto px-6">
         {/* TEXT */}
         <div className="space-y-6">
-          <h2 ref={titleRef} className="text-section font-bold text-[#FFE1C5]">
+          <h2 ref={titleRef} className="font-heading text-section font-bold text-[#FFE1C5]">
             WHERE TECHNOLOGY SCALES BRANDS
           </h2>
           <p ref={textRef} className="text-lg text-muted max-w-md text-[#FFE1C5]">

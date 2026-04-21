@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import CubeGallery from './CubeGallery';
 
 
 // Mocked theme context to ensure successful standalone compilation
@@ -384,7 +383,7 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-10 mb-12 md:mb-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className={`text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-none ${textCol}`}>
+            <h2 className={`font-heading text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-none ${textCol}`}>
               Case <span className={accent}>Study</span>
             </h2>
           </motion.div>
