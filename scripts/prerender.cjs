@@ -50,7 +50,10 @@ async function prerender() {
   const server = app.listen(3000, async () => {
     console.log('Temporary server listening on port 3000');
 
-    const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({ 
+      headless: "new",
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    });
     const page = await browser.newPage();
 
     for (const route of routes) {
@@ -58,8 +61,8 @@ async function prerender() {
       
       // Navigate to the route
       await page.goto(`http://localhost:3000${route}`, {
-        waitUntil: 'networkidle0',
-        timeout: 60000
+        waitUntil: 'networkidle2',
+        timeout: 0 // Disable timeout for CI environments
       });
 
       // Wait for the custom render trigger event
