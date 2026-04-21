@@ -120,9 +120,9 @@ export default function PinnedStory() {
           ref={cardRef}
           className="card relative h-[360px] md:h-[420px] overflow-hidden"
         >
-          <img ref={img1Ref} src="/projects/BoostIQ/1.jpg" className="absolute inset-0 w-full h-full object-cover" />
-          <img ref={img2Ref} src="/projects/Mayota/Banner.png" className="absolute inset-0 w-full h-full object-cover" />
-          <img ref={img3Ref} src="/projects/Westrock%20logo/1.jpg" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img1Ref} src="/projects/BoostIQ/1.webp" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img2Ref} src="/projects/Mayota/Banner.webp" className="absolute inset-0 w-full h-full object-cover" />
+          <img ref={img3Ref} src="/projects/Westrock%20logo/1.webp" className="absolute inset-0 w-full h-full object-cover" />
 
           <div
             ref={lightRef}

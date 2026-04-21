@@ -6,7 +6,7 @@ const services = [
     id: "I",
     title: "Branding",
     description: "We build dynamic brands through thoughtful design and strategic positioning.",
-    image: "/clients/kalpnova/Artboard 1.jpg",
+    image: "/clients/kalpnova/Artboard 1.webp",
     subServices: [
       "Logo design", "Brand Strategy", "Print Collateral Designs", 
       "Brand Imagery", "Brand Consultation", "Event Identity Design", "Launch Event Design"
@@ -16,7 +16,7 @@ const services = [
     id: "II",
     title: "Packaging",
     description: "Creating physical and digital packaging that stands out on the shelf and in the mind.",
-    image: "/clients/London Coffee/banner.png",
+    image: "/clients/London Coffee/banner.webp",
     subServices: [
       "Product Packaging", "Label & Box Design", "Unboxing Experience", 
       "Sustainable Packaging", "3D Mockups"
@@ -26,7 +26,7 @@ const services = [
     id: "III",
     title: "Social Media",
     description: "Engaging your audience with compelling content and strategic campaign execution.",
-    image: "/clients/Pixal Plus/2.jpg",
+    image: "/clients/Pixal Plus/2.webp",
     subServices: [
       "Content Strategy", "Grid Design", "Motion Graphics", 
       "Campaign Planning", "Community Management"
