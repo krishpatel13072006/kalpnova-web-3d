@@ -17,15 +17,37 @@ async function renderRoute(browser, route, distPath) {
   const page = await browser.newPage();
   try {
     console.log(`Prerendering: ${route}`);
-    await page.goto(`http://localhost:3000${route}`, {
-      waitUntil: 'networkidle2',
-      timeout: 0
+
+    // OPTIMIZATION: Block heavy assets (we only need the HTML text for Google SEO)
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+      const type = request.resourceType();
+      const url = request.url();
+      if (['image', 'media', 'font'].includes(type) || url.match(/\.(glb|gltf|mp4|webm)$/i)) {
+        request.abort();
+      } else {
+        request.continue();
+      }
     });
 
-    // Wait for the custom render trigger event
+    // Navigate and just wait for the DOM structure, not all the network requests
+    await page.goto(`http://localhost:3000${route}`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 15000
+    }).catch(e => console.warn(`Note: Goto timeout for ${route}`));
+
+    // Wait for React to render something inside #root
     try {
-      await page.waitForFunction(() => window.__PRERENDER_READY__ || true, { timeout: 5000 });
-    } catch (e) {}
+      await page.waitForFunction(() => {
+        const root = document.querySelector('#root');
+        return root && root.children.length > 0;
+      }, { timeout: 10000 });
+      
+      // Give React 1 more second to settle any immediate state updates
+      await new Promise(r => setTimeout(r, 1000));
+    } catch (e) {
+      console.warn(`Note: React render timeout on ${route}`);
+    }
 
     const content = await page.content();
     let outputPath = route === '/' 
