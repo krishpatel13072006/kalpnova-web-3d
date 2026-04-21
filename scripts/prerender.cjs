@@ -20,13 +20,14 @@ async function renderRoute(browser, route, distPath) {
 
     // OPTIMIZATION: Block heavy assets (we only need the HTML text for Google SEO)
     await page.setRequestInterception(true);
-    page.on('request', (request) => {
+    page.on('request', async (request) => {
+      if (request.isInterceptResolutionHandled()) return;
       const type = request.resourceType();
       const url = request.url();
       if (['image', 'media', 'font'].includes(type) || url.match(/\.(glb|gltf|mp4|webm)$/i)) {
-        request.abort();
+        await request.abort().catch(() => {});
       } else {
-        request.continue();
+        await request.continue().catch(() => {});
       }
     });
 
@@ -59,7 +60,7 @@ async function renderRoute(browser, route, distPath) {
 
     fs.writeFileSync(outputPath, content);
   } finally {
-    await page.close();
+    await page.close().catch(() => {});
   }
 }
 
@@ -84,8 +85,15 @@ async function prerender() {
   const server = app.listen(3000, async () => {
     console.log('Temporary server listening on port 3000');
     const browser = await puppeteer.launch({ 
-      headless: "new",
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+      headless: true,
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox', 
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-webgl',
+        '--disable-software-rasterizer'
+      ]
     });
 
     try {
@@ -95,6 +103,8 @@ async function prerender() {
         console.log(`Processing batch: ${batch.join(', ')}`);
         await Promise.all(batch.map(route => renderRoute(browser, route, distPath)));
       }
+    } catch (err) {
+      console.error('FATAL ERROR DURING BATCH PROCESSING:', err);
     } finally {
       await browser.close();
       server.close(() => {
