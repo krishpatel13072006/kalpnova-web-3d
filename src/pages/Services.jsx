@@ -27,7 +27,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-heading text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-8 text-[#FFE1C5] uppercase"
+            className="font-heading text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-8 text-[#FFE1C5] uppercase"
           >
             Design & Branding <span className="text-orange-500 italic">Services in Ahmedabad</span>
           </motion.h1>

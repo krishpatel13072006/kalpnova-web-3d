@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
+import LiveLab from "./pages/LiveLab";
 import InsideKalpnova from './pages/InsideKalpnova';
 import VirtualExhibition from "./pages/VirtualExhibition";
 import WorkPortfolio from './pages/workportfolio';
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/live" element={<LiveLab />} />
 
         {/* The Hub Route */}
         <Route path="/insidekalpnova" element={<InsideKalpnova />} />

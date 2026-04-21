@@ -65,12 +65,12 @@ export default function Home() {
           {/* HEADING — always exactly 2 lines */}
           <h1
             className="font-heading font-bold tracking-tight leading-[1.1]"
-            style={{ fontSize: "clamp(0.9rem, 3.5vw, 5rem)" }}
+            style={{ fontSize: "clamp(1.75rem, 8vw, 3.5rem)" }}
           >
-            <span className="block text-white drop-shadow-md whitespace-nowrap">
+            <span className="block text-white drop-shadow-md">
               Premium Design &amp;
             </span>
-            <span className="block text-[#f5f7f6] drop-shadow-lg whitespace-nowrap">
+            <span className="block text-[#f5f7f6] drop-shadow-lg">
               Branding Studio in Ahmedabad
             </span>
           </h1>

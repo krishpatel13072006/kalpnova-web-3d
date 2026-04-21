@@ -103,7 +103,7 @@ const AboutCards = () => {
               <div className="p-6 pb-4 bg-[#eeeadd] flex justify-between items-start">
                 <div>
                   <span className="block text-lg font-medium text-zinc-800 mb-1">{card.id}</span>
-                  <h3 className="text-xl font-heading italic">{card.title}</h3>
+                  <h3 className="text-xl font-heading font-black italic tracking-tight">{card.title}</h3>
                 </div>
                 <div className="mt-1 scale-90 origin-top-right">
                   {card.icon}
@@ -112,10 +112,10 @@ const AboutCards = () => {
               
               {/* Subtle Divider */}
               <div className="h-[1px] w-full bg-zinc-300/60"></div>
-
+ 
               {/* Card Bottom Half */}
               <div className="p-6 pt-4 flex-grow">
-                <p className="text-sm text-zinc-800 leading-relaxed font-medium">
+                <p className="text-sm text-zinc-800 leading-relaxed font-normal">
                   {card.description}
                 </p>
               </div>

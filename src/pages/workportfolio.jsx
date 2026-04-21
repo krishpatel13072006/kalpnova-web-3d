@@ -185,7 +185,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
             </motion.div>
           </AnimatePresence>
 
-          {/* ── PROJECT GRID ────────────────────────────────────────── */}
+          {/* ── PROJECT GRID / TERMINAL ─────────────────────────────── */}
           <motion.div
             key={activeCategory}
             variants={containerVariants}
