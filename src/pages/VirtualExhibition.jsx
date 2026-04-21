@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useTexture } from "@react-three/drei";
+import SEO from "../components/SEO";
 import {
   Text,
   Image,
@@ -330,6 +331,11 @@ export default function VirtualExhibition() {
 
   return (
     <div style={containerStyle}>
+      <SEO 
+        title="Virtual Showcase"
+        description="Experience an immersive 3D gallery showcasing Kalpnova's premium high-impact web, app, and enterprise solutions."
+        url="/showcase"
+      />
       {/* <div style={headerStyle}>
         <h1 style={{ margin: 0, fontSize: '3rem', color: 'white', fontFamily: 'sans-serif' }}>KALPNOVA</h1>
         <p style={{ color: activeProject ? activeProject.color : '#fff', margin: 0, fontFamily: 'monospace' }}>

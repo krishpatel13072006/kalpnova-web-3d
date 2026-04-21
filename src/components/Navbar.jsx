@@ -233,7 +233,7 @@ export default function Navbar() {
           >
             <img
               src={logo}
-              alt="Imagine logo"
+              alt="Kalpnova - Premium Web Design & Digital Growth Agency Logo"
               className="h-8 md:h-10 w-auto"
             />
           </button>

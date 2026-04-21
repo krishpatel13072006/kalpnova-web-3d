@@ -51,7 +51,7 @@ const EmailIcon = () => (
 const teamMembers = [
   {
     id: 2,
-    role: 'Graphics designer',
+    role: 'Co-founder, CMO',
     name: 'Vishal Patel',
     image: '/clients/Team/Graphics designer.png',
     quote: '"Efficiency is doing things right; effectiveness is doing the right things. I strive to bring both to our daily operations."',

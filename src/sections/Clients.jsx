@@ -70,7 +70,8 @@ export default function Clients() {
                 >
                   <img
                     src={client.logo}
-                    alt={client.name}
+                    alt={`${client.name} logo - Kalpnova Client`}
+                    loading="lazy"
                     className="h-12 object-contain
                                grayscale
                                hover:grayscale-0

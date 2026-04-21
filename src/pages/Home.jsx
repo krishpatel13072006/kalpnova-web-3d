@@ -7,6 +7,7 @@ import Testimonials from "../sections/Testimonials";
 import Clients from "../sections/Clients";
 import AboutCards from "../components/AboutCards";
 import Silk from "../components/Silk";
+import SEO from "../components/SEO";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -23,8 +24,28 @@ export default function Home() {
     });
   }, []);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Agency",
+    "name": "Kalpnova",
+    "url": "https://kalpnova.com",
+    "logo": "https://kalpnova.com/public/kalpnova.svg",
+    "description": "Kalpnova helps ambitious brands scale with high-impact design, strategic identity, and high-performance digital solutions.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ahmedabad",
+      "addressCountry": "IN"
+    }
+  };
+
   return (
     <>
+      <SEO 
+        title="Home"
+        description="Kalpnova helps ambitious brands scale with high-impact design, strategic identity, and high-performance digital solutions."
+        url="/"
+        jsonLd={jsonLd}
+      />
       {/* HERO */}
       <section className="relative min-h-screen min-h-[100dvh] pt-32 pb-16 md:pt-40 md:pb-16 flex items-center justify-center overflow-hidden">
         {/* BACKGROUND */}
