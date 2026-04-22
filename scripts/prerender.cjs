@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const routes = [
   '/', '/about', '/services', '/products', '/contact', 
-  '/insidekalpnova', '/showcase', '/vision', '/pavilion', '/portfolio', '/links',
+  '/insidekalpnova', '/showcase', '/vision', '/pavilion', '/portfolio',
   '/portfolio/8', '/portfolio/9', '/portfolio/10', '/portfolio/12', 
   '/portfolio/13', '/portfolio/14', '/portfolio/15', '/portfolio/16', 
   '/portfolio/17', '/portfolio/18', '/portfolio/19'
