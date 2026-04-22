@@ -64,7 +64,7 @@ export default function Home() {
 
           {/* HEADING — always exactly 2 lines */}
           <h1
-            className="font-heading font-bold tracking-tight leading-[1.1]"
+            className="font-heading font-black uppercase leading-[1.1]"
             style={{ fontSize: "clamp(1.75rem, 8vw, 3.5rem)" }}
           >
             <span className="block text-white drop-shadow-md">
