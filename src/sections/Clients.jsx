@@ -10,8 +10,6 @@ const clients = [
   { name: "SchoolG", logo: "/clients/LOGO.webp" },
   { name: "Maruti", logo: "/clients/maruti.webp" },
   { name: "Lioncut", logo: "/clients/lioncut.webp" },
-  { name: "Mayota", logo: "/clients/Asset 5@4x-8.webp" },
-  { name: "Kalpnova", logo: "/kalpnova.svg" },
   { name: "Lotus Salon", logo: "/clients/lotus salon.webp" },
 ];
 
@@ -20,11 +18,11 @@ export default function Clients() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const width = trackRef.current.scrollWidth / 2;
+      const width = trackRef.current.scrollWidth / 3;
 
       gsap.to(trackRef.current, {
         x: -width,
-        duration: 25,
+        duration: 30,
         ease: "linear",
         repeat: -1,
       });
@@ -53,34 +51,30 @@ export default function Clients() {
         {/* SCROLLER */}
         <div className="relative">
           {/* Fade edges */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-32
-                          bg-gradient-to-r from-bg via-bg/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-32
-                          bg-gradient-to-l from-bg via-bg/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute left-0 top-0 h-full hidden md:block md:w-32
+                           bg-gradient-to-r from-bg via-bg/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full hidden md:block md:w-32
+                           bg-gradient-to-l from-bg via-bg/80 to-transparent z-10" />
 
           <div className="overflow-hidden">
             <div
               ref={trackRef}
-              className="flex gap-20 w-max items-center py-4"
+              className="flex gap-8 md:gap-20 w-max items-center py-4"
             >
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
                   className="flex items-center justify-center
-                             min-w-[180px]
-                             opacity-60
-                             transition-all duration-300
-                             hover:opacity-100 hover:scale-110"
+                               min-w-[100px] md:min-w-[180px]
+                               transition-all duration-300
+                               hover:scale-110"
                 >
                   <img
                     src={client.logo}
-                    alt={`${client.name} logo - Kalpnova Client`}
+                    alt={`${client.name} logo`}
                     loading="lazy"
-                    className="h-12 object-contain
-                               grayscale
-                               hover:grayscale-0
-                               hover:drop-shadow-[0_0_25px_rgba(249,115,22,0.8)]
-                               transition-all duration-300"
+                    className="h-8 md:h-12 object-contain
+                               transition-all duration-300"
                   />
                 </div>
               ))}

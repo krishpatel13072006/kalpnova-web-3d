@@ -23,15 +23,6 @@ const live_sites = [
     result: 'Immersive 10/10 user experience'
   },
   { 
-    id: 3, 
-    name: 'Kalpnova Hub', 
-    url: 'https://kalpnova.com/', 
-    type: 'Agency',
-    industry: '3D Interactive Design',
-    description: "Exploring the future of web design. A state-of-the-art 3D interactive hub demonstrating the power of React and Three.js to provide an unforgettable, high-retention brand experience.",
-    result: 'Award-ready visual performance'
-  },
-  { 
     id: 4, 
     name: 'ResourceOS', 
     url: 'https://resourceos.com/', 
@@ -51,7 +42,7 @@ const live_sites = [
   }
 ];
 
-const CATEGORIES = ['All', 'Security', 'Hospitality', 'Agency', 'Enterprise', 'Industrial'];
+const CATEGORIES = ['All', 'Security', 'Hospitality', 'Enterprise', 'Industrial'];
 
 export default function LiveLab() {
   const [activeCategory, setActiveCategory] = useState('All');

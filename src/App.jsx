@@ -17,16 +17,18 @@ import WorkPortfolio from './pages/workportfolio';
 import ProjectDetail from './pages/ProjectDetail';
 import Vision360 from './pages/Vision360';
 import KalpnovaPavilion from './pages/KalpnovaPavilion';
+import Links from './pages/Links';
 import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
   const location = useLocation();
+  const isLinkTree = location.pathname === '/links';
 
   return (
     <ThemeProvider>
-      <ScrollProgress />
-      <Navbar />
-      <ScrollToTop />
+      {!isLinkTree && <ScrollProgress />}
+      {!isLinkTree && <Navbar />}
+      {!isLinkTree && <ScrollToTop />}
 
       {/* Normal SPA Routing without forced full-tree remounts */}
       <Routes location={location}>
@@ -47,8 +49,9 @@ export default function App() {
 
         <Route path="/portfolio" element={<WorkPortfolio />} />
         <Route path="/portfolio/:id" element={<ProjectDetail />} />
+        <Route path="/links" element={<Links />} />
       </Routes>
-      <Footer />
+      {!isLinkTree && <Footer />}
       <GrainOverlay />
     </ThemeProvider>
   );

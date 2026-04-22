@@ -96,12 +96,12 @@ export default function ServicesGrid() {
             key={s.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
             className="group p-8 rounded-[2rem] bg-[#111112]
                        border border-white/5
                        hover:border-orange-500/30 hover:bg-[#161618]
-                       transition-all duration-500 relative overflow-hidden"
+                       transition-colors duration-500 relative overflow-hidden"
           >
             {/* Number background */}
             <span className="absolute -right-4 -top-4 text-8xl font-black text-white/[0.02] group-hover:text-orange-500/[0.05] transition-colors duration-500">

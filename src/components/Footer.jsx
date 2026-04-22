@@ -51,7 +51,7 @@ export default function Footer() {
               About
             </NavLink>
             <NavLink to="/services" className="hover:text-orange-500 transition">
-              Services
+              Work Portfolio
             </NavLink>
             <NavLink to="/contact" className="hover:text-orange-500 transition">
               Contact

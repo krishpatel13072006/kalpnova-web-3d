@@ -14,9 +14,11 @@ const categoryMap = {
   14: 'Digital',
   15: 'Social Media',
   16: 'Branding',
-  17: 'Branding',
   18: 'Branding',
   19: 'Social Media',
+  20: 'Branding',
+  21: 'Social Media',
+  22: 'Branding',
 };
 
 const CATEGORIES = ['All', 'Branding', 'Packaging', 'Social Media', 'Digital'];

@@ -154,7 +154,7 @@ import logo from "../assets/kalpnova.png"; // 👈 update path if needed
 const links = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Services", to: "/services" },
+  { label: "Work Portfolio", to: "/services" },
   { label: "Products", to: "/products" },
   { label: "Live Lab", to: "/live" },
   { label: "Contact", to: "/contact" },
