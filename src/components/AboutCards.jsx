@@ -79,7 +79,7 @@ const AboutCards = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-heading font-semibold text-3xl md:text-4xl lg:text-5xl text-center mb-12 tracking-tight max-w-2xl"
+          className="font-heading font-semibold text-3xl md:text-4xl lg:text-5xl text-center mb-12 max-w-2xl"
         >
           Few things you <span className="font-heading italic text-[#ff6b2b]">should</span> <br className="hidden md:block"/> 
           <span className="font-heading italic text-[#ff6b2b]">know</span> about us.
@@ -103,7 +103,7 @@ const AboutCards = () => {
               <div className="p-6 pb-4 bg-[#eeeadd] flex justify-between items-start">
                 <div>
                   <span className="block text-lg font-medium text-zinc-800 mb-1">{card.id}</span>
-                  <h3 className="text-xl font-heading font-black italic tracking-tight">{card.title}</h3>
+                  <h3 className="text-xl font-heading font-black italic">{card.title}</h3>
                 </div>
                 <div className="mt-1 scale-90 origin-top-right">
                   {card.icon}

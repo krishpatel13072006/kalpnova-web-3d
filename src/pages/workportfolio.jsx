@@ -19,6 +19,7 @@ const categoryMap = {
   20: 'Branding',
   21: 'Social Media',
   22: 'Branding',
+  23: 'Branding',
 };
 
 const CATEGORIES = ['All', 'Branding', 'Packaging', 'Social Media', 'Digital'];
@@ -101,18 +102,18 @@ const PortfolioCard = memo(({ item }) => {
         </div>
 
         {/* Category pill */}
-        <div className="px-2 mb-2 flex justify-center">
+        <div className="px-2 mb-2">
           <span className="text-[9px] font-black uppercase tracking-widest text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
             {categoryMap[item.id] || 'Work'}
           </span>
         </div>
 
         {/* Title */}
-        <div className="px-2 text-center">
-          <h3 className="font-heading text-xl md:text-2xl font-black mb-3 text-white group-hover:text-[#ff6b2b] transition-colors uppercase tracking-tighter">
+        <div className="px-2">
+          <h3 className="font-heading text-xl md:text-2xl font-black mb-3 text-white group-hover:text-[#ff6b2b] transition-colors uppercase">
             {item.title}
           </h3>
-          <p className="text-[10px] font-black uppercase tracking-[0.1em] leading-relaxed text-gray-500">
+          <p className="text-[10px] font-black uppercase leading-relaxed text-gray-500">
             {item.type || item.tags}
           </p>
         </div>
@@ -140,10 +141,10 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
             variants={fadeInUp} initial="hidden" animate="visible"
             className="pt-0 pb-8"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#ff6b2b] mb-3">
+            <p className="text-[10px] font-black uppercase text-[#ff6b2b] mb-3">
               Work Portfolio
             </p>
-            <HeadingTag className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white">
+            <HeadingTag className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none text-white">
               Our Work
             </HeadingTag>
           </motion.div>

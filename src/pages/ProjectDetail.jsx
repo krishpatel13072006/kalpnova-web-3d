@@ -93,7 +93,7 @@ const ProjectDetail = () => {
               <ArrowLeft size={16} />
               <span className="text-[10px] font-bold uppercase tracking-widest">Back to Portfolio</span>
             </Link>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] transition-colors duration-500 text-white">
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9] transition-colors duration-500 text-white">
               {project.title}
             </h1>
             <div className={`w-24 h-[3px] mt-6 transition-colors duration-500 ${themeStyles.accentBg}`}></div>

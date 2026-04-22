@@ -287,6 +287,80 @@ const renderMaruti = (items) => {
 };
 
 // ─────────────────────────────────────────────
+// Custom Layout — Zero Gap Masonry (AMC & Invitation)
+// ─────────────────────────────────────────────
+const renderZeroGrid = (items, columns = "columns-1 md:columns-2", imgClass = "object-contain !h-auto") => {
+  return (
+    <div
+      className={columns}
+      style={{ columnGap: '16px' }}
+    >
+      {items.map((item, idx) => (
+        <div key={idx} className="break-inside-avoid overflow-hidden" style={{ marginBottom: '16px' }}>
+          {renderTile(item.src, 'h-auto w-full', imgClass)}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const renderAMCGrid = (items) => {
+  // Move the last item (landscape) to the 3rd position (index 2)
+  // to make it the full-width 2nd row.
+  const reordered = [...items];
+  if (reordered.length === 5) {
+    const last = reordered.pop();
+    reordered.splice(2, 0, last);
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+      {reordered.map((item, idx) => {
+        // The landscape image is now at index 2
+        const isFullWidth = reordered.length === 5 && idx === 2;
+        return (
+          <div key={idx} className={`overflow-hidden ${isFullWidth ? 'md:col-span-2' : ''}`}>
+            {renderTile(item.src, 'w-full h-auto', 'object-contain !h-auto')}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const renderInvitationGrid = (items) => {
+  // Manual reorder based on user request
+  const order = [
+    '1 (10)', '1 (6)', '1 (7)', '1 (11)', '1-1.png', 
+    '1 (9)-optimized', '1-3.png', '1-4.png', '1-2.png', 
+    '1-5.png', '1 (8)'
+  ];
+
+  const reordered = [];
+  order.forEach(name => {
+    const found = items.find(it => it.src.includes(name));
+    if (found) reordered.push(found);
+  });
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+      {reordered.map((item, idx) => {
+        // Row 1 (index 0) and Row 4 (index 5) are full width
+        const isFullWidth = idx === 0 || idx === 5;
+        return (
+          <div 
+            key={idx} 
+            className={`overflow-hidden ${isFullWidth ? 'md:col-span-2' : ''}`}
+          >
+            {renderTile(item.src, 'w-full h-auto', 'object-contain !h-auto')}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────
 // Custom Layout — Lotus Salon (3-column flex masonry)
 // ─────────────────────────────────────────────
 const renderLotusSalon = (items) => {
@@ -436,6 +510,10 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
               renderLotusSalon(classified)
             ) : layout === "maruti" ? (
               renderMaruti(classified)
+            ) : layout === "amc" ? (
+              renderAMCGrid(classified)
+            ) : layout === "invitation" ? (
+              renderInvitationGrid(classified)
             ) : layout === "2-col" ? (
               <div className="grid grid-cols-2 gap-[16px] items-start">
                 {images.map((src, i) => (

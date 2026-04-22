@@ -484,7 +484,7 @@ export const portfolioItems = [
     type: "Print Media, Graphic Design",
     image: "/clients/invitation cards/invitation card  (1).webp",
     heroImage: "/clients/invitation cards/invitation card  (1).webp",
-    tags: "Print Media, invitation card, event design",
+    galleryLayout: "invitation",
     brandOverview: "A collection of bespoke invitation and celebration cards designed for high-end events and institutional ceremonies.",
     challenge: "Combining traditional elegance with modern design typography across various print formats.",
     perceptionShift: "Elevating the perception of formal events through sophisticated visual storytelling on physical and digital cards.",
@@ -494,30 +494,25 @@ export const portfolioItems = [
       { title: "PREMIUM PRINT.", img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.webp", subtitle: "Tactile quality.", badge: "Material Focus" },
       { title: "UNIQUE LAYOUTS.", img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.webp", subtitle: "Never generic.", badge: "Bespoke" }
     ],
-    billboardImage: "/clients/invitation cards/invitation card  (4).webp",
+    billboardImage: "/clients/invitation cards/1 (10).webp",
     billboardTitle: "Invitation Design Showcase",
-    videoThumbnail: "/clients/invitation cards/invitation card  (6).webp",
+    videoThumbnail: "/clients/invitation cards/1 (6).webp",
     videoText: "Premium Cards | The Art of Invitation...",
     services: "Print Media, Graphic Design",
     industry: "Events & Branding",
     stats: [{ label: "Designs Created", value: "50+" }, { label: "Client Satisfaction", value: "100%" }, { label: "Print Quality", value: "Premium" }],
     gallery: [
-      "/clients/invitation cards/invitation card  (1).webp",
-      "/clients/invitation cards/invitation card  (2).webp",
-      "/clients/invitation cards/invitation card  (3).webp",
-      "/clients/invitation cards/invitation card  (4).webp",
-      "/clients/invitation cards/invitation card  (5).webp",
-      "/clients/invitation cards/invitation card  (6).webp",
-      "/clients/invitation cards/invitation card  (7).webp",
-      "/clients/invitation cards/invitation card  (8).webp",
-      "/clients/invitation cards/invitation card  (9).webp",
-      "/clients/invitation cards/invitation card  (10).webp",
-      "/clients/invitation cards/invitation card  (11).webp",
-      "/clients/invitation cards/invitation card  (12).webp",
-      "/clients/invitation cards/invitation card  (13).webp",
-      "/clients/invitation cards/invitation card  (14).webp",
-      "/clients/invitation cards/invitation card  (15).webp",
-      "/clients/invitation cards/invitation card  (16).webp"
+      "/clients/invitation cards/1 (10).webp",
+      "/clients/invitation cards/1 (11).webp",
+      "/clients/invitation cards/1 (6).webp",
+      "/clients/invitation cards/1 (7).webp",
+      "/clients/invitation cards/1 (8).webp",
+      "/clients/invitation cards/1 (9)-optimized.webp",
+      "/clients/invitation cards/1-1.png.webp",
+      "/clients/invitation cards/1-2.png.webp",
+      "/clients/invitation cards/1-3.png.webp",
+      "/clients/invitation cards/1-4.png.webp",
+      "/clients/invitation cards/1-5.png.webp"
     ]
   },
   {
@@ -596,6 +591,39 @@ export const portfolioItems = [
       "/clients/Branding and horders/Branding and Horders (7).webp",
       "/clients/Branding and horders/Branding and Horders (8).webp",
       "/clients/Branding and horders/Branding and Horders (9).webp"
+    ]
+  },
+  {
+    id: 23,
+    title: "AMC: Public Awareness Campaign",
+    client: "AMC (Ahmedabad Municipal Corporation)",
+    type: "Public Awareness, Outdoor Branding",
+    image: "/clients/AMC/AMC 1 (1)-optimized.webp",
+    heroImage: "/clients/AMC/AMC 1 (1)-optimized.webp",
+    tags: "Public Awareness, Hoardings, Social Impact",
+    galleryLayout: "amc",
+    brandOverview: "A comprehensive public awareness campaign for the Ahmedabad Municipal Corporation, focusing on cleanliness and civic responsibility.",
+    challenge: "Designing impactful visuals that communicate essential civic messages to a diverse urban population.",
+    perceptionShift: "From 'government notices' to 'engaging civic responsibility narratives'.",
+    endorsement: "Drove significant public engagement and awareness across Ahmedabad.",
+    graphics: [
+      { title: "SWACHH BHARAT.", img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.webp", subtitle: "Cleanliness first.", badge: "Social Impact" },
+      { title: "PUBLIC REACH.", img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.webp", subtitle: "Cities that care.", badge: "Urban Awareness" },
+      { title: "VISUAL CLARITY.", img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.webp", subtitle: "Direct messaging.", badge: "Civic Duty" }
+    ],
+    billboardImage: "/clients/AMC/AMC 1 (2)-optimized.webp",
+    billboardTitle: "Civic Awareness Hoardings",
+    videoThumbnail: "/clients/AMC/AMC 1 (3)-optimized.webp",
+    videoText: "AMC | Swachh Survekshan Campaign...",
+    services: "Public Awareness, Outdoor Branding",
+    industry: "Government / Social Impact",
+    stats: [{ label: "Reach", value: "5M+" }, { label: "Civic Engagement", value: "High" }, { label: "Visual Impact", value: "Iconic" }],
+    gallery: [
+      "/clients/AMC/AMC 1 (1)-optimized.webp",
+      "/clients/AMC/AMC 1 (2)-optimized.webp",
+      "/clients/AMC/AMC 1 (3)-optimized.webp",
+      "/clients/AMC/AMC 1 (4)-optimized.webp",
+      "/clients/AMC/AMC 1 (5)-optimized.webp"
     ]
   }
 ];
