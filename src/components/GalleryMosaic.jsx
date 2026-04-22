@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 // Mocked theme context to ensure successful standalone compilation
@@ -329,33 +329,43 @@ const renderAMCGrid = (items) => {
 };
 
 const renderInvitationGrid = (items) => {
-  // Manual reorder based on user request
-  const order = [
-    '1 (10)', '1 (6)', '1 (7)', '1 (11)', '1-1.png', 
-    '1 (9)-optimized', '1-3.png', '1-4.png', '1-2.png', 
-    '1-5.png', '1 (8)'
+  // Manual reorder and layout definition based on user request
+  const layout = [
+    { name: '1 (8)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1 (11)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1-1.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1-2.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1 (9)-optimized', span: 'md:col-span-2', aspect: 'aspect-[3/2]' },
+    { name: '1 (10)', span: 'md:col-span-2', aspect: 'aspect-[3/2]' },
+    { name: '1-3.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1-4.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1-5.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1 (6)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    { name: '1 (7)', span: 'col-span-1', aspect: 'aspect-[3/4]' }, // Including 1 (7) as it's in the data
   ];
 
-  const reordered = [];
-  order.forEach(name => {
-    const found = items.find(it => it.src.includes(name));
-    if (found) reordered.push(found);
+  const orderedItems = [];
+  layout.forEach(config => {
+    const found = items.find(it => it.src.includes(config.name));
+    if (found) orderedItems.push({ ...found, ...config });
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
-      {reordered.map((item, idx) => {
-        // Row 1 (index 0) and Row 4 (index 5) are full width
-        const isFullWidth = idx === 0 || idx === 5;
-        return (
-          <div 
-            key={idx} 
-            className={`overflow-hidden ${isFullWidth ? 'md:col-span-2' : ''}`}
-          >
-            {renderTile(item.src, 'w-full h-auto', 'object-contain !h-auto')}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-screen-2xl mx-auto">
+      {orderedItems.map((item, idx) => (
+        <div 
+          key={idx} 
+          className={`overflow-hidden rounded-lg shadow-lg group cursor-pointer relative ${item.span} ${item.aspect}`}
+        >
+          {/* Hover overlay similar to user's HTML */}
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+            <svg className="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+            </svg>
           </div>
-        );
-      })}
+          {renderTile(item.src, 'w-full h-full', 'object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out')}
+        </div>
+      ))}
     </div>
   );
 };
@@ -415,6 +425,7 @@ const renderLotusSalon = (items) => {
 const GalleryMosaic = ({ images, layout = "auto" }) => {
   const [classified, setClassified] = useState([]);
   const [ready, setReady] = useState(false);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   useEffect(() => {
     if (!images?.length) return;
@@ -449,6 +460,76 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
   const textCol = 'text-white';
   const accent = 'text-[#ff6b2b]';
 
+  // Helper to open lightbox
+  const openLightbox = (src) => setSelectedImg(src);
+  const closeLightbox = () => setSelectedImg(null);
+
+  // Updated renderTile to include click handler
+  const renderTileWithClick = (src, extraClass = '', imgClass = 'object-contain') => (
+    <motion.div
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-60px' }}
+      className={`relative flex items-center justify-center overflow-hidden w-full bg-transparent cursor-pointer ${extraClass}`}
+      onClick={() => openLightbox(src)}
+    >
+      <img
+        src={src}
+        alt="Gallery Content"
+        loading="lazy"
+        className={`w-full h-full ${imgClass}`}
+      />
+    </motion.div>
+  );
+
+  const renderInvitationGrid = (items) => {
+    // Manual reorder and layout definition based on user request
+    const layoutConfig = [
+      { name: '1 (8)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1 (11)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1-1.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1-2.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1 (9)-optimized', span: 'md:col-span-2', aspect: 'aspect-[3/2]' },
+      { name: '1 (10)', span: 'md:col-span-2', aspect: 'aspect-[3/2]' },
+      { name: '1-3.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1-4.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1-5.png', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1 (6)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+      { name: '1 (7)', span: 'col-span-1', aspect: 'aspect-[3/4]' },
+    ];
+
+    const orderedItems = [];
+    layoutConfig.forEach(config => {
+      const found = items.find(it => it.src.includes(config.name));
+      if (found) orderedItems.push({ ...found, ...config });
+    });
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-screen-2xl mx-auto">
+        {orderedItems.map((item, idx) => (
+          <div 
+            key={idx} 
+            className={`overflow-hidden rounded-lg shadow-lg group cursor-pointer relative ${item.span} ${item.aspect}`}
+            onClick={() => openLightbox(item.src)}
+          >
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+              <svg className="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+              </svg>
+            </div>
+            <img
+              src={item.src}
+              alt="Gallery Content"
+              loading="lazy"
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   if (!images?.length) return null;
 
   return (
@@ -463,37 +544,18 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
           </motion.div>
         </div>
 
-        {/* Loading skeleton */}
         {!ready && (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-[16px] animate-pulse">
             {images.map((_, i) => (
-              // REMOVED rounded-lg here
               <div key={i} className="aspect-[4/3] bg-gray-200 dark:bg-gray-800" />
             ))}
           </div>
         )}
 
-        {/* Rendered Layouts */}
         {ready && (
           <div className="space-y-[16px]">
             {layout === "krushak" ? (
-              <>
-                <div className="hidden lg:block">
-                  <CubeGallery images={images} />
-                </div>
-                <div className="lg:hidden space-y-[16px]">
-                  {rows.map((row, rowIdx) => (
-                    <div key={rowIdx}>
-                      {row.type === 'landscape' && renderBento(row.items, rowIdx)}
-                      {row.type === 'square' && renderDuo(row.items)}
-                      {row.type === 'portrait' && renderMasonry(row.items)}
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : layout === "londoncoffee" ? (
               <div className="space-y-[16px]">
-                {/* Standard grid for London Coffee */}
                 {rows.map((row, rowIdx) => (
                   <div key={rowIdx}>
                     {row.type === 'landscape' && renderBento(row.items, rowIdx)}
@@ -502,49 +564,16 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
                   </div>
                 ))}
               </div>
-            ) : layout === "schoolg" ? ( 
-              <div className="space-y-[16px]">
-                {renderSchoolG(classified)}
-              </div>
-            ) : layout === "lotus-salon" ? (
-              renderLotusSalon(classified)
-            ) : layout === "maruti" ? (
-              renderMaruti(classified)
-            ) : layout === "amc" ? (
-              renderAMCGrid(classified)
             ) : layout === "invitation" ? (
               renderInvitationGrid(classified)
-            ) : layout === "2-col" ? (
-              <div className="grid grid-cols-2 gap-[16px] items-start">
-                {images.map((src, i) => (
-                  // REMOVED rounded-2xl here
-                  <div key={i} className="overflow-hidden">
-                    {renderTile(src, 'w-full')}
-                  </div>
-                ))}
-              </div>
-            ) : layout === "masonry-2-col" ? (
-              renderMasonry2Col(classified)
-            ) : layout === "mobile-2-col-auto" ? (
-              <>
-                <div className="md:hidden grid grid-cols-2 gap-[16px] items-start">
-                  {images.map((src, i) => (
-                    // REMOVED rounded-2xl here
-                    <div key={i} className="overflow-hidden">
-                      {renderTile(src, 'w-full', 'object-cover')}
-                    </div>
-                  ))}
-                </div>
-                <div className="hidden md:block space-y-[16px]">
-                  {rows.map((row, rowIdx) => (
-                    <div key={rowIdx}>
-                      {row.type === 'landscape' && renderBento(row.items, rowIdx, 'object-cover')}
-                      {row.type === 'square' && renderDuo(row.items, 'object-cover')}
-                      {row.type === 'portrait' && renderMasonry(row.items, 'object-cover')}
-                    </div>
-                  ))}
-                </div>
-              </>
+            ) : layout === "amc" ? (
+              renderAMCGrid(classified)
+            ) : layout === "maruti" ? (
+              renderMaruti(classified)
+            ) : layout === "lotus-salon" ? (
+              renderLotusSalon(classified)
+            ) : layout === "schoolg" ? (
+              renderSchoolG(classified)
             ) : (
               rows.map((row, rowIdx) => (
                 <div key={rowIdx}>
@@ -557,6 +586,43 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
           </div>
         )}
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm cursor-pointer"
+            onClick={closeLightbox}
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10 z-[10000]"
+              onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="max-w-full max-h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={selectedImg} 
+                alt="Fullscreen view" 
+                className="max-w-[95vw] max-h-[90vh] object-contain rounded-sm shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

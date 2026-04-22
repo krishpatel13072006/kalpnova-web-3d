@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensuring perfect image filling without scrollbar issues */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Prevent image drag ghosting */
+        img {
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="py-8 px-6 text-center bg-zinc-950 border-b border-zinc-900 shadow-xl z-10 relative">
+        <h1 class="text-3xl md:text-4xl font-light tracking-wide text-zinc-100 mb-2">Invitation Gallery</h1>
+        <p class="text-sm text-zinc-500 uppercase tracking-widest">Spaced Grid Layout</p>
+    </header>
+
+    <!-- Main Grid Container -->
+    <main class="w-full flex-grow p-4 md:p-6 lg:p-8">
+        <!-- 
+            Grid Logic:
+            - 4 Columns on Desktop, 2 on Tablet, 1 on Mobile.
+            - Added gaps (gap-4 md:gap-6).
+            - Landscape: spans 2 cols, aspect ratio 3/2
+            - Portrait: spans 1 col, aspect ratio 3/4
+        -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-screen-2xl mx-auto">
+            
+            <!-- Row 1: Portrait Images (4 columns) -->
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1 (8).jpg')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1 (8).jpg" alt="Portrait Card 1" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1 (11).jpg')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1 (11).jpg" alt="Portrait Card 2" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1-1.png.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1-1.png.webp" alt="Portrait Card 3" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1-2.png.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1-2.png.webp" alt="Portrait Card 4" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <!-- Row 2: Landscape Images (Placed after Row 1) -->
+            <div class="md:col-span-2 aspect-[3/2] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1 (9)-optimized.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1 (9)-optimized.webp" alt="Landscape Card 1" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="md:col-span-2 aspect-[3/2] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1 (10).jpg')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1 (10).jpg" alt="Landscape Card 2" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <!-- Row 3: Remaining Portrait Images -->
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1-3.png.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1-3.png.webp" alt="Portrait Card 5" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1-4.png.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1-4.png.webp" alt="Portrait Card 6" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1-5.png.webp')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1-5.png.webp" alt="Portrait Card 7" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+            <div class="col-span-1 aspect-[3/4] overflow-hidden rounded-lg shadow-lg group cursor-pointer relative" onclick="openLightbox('1 (6).jpg')">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                </div>
+                <img src="1 (6).jpg" alt="Portrait Card 8" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Lightbox Modal Overlay -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm" onclick="closeLightbox()">
+        <!-- Close Button -->
+        <button class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10" onclick="closeLightbox()">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <!-- Image Container -->
+        <div class="max-w-[90vw] max-h-[90vh] relative">
+            <img id="lightbox-img" src="" alt="Fullscreen view" class="max-w-full max-h-[90vh] object-contain rounded-sm shadow-2xl scale-95 transition-transform duration-300">
+        </div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        function openLightbox(imageSrc) {
+            // Set image source
+            lightboxImg.src = imageSrc;
+            
+            // Show lightbox
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            
+            // Small delay for transition to kick in
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10

@@ -1,6 +1,7 @@
 import React, { useState, useMemo, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { portfolioItems } from '../data/portfolio';
 
 // ─── Category map: match each project by id to a category ───────────────────
@@ -211,21 +212,30 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               viewport={{ once: true, amount: 0.1 }}
               className="space-y-8"
             >
-              <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-tighter">
+              <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-normal">
                 Got big plans for your brand or a <br className="hidden md:block" /> new project?{' '}
                 <span className="text-[#ff6b2b]">Let's chat!</span>
               </h2>
               <div className="space-y-12 pt-6">
-                <div>
-                  <Link to="mailto:business@kalpnova.com" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight">
-                    business@kalpnova.com
-                  </Link>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="font-heading text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">Career</h3>
-                  <Link to="mailto:hr@kalpnova.com" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight">
-                    hr@kalpnova.com
-                  </Link>
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">Business Inquiries</p>
+                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20discussing%20a%20project%20with%20Kalpnova" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                      Let's Talk Business <ArrowUpRight size={20} />
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">Career</p>
+                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20joining%20the%20Kalpnova%20team" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                      Join Our Team <ArrowUpRight size={20} />
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">General</p>
+                    <Link to="/contact" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                      Contact Us <ArrowUpRight size={20} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -149,6 +149,7 @@ export default function Home() {
       <Services />
 
       <Testimonials />
+      <div className="py-12 md:py-20" />
       <AboutCards />
       {/* CONTACT */}
       <Contact />

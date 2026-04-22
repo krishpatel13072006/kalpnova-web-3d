@@ -284,28 +284,45 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             className="space-y-6 md:space-y-8"
           >
-            <h2 className={`font-heading text-2xl md:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>
+            <h2 className={`font-heading text-2xl md:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-normal transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>
               Got big plans for your brand or a <br className="hidden md:block" /> new project? <span className={`transition-colors duration-500 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Let's chat!</span>
             </h2>
 
             <div className="space-y-8 md:space-y-12 pt-4 md:pt-6">
-              <div>
-                <Link
-                  to="mailto:business@kalpnova.com"
-                  className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
-                >
-                  business@kalpnova.com
-                </Link>
-              </div>
+              <div className="flex flex-col gap-6">
+                <div>
+                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Business Inquiries</p>
+                  <a
+                    href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20discussing%20a%20project%20with%20Kalpnova"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight flex items-center gap-2 ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
+                  >
+                    Let's Talk Business <ArrowUpRight size={20} />
+                  </a>
+                </div>
 
-              <div className="space-y-3 md:space-y-4">
-                <h3 className={`font-heading text-2x md:text-3xl font-black uppercase tracking-tighter transition-colors duration-500 ${isLight ? 'text-black' : 'text-white'}`}>Career</h3>
-                <Link
-                  to="mailto:hr@kalpnova.com"
-                  className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
-                >
-                  hr@kalpnova.com
-                </Link>
+                <div>
+                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Career</p>
+                  <a
+                    href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20joining%20the%20Kalpnova%20team"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight flex items-center gap-2 ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
+                  >
+                    Join Our Team <ArrowUpRight size={20} />
+                  </a>
+                </div>
+
+                <div>
+                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>General</p>
+                  <Link
+                    to="/contact"
+                    className={`text-lg md:text-2xl font-bold transition-all duration-500 tracking-tight flex items-center gap-2 ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}
+                  >
+                    Contact Us <ArrowUpRight size={20} />
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>
