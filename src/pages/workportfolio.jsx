@@ -133,14 +133,14 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
   }, [activeCategory]);
 
   return (
-    <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4]  relative overflow-x-hidden pt-0 selection:bg-[#ff6b2b] selection:text-white">
+    <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4]  relative overflow-x-hidden pt-24 md:pt-32 selection:bg-[#ff6b2b] selection:text-white">
       <div className="relative z-10 pb-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
 
           {/* ── PAGE HEADER ─────────────────────────────────────────── */}
           <motion.div
             variants={fadeInUp} initial="hidden" animate="visible"
-            className="pt-0 pb-8"
+            className="pt-0 pb-8 flex flex-col"
           >
             <p className="text-[10px] font-black uppercase text-[#ff6b2b] mb-3">
               Work Portfolio
@@ -178,7 +178,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35 }}
-              className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end gap-4 md:gap-16 border-b border-white/5 pb-10"
+              className="mb-12 md:mb-16 flex flex-col gap-4 border-b border-white/5 pb-10"
             >
               <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none text-white shrink-0 italic">
                 {activeCategory}

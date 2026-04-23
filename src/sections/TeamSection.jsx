@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useAnimationFrame } from 'framer-motion';
-import BlueButterfly from '../components/BlueButterfly';
 import TimelineButterfly from '../components/TimelineButterfly';
 
 // ─── Social Icon SVGs ────────────────────────────────────────────────────────
@@ -54,8 +53,8 @@ const teamMembers = [
     role: 'Co-founder, CMO',
     name: 'Vishal Patel',
     image: '/clients/Team/Graphics designer.webp',
-    quote: '"Efficiency is doing things right; effectiveness is doing the right things. I strive to bring both to our daily operations."',
-    bio: 'Managing our daily operations is about empowering our creative minds. By streamlining workflows and optimizing resources, I ensure our team can focus entirely on creating exceptional brand experiences.',
+    quote: '"Good design solves problems. Great design builds businesses. I bridge creativity and strategy to deliver both-every single time."',
+    bio: "At Kalpnova, I don't just manage projects—I architect brand growth. By streamlining creative processes and aligning design with business goals, I ensure our work drives real results, not just aesthetic appeal.",
     stats: [{ label: 'Teams Managed', value: '8+' }, { label: 'Deadlines Met', value: '100%' }, { label: 'Client Retentions', value: '95%' }],
     accentFrom: '#f97316',
     accentTo: '#dc2626',
@@ -459,48 +458,6 @@ function SectionHeader() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
 
-  // Blue Butterfly Figure-8 (Infinity) Animation Logic
-  const butterflyX = useMotionValue(0);
-  const butterflyY = useMotionValue(0);
-  const butterflyRotate = useMotionValue(90); // default pointing right
-  const timeRef = useRef(0);
-
-  useAnimationFrame((time, delta) => {
-    // Normalize time to handle different display rates gracefully
-    const dt = delta / 16.6;
-    timeRef.current += 0.015 * dt; // Speed of the loop
-    const t = timeRef.current;
-
-    // Infinity figure parametric equations
-    const A = 350; // Horizontal Width radius
-    const B = 100; // Vertical Height radius
-
-    const x = A * Math.sin(t);
-    const y = B * Math.sin(t) * Math.cos(t);
-    butterflyX.set(x);
-    butterflyY.set(y);
-
-    // Calculate exact tangent angle to the path for correct facing
-    // Derivatives of the path
-    const dx = A * Math.cos(t);
-    // Derivative of sin(t)*cos(t) is cos^2(t) - sin^2(t) = cos(2t)
-    const dy = B * Math.cos(2 * t);
-
-    // atan2 gives angle from standard Right horizontal. 
-    // Since SVG 0 degree is UP, we add 90 to align its head with the tangent.
-    const angleRad = Math.atan2(dy, dx);
-    const angleDeg = (angleRad * 180) / Math.PI;
-    
-    // Smooth angle interpolation to prevent snapping
-    const currentRot = butterflyRotate.get();
-    let diff = (angleDeg + 90) - currentRot;
-    
-    // Normalize diff to -180 to +180 to avoid full circle spins
-    diff = ((diff + 180) % 360 + 360) % 360 - 180;
-    
-    butterflyRotate.set(currentRot + diff * 0.15 * dt);
-  });
-
   return (
     <motion.div
       ref={ref}
@@ -509,24 +466,6 @@ function SectionHeader() {
       transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative' }}
     >
-      {/* Animated Infinity Blue Butterfly */}
-      <motion.div
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          x: butterflyX,
-          y: butterflyY,
-          rotate: butterflyRotate,
-          marginLeft: -45, // Half of SVG width
-          marginTop: -32.5, // Half of SVG height
-          zIndex: -1, // Fly slightly behind main text but over the background
-          opacity: 0.7,
-          pointerEvents: "none"
-        }}
-      >
-        <BlueButterfly scale={1.2} />
-      </motion.div>
       {/* Overline */}
       <motion.div
         initial={{ scaleX: 0 }}

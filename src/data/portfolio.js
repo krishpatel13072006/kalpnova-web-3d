@@ -2,16 +2,55 @@ export const portfolioItems = [
 
   {
     id: 8,
-    title: "BoostIQ: Digital Growth & Analytics",
-    client: "BoostIQ",
-    type: "AI Strategy, Performance Marketing, UI/UX Design",
+    title: "Product Catalog Design for Sports Nutrition Brand",
+    client: "BoostIQ | Sports Nutrition Brand",
+    type: "Product Catalog Design, Print & Digital Media",
     image: "/projects/BoostIQ/1.webp",
     heroImage: "/projects/BoostIQ/1.webp",
-    tags: "AI Strategy, Performance Marketing, UI/UX Design",
-    brandOverview: "BoostIQ is a data-driven digital growth agency specializing in AI-integrated business scaling.",
-    challenge: "Navigating the shift from traditional leafleting to hyper-targeted AI analytics for retail businesses.",
-    perceptionShift: "Move from 'traditional digital marketing' to 'predictive analytics and growth automation'.",
-    endorsement: "Implemented custom mobile apps and an intelligent loyalty platform, increasing top-line revenue through targeted insight.",
+    tags: "Product Catalog Design, Print & Digital Media",
+    targetAudience: "Gym Enthusiasts & Workout Athletes",
+    brandOverview: "BoostIQ is a performance-driven nutraceuticals brand offering science-backed supplements for gym-goers and fitness enthusiasts. They needed a high-impact product catalog that speaks the language of gains, recovery, and results.",
+    challenge: {
+      text: "Design a comprehensive product catalog for 50+ supplement SKUs that:",
+      list: [
+        "Cuts through the noise in a crowded sports nutrition market",
+        "Communicates ingredient transparency to trust-conscious fitness consumers",
+        "Makes complex nutritional science instantly understandable for gym enthusiasts",
+        "Works across both digital platforms and retail/distributor print formats"
+      ]
+    },
+    perceptionShiftTitle: "Strategic Approach",
+    perceptionShift: [
+      {
+        title: "Performance-First Layout",
+        desc: "Created bold, high-contrast designs that grab attention in competitive gym supplement spaces—optimized for quick scanning during pre/post-workout shopping decisions.",
+        icon: "⚡"
+      },
+      {
+        title: "Education Through Design",
+        desc: "Transformed dense supplement facts into visual ingredient breakdowns, benefit callouts, and dosage clarity—building trust through transparency, not marketing fluff.",
+        icon: "🧠"
+      },
+      {
+        title: "Category-Coded System",
+        desc: "Implemented color-coded product families (Mass Gainers, BCAAs, Pre-Workout, Recovery, Immunity) for instant product identification across 50+ SKUs.",
+        icon: "🎨"
+      },
+      {
+        title: "Modular Scalability",
+        desc: "Designed a flexible template system that maintains brand consistency while allowing quick deployment for new product launches.",
+        icon: "📈"
+      }
+    ],
+    deliverables: [
+      "Complete product catalog design system (100+ pages)",
+      "50+ individual supplement product layouts",
+      "Ingredient transparency & benefit breakdown templates",
+      "Brand story and About Us section designs",
+      "Print-ready catalog files + digital-optimized versions",
+      "Social media product card templates for Meta Ads"
+    ],
+    endorsement: "A catalog system that doesn't just list products—it educates, builds trust, and drives purchase decisions for fitness-focused consumers who demand both performance and transparency.",
     graphics: [
       {
         title: "DATA-DRIVEN DECISIONS.",
@@ -35,8 +74,8 @@ export const portfolioItems = [
     billboardImage: "/projects/BoostIQ/6.webp",
     billboardTitle: "Analytics Dashboard & Growth Apps",
     videoThumbnail: "/projects/BoostIQ/8.webp",
-    videoText: "BoostIQ | Enabling AI-Driven Retail Revenue Analytics...",
-    services: "AI Strategy, Performance Marketing, UI/UX Design",
+    videoText: "BoostIQ | Performance-Driven Catalog Design...",
+    services: "Catalog Design, Layout Strategy, Brand Consistency",
     industry: "SaaS / Digital Services",
     galleryLayout: "2-col",
     stats: [
@@ -109,17 +148,63 @@ export const portfolioItems = [
   },
   {
     id: 10,
-    title: "Westrock: Sustainable Packaging Leadership",
-    client: "Westrock",
-    type: "Industrial Branding, Packaging Design, B2B Strategy",
+    title: "Social Media Creative Design for Multi-Cuisine Restaurant",
+    client: "Westrock Food",
+    type: "Social Media Design & Management",
     galleryLayout: "masonry-2-col",
     image: "/clients/product banner/west rock banner.webp",
     heroImage: "/clients/product banner/west rock banner.webp",
-    tags: "Industrial Branding, Packaging Design, B2B Strategy",
-    brandOverview: "Westrock is a global leader in sustainable fiber-based packaging solutions, operating on a massive industrial scale while maintaining environmental commitments.",
-    challenge: "Visualizing complex industrial machinery and large-scale manufacturing processes as clean, modern, and eco-friendly narratives.",
-    perceptionShift: "Transition the visual identity from 'heavy industry' to 'innovative eco-conscious engineering'.",
-    endorsement: "The suite of assets provided a highly professional, pristine view into the heart of sustainable paper manufacturing and corporate branding.",
+    tags: "Social Media Design, Meta Ads, Instagram Management",
+    brandOverview: "Westrock Food is a multi-cuisine restaurant offering diverse flavors from Indian classics to global favorites. They needed a consistent social media presence that drives online orders while building brand recall in a competitive food delivery market.",
+    challenge: {
+      text: "Create a high-performing Instagram content system that:",
+      list: [
+        "Stands out in oversaturated food content feeds",
+        "Showcases menu diversity without losing brand identity",
+        "Drives direct orders through scroll-stopping visuals",
+        "Appeals to multiple audience segments (families, couples, delivery-first customers)",
+        "Maintains design consistency across 50+ monthly posts"
+      ]
+    },
+    perceptionShiftTitle: "Strategic Approach",
+    perceptionShift: [
+      {
+        title: "Appetite-Driven Design Psychology",
+        desc: "Every creative is engineered using food color psychology—warm reds, appetite-triggering oranges, fresh greens—to stimulate cravings and impulse orders within 3 seconds of scroll time.",
+        icon: "🍎"
+      },
+      {
+        title: "Multi-Cuisine, Single Brand Voice",
+        desc: "Designed a flexible template system that adapts across Indian, Chinese, Continental, and fusion dishes while maintaining Westrock's premium yet approachable brand personality.",
+        icon: "🍛"
+      },
+      {
+        title: "Conversion-Focused Layouts",
+        desc: "Hero food photography + minimal text + direct CTAs ('Order Now,' 'Limited Time') = creatives optimized for both organic engagement and Meta Ads performance.",
+        icon: "🎯"
+      },
+      {
+        title: "Menu Storytelling",
+        desc: "Moved beyond generic food posts—created visual narratives around Chef Specials, Combo Deals, Festival Menus, and Customer Favorites to build emotional connections.",
+        icon: "📖"
+      }
+    ],
+    creativeExecution: [
+      "Special Offer Posts - Discount-driven designs with urgency elements",
+      "Menu Highlight Series - Individual dish spotlights showcasing variety",
+      "Combo Meal Promotions - Value-focused layouts for family diners",
+      "Chef's Special Features - Premium positioning for signature dishes",
+      "Festival/Seasonal Campaigns - Cultural tie-ins and Diwalis specials",
+      "Food Photography Direction - Styling guidelines for consistency"
+    ],
+    deliverables: [
+      "50+ Instagram post designs (feed-optimized 1:1 ratio)",
+      "Multi-category templates (Indian, Chinese, Fusion, Desserts)",
+      "Seasonal campaign creatives (festivals, weekend specials)",
+      "Meta Ads-ready designs with conversion CTAs",
+      "Brand design guidelines for content consistency"
+    ],
+    endorsement: "A social media design system that transformed Westrock Food's Instagram from random food posts into a strategic order-generation engine—where every creative serves a dual purpose: build brand love and drive immediate sales.",
     graphics: [
       {
         title: "SUSTAINABLE SCALE.",
@@ -141,11 +226,11 @@ export const portfolioItems = [
       }
     ],
     billboardImage: "/projects/Westrock%20logo/6.webp",
-    billboardTitle: "Corporate Brand Evolution Strategy",
+    billboardTitle: "Westrock Food Social Strategy",
     videoThumbnail: "/projects/Westrock%20logo/2.webp",
-    videoText: "Westrock | Visualizing Industrial Innovation...",
-    services: "Industrial Branding, Packaging Design, B2B Strategy",
-    industry: "Industrial Manufacturing / B2B",
+    videoText: "Westrock Food | Strategic Social Growth...",
+    services: "Social Media Design & Management",
+    industry: "Food & Beverage",
     stats: [
       { label: "Brand Consistency", value: "98%" },
       { label: "Market Resonance", value: "High" },
@@ -169,17 +254,59 @@ export const portfolioItems = [
 
   {
     id: 12,
-    title: "Krushak: Empowering Precision Agriculture",
-    client: "Krushak",
-    type: "Brand Identity, UI/UX, Web Dev",
+    title: "Complete Brand Identity & Farmer-Focused Mobile App Design for AgriTech Startup",
+    client: "Krusak",
+    type: "Brand Identity, Mobile App UI/UX, Marketing Strategy",
     image: "/clients/product banner/krushak banner.webp",
     heroImage: "/clients/product banner/krushak banner.webp",
-    tags: "Brand Identity, UI/UX, Web Dev",
+    tags: "Brand Identity, UI/UX, AgriTech, Mobile App Design",
     galleryLayout: "krushak",
-    brandOverview: "Krushak is empowering farmers with smart technology and sustainable agricultural solutions.",
-    challenge: "Modernizing the traditional perception of farming equipment and services.",
-    perceptionShift: "From 'traditional agriculture' to 'data-driven modern farming'.",
-    endorsement: "Implemented user-friendly digital tools for rural outreach.",
+    brandOverview: "Krusak is a precision agriculture technology platform connecting farmers with smart farming solutions—from soil health diagnostics to expert agronomic consultation. Their mission: make scientific farming accessible to every farmer, regardless of farm size or tech literacy.",
+    challenge: {
+      text: "Build a complete brand and digital product from zero for an AgriTech startup entering a market where:",
+      list: [
+        "Farmers are skeptical of technology and corporate agendas",
+        "Low digital literacy makes most apps unusable for rural users",
+        "Trust is the currency—earned through simplicity, not sophistication",
+        "The brand must feel like a trusted partner, not just a tech platform"
+      ]
+    },
+    perceptionShiftTitle: "Strategic Approach",
+    perceptionShift: [
+      {
+        title: "Brand Rooted in Farmland",
+        desc: "Designed a visual identity using earthy greens and agricultural symbolism that mirrors the fields farmers work in daily—building familiarity and trust.",
+        icon: "🚜"
+      },
+      {
+        title: "Farmer-First App Philosophy",
+        desc: "Engineered a UI for low tech literacy: large touch targets, minimal text, icon-heavy navigation, and vernacular language support (Gujarati/Hindi).",
+        icon: "📱"
+      },
+      {
+        title: "Complexity Hidden, Empowerment Visible",
+        desc: "Translated dense agronomic science into simple, actionable visual interfaces that educate farmers without overwhelming them.",
+        icon: "💡"
+      },
+      {
+        title: "Real Farmers, Real Stories",
+        desc: "Built marketing visuals featuring authentic farmer imagery, positioning Krusak as a brand built with farmers, not just for them.",
+        icon: "🤝"
+      }
+    ],
+    deliverables: [
+      "Complete Logo Design System & Brand Guidelines",
+      "Multi-language Mobile App Design (60+ Screens)",
+      "User Research & Farmer Persona Development",
+      "Information Architecture & Simplified Navigation System",
+      "Soil Testing & Expert Consultation Booking Flows",
+      "AI-Powered Pest & Disease Diagnosis UI",
+      "Vernacular Language Support (Gujarati/Hindi)",
+      "Field-Ready Marketing Brochures & Collaterals",
+      "Social Media Educational Content System",
+      "Interactive Component Library & Prototypes"
+    ],
+    endorsement: "A complete brand and digital ecosystem that positions Krusak not as a disruptor, but as a partner in the farming journey. The identity bridges centuries-old farming tradition with 21st-century agri-science, making precision agriculture accessible to the farmer who's never downloaded an app before.",
     graphics: [
       {
         title: "SMART FARMING.",
@@ -201,11 +328,11 @@ export const portfolioItems = [
       }
     ],
     billboardImage: "/clients/Krushak/1 (2).webp",
-    billboardTitle: "Krushak Brand Identity",
+    billboardTitle: "Krusak AgriTech Ecosystem",
     videoThumbnail: "/clients/Krushak/1 (2).webp",
-    videoText: "Krushak | The Future of AgriTech...",
-    services: "Brand Identity, UI/UX, Web Dev",
-    industry: "Agriculture",
+    videoText: "Krusak | Empowering Every Farmer...",
+    services: "Brand Identity, UI/UX, Marketing Collaterals",
+    industry: "Agriculture Technology (AgriTech)",
     stats: [
       { label: "App Adoption", value: "+55%" },
       { label: "Community Reach", value: "10k+" },

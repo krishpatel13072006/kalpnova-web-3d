@@ -4,10 +4,11 @@ import gsap from "gsap";
 
 export const lenis = new Lenis({
   duration: 1.2,
-  lerp: 0.1,
+  lerp: 0.08,
   smoothWheel: true,
   wheelMultiplier: 1,
   touchMultiplier: 1.5,
+  infinite: false,
 });
 
 export function initLenis() {

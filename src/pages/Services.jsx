@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function Services() {
   return (
     <main className="pt-12 bg-[#0B0B0C]">
-      <SEO 
+      <SEO
         title="Design & Branding Services in Ahmedabad | Kalpnova"
         description="From branding and social media design to Meta Ads creatives, UI/UX, print media and video editing — explore all design services by Kalpnova, Ahmedabad."
         url="/services"
@@ -17,7 +17,7 @@ export default function Services() {
       <section className="relative pt-12 pb-24 md:pt-16 md:pb-32 px-6 overflow-hidden">
         {/* Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
-        
+
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -31,7 +31,7 @@ export default function Services() {
             </span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -41,7 +41,7 @@ export default function Services() {
             <span className="text-orange-500 italic">Services in Ahmedabad</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}

@@ -7,8 +7,8 @@ const AboutCards = () => {
   const cards = [
     {
       id: "01",
-      title: "Play with Purpose",
-      description: "We embrace creativity and experimentation, ensuring every idea is rooted in strategy and impact.",
+      title: "Strategy-First Design",
+      description: "We merge design thinking with business goals—every brand identity, social post, and ad creative is engineered for impact, not just impressions.",
       // Using SVGs for the icons 
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" className="text-[#ff6b2b]">
@@ -18,8 +18,8 @@ const AboutCards = () => {
     },
     {
       id: "02",
-      title: "People First",
-      description: "Long-term relationships matter to us, we collaborate as an extension of your team.",
+      title: "Your Growth Partner",
+      description: "Long-term growth matters to us. We collaborate as your marketing partner, not a one-off vendor—understanding your brand to scale it consistently.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b2b]">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -33,8 +33,8 @@ const AboutCards = () => {
     },
     {
       id: "03",
-      title: "Design with Storytelling",
-      description: "More than problem-solving, our designs create human connections through compelling narratives.",
+      title: "Designs That Convert",
+      description: "More than problem-solving, our work combines psychology, platform trends, and storytelling to create designs that build trust and convert audiences.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b2b]">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -136,6 +136,9 @@ const AboutCards = () => {
           </Link>
           <Link to="/portfolio" className="px-8 py-3.5 bg-transparent border border-[#ff6b2b] text-[#ff6b2b] rounded-full font-semibold text-sm hover:bg-[#ff6b2b]/10 transition-all">
             View Projects
+          </Link>
+          <Link to="/portfolio" className="px-8 py-3.5 bg-transparent border border-[#ff6b2b] text-[#ff6b2b] rounded-full font-semibold text-sm hover:bg-[#ff6b2b]/10 transition-all">
+            View Websites
           </Link>
         </motion.div>
 

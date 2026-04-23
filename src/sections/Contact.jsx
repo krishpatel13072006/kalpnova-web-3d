@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "../lib/gsap";
 
 export default function Contact() {
@@ -63,8 +64,8 @@ export default function Contact() {
         </p>
 
         <div className="flex justify-center">
-          <a
-            href="mailto:info@kalpnova.com"
+          <Link
+            to="/contact"
             className="inline-flex items-center gap-2 px-10 py-4
                        rounded-full font-semibold
                        bg-orange-500 text-black
@@ -74,7 +75,7 @@ export default function Contact() {
                        hover:shadow-[0_0_90px_rgba(226,74,43,1)]"
           >
             Book a Free Discovery Call
-          </a>
+          </Link>
         </div>
       </div>
     </section>

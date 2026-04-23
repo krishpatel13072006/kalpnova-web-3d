@@ -36,13 +36,13 @@ export default function Clients() {
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER */}
         <div className="mb-14 max-w-xl">
-          <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
-                           rounded-full border border-orange-500/30
-                           text-orange-500 font-medium">
+          <span className="inline-block mb-4 px-4 py-1 text-[10px] tracking-[0.2em] 
+                           rounded-full border border-orange-500/30 bg-orange-500/10
+                           text-orange-500 font-bold uppercase backdrop-blur-sm">
             CLIENTS
           </span>
 
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#FFE1C5] tracking-tight leading-tight">
+          <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#FFE1C5]">
             Trusted by teams
             <span className="text-orange-500"> worldwide</span>
           </h2>
