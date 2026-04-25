@@ -71,7 +71,7 @@ export default function Services() {
 
                 {/* Sub-services List */}
                 <div className="min-h-[160px] text-center lg:text-left">
-                  <h3 className="font-heading text-lg font-medium text-white mb-4">
+                  <h3 className="font-heading text-lg font-medium text-white mb-4 uppercase">
                     {services[activeIndex].title}
                   </h3>
                   <ul className="space-y-3 inline-block lg:block text-left">
@@ -101,7 +101,7 @@ export default function Services() {
                   {/* Title & Roman Numeral */}
                   <div className="flex items-start z-10 w-full lg:w-1/2">
                     <h2 
-                      className={`transition-all duration-500 ease-in-out whitespace-nowrap ${
+                      className={`transition-all duration-500 ease-in-out whitespace-nowrap uppercase ${
                         isActive 
                           ? 'text-white font-heading italic text-4xl md:text-6xl lg:text-[80px] tracking-tight transform translate-x-2' 
                           : 'text-zinc-600 font-heading font-medium text-3xl md:text-5xl lg:text-7xl tracking-tighter group-hover:text-zinc-400'

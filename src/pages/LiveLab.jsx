@@ -76,7 +76,7 @@ export default function LiveLab() {
           <motion.p 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4"
+            className="text-[10px] font-black uppercase text-orange-500 mb-4"
           >
             Digital Case Study Lab
           </motion.p>
@@ -84,7 +84,7 @@ export default function LiveLab() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-8 text-white"
+            className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none mb-8 text-white"
           >
             Live <span className="text-orange-500">Deployments</span>
           </motion.h1>
@@ -111,7 +111,7 @@ export default function LiveLab() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
+                className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase transition-all duration-300 border ${
                   activeCategory === cat 
                   ? 'bg-orange-500 border-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.3)]' 
                   : 'bg-white/5 border-white/10 text-zinc-500 hover:border-white/20 hover:text-white'
@@ -129,7 +129,7 @@ export default function LiveLab() {
               placeholder="SEARCH PROJECT..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-10 py-3 text-[10px] font-mono tracking-widest text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/50 transition-all font-bold"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-10 py-3 text-[10px] font-mono text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/50 transition-all font-bold"
             />
             <svg 
               className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within:text-orange-500 transition-colors" 
@@ -156,14 +156,14 @@ export default function LiveLab() {
                   {/* PROJECT INFO - SEO TEXT BLOCK (TOP) */}
                   <div className="w-full max-w-4xl">
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-[10px] font-black py-1 px-3 bg-orange-500/10 text-orange-500 rounded-full uppercase tracking-widest border border-orange-500/20">
+                      <span className="text-[10px] font-black py-1 px-3 bg-orange-500/10 text-orange-500 rounded-full uppercase border border-orange-500/20">
                         {site.type} System
                       </span>
                     </div>
-                    <h2 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter text-white mb-2 leading-none">
+                    <h2 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase text-white mb-2 leading-none">
                       {site.name}
                     </h2>
-                    <h3 className="text-zinc-500 text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6">
+                    <h3 className="text-zinc-500 text-xs md:text-sm font-bold uppercase mb-6">
                       {site.industry}
                     </h3>
                     <p className="text-zinc-400 text-base md:text-xl leading-relaxed mb-8 max-w-3xl">
@@ -173,7 +173,7 @@ export default function LiveLab() {
                     {/* RESULT PILL */}
                     <div className="inline-flex p-4 rounded-2xl bg-white/5 border border-white/10 items-center gap-3 group hover:border-orange-500/30 transition-colors">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.4)]" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 transition-colors">
+                      <span className="text-[10px] font-black uppercase text-zinc-500 transition-colors">
                         Result: <span className="text-white">{site.result}</span>
                       </span>
                     </div>
@@ -195,12 +195,12 @@ export default function LiveLab() {
                 animate={{ opacity: 1 }}
                 className="py-40 text-center"
               >
-                <div className="text-5xl font-heading font-black text-white/10 uppercase tracking-tighter mb-4 italic">
+                <div className="text-5xl font-heading font-black text-white/10 uppercase mb-4 italic">
                   NO MATCHING VIEWPORTS FOUND
                 </div>
                 <button 
                   onClick={() => { setActiveCategory('All'); setSearchQuery(''); }}
-                  className="text-orange-500 text-[10px] font-black uppercase tracking-widest hover:underline"
+                  className="text-orange-500 text-[10px] font-black uppercase hover:underline"
                 >
                   Reset Terminal Filters
                 </button>

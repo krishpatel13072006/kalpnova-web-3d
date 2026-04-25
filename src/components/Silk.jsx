@@ -73,9 +73,9 @@ void main() {
 const SilkPlane = function SilkPlane({ uniforms }) {
   const materialRef = useRef(null);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     // Safety check prevents R3F unmount crashes
-    if(materialRef.current) {
+    if(materialRef.current && state.size.width > 0) {
         materialRef.current.uniforms.uTime.value += 0.1 * delta;
     }
   });
@@ -112,10 +112,10 @@ const Silk = ({ speed = 5, scale = 1, color = '#FF6B00', noiseIntensity = 1.5, r
     <div className={`pointer-events-none ${className}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}>
       {/* Using preserveDrawingBuffer prevents Canvas blackouts on render cycles */}
       <Canvas 
-        dpr={[1, 2]} 
+        dpr={Math.min(window.devicePixelRatio, 1.5)} 
         frameloop="always" 
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-        gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
+        gl={{ alpha: true, antialias: false, preserveDrawingBuffer: false, powerPreference: "high-performance" }}
       >
         <SilkPlane uniforms={uniforms} />
       </Canvas>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Exhibition Stall - Lion Cut</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0b0b0b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #D82424;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        #ui-overlay {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .instruction {
+            font-size: 12px;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .icon {
+            font-weight: bold;
+            background: #D82424;
+            color: white;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+
+    <div id="loading">Building 3D Stall...</div>
+    <div id="canvas-container"></div>
+
+    <div id="ui-overlay">
+        <div class="instruction"><span class="icon">🖱️</span> Drag to Rotate</div>
+        <div class="instruction"><span class="icon">🔍</span> Scroll to Zoom</div>
+        <div class="instruction"><span class="icon">🖐️</span> Right-click to Pan</div>
+    </div>
+
+    <script>
+        // ── Color Palette ──────────────────────────────────────────────
+        const RED    = '#D82424';
+        const WHITE  = '#ffffff';
+        const FLOOR  = '#1a1a1a';
+
+        // ── Stall Dimensions ───────────────────────────────────────────
+        const stallWidth  = 8;
+        const stallDepth  = 5;
+        const stallHeight = 3.5;
+        const wallThick   = 0.1;
+
+        // ── Scene ──────────────────────────────────────────────────────
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x111114);
+        scene.fog = new THREE.Fog(0x111114, 12, 35);
+
+        // ── Camera ─────────────────────────────────────────────────────
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 2.8, 10);
+
+        // ── Renderer ───────────────────────────────────────────────────
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // ── Controls ───────────────────────────────────────────────────
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 - 0.05;
+        controls.minDistance = 2;
+        controls.maxDistance = 22;
+        controls.target.set(0, 1.5, 0);
+
+        // ── Lighting ───────────────────────────────────────────────────
+        scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        dirLight.position.set(5, 10, 8);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.set(2048, 2048);
+        dirLight.shadow.camera.left  = -7;
+        dirLight.shadow.camera.right  = 7;
+        dirLight.shadow.camera.top    = 7;
+        dirLight.shadow.camera.bottom = -7;
+        scene.add(dirLight);
+
+        // ── Base Materials ─────────────────────────────────────────────
+        const matWhite  = new THREE.MeshStandardMaterial({ color: WHITE,  roughness: 0.8 });
+        const matRed    = new THREE.MeshStandardMaterial({ color: RED,    roughness: 0.7 });
+        const matFloor  = new THREE.MeshStandardMaterial({ color: FLOOR,  roughness: 0.9 });
+        const matMetal  = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8, roughness: 0.2 });
+        const matDkMet  = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.9, roughness: 0.3 });
+
+        // ── Texture Loader & Wall Image Materials ──────────────────────
+        const TL = new THREE.TextureLoader();
+
+        function loadMat(path, roughness = 0.65) {
+            const tex = TL.load(path, () => { tex.needsUpdate = true; renderer.render(scene, camera); });
+            tex.encoding = THREE.sRGBEncoding;
+            tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            return new THREE.MeshStandardMaterial({ map: tex, roughness });
+        }
+
+        // Map each print file to its wall:
+        //  Banner_Print.webp      → Fascia (top header board)
+        //  wall_3_Print.webp      → Back wall (main facing wall)
+        //  rightwall_print.webp   → Right side wall inner face
+        //  Table_Print.webp       → Left side wall inner face
+        //  Table_Small_Print.webp → Front counter face
+        const matFascia       = loadMat('Banner_Print.webp',      0.55);
+        const matBackWall     = loadMat('wall_3_Print.webp',       0.65);
+        const matRightWall    = loadMat('rightwall_print.webp',    0.65);
+        const matLeftWall     = loadMat('Table_Print.webp',        0.65);
+        const matFrontCounter = loadMat('Table_Small_Print.webp',  0.55);
+
+        // ── Helpers ────────────────────────────────────────────────────
+        function box(w, h, d, mats) {
+            return new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mats);
+        }
+
+        // ── Ground & Platform ─────────────────────────────────────────
+        const ground = box(40, 0.02, 40, new THREE.MeshStandardMaterial({ color: 0x1a1a1f, roughness: 1 }));
+        ground.position.y = -0.01;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        const platform = box(stallWidth, 0.1, stallDepth, matFloor);
+        platform.position.set(0, 0, 0);
+        platform.receiveShadow = true;
+        scene.add(platform);
+
+        // ── Stall Group ────────────────────────────────────────────────
+        const stall = new THREE.Group();
+        stall.position.y = 0.05;
+        scene.add(stall);
+
+        // ── Back Wall ─────────────────────────────────────────────────
+        //  BoxGeometry face order: +X, -X, +Y, -Y, +Z(front), -Z(back)
+        const backWall = box(stallWidth, stallHeight, wallThick,
+            [matWhite, matWhite, matWhite, matWhite, matBackWall, matWhite]);
+        backWall.position.set(0, stallHeight / 2, -stallDepth / 2 + wallThick / 2);
+        backWall.castShadow = backWall.receiveShadow = true;
+        stall.add(backWall);
+
+        // ── Left Wall ─────────────────────────────────────────────────
+        //  +X face (right face of left wall = inner facing surface)
+        const leftWall = box(wallThick, stallHeight, stallDepth,
+            [matLeftWall, matWhite, matWhite, matWhite, matWhite, matWhite]);
+        leftWall.position.set(-stallWidth / 2 + wallThick / 2, stallHeight / 2, 0);
+        leftWall.castShadow = leftWall.receiveShadow = true;
+        stall.add(leftWall);
+
+        // ── Right Wall ────────────────────────────────────────────────
+        //  -X face (left face of right wall = inner facing surface)
+        const rightWall = box(wallThick, stallHeight, stallDepth,
+            [matWhite, matRightWall, matWhite, matWhite, matWhite, matWhite]);
+        rightWall.position.set(stallWidth / 2 - wallThick / 2, stallHeight / 2, 0);
+        rightWall.castShadow = rightWall.receiveShadow = true;
+        stall.add(rightWall);
+
+        // ── Fascia / Header Board ─────────────────────────────────────
+        const fascia = box(stallWidth, 0.8, 0.2,
+            [matWhite, matWhite, matWhite, matWhite, matFascia, matWhite]);
+        fascia.position.set(0, stallHeight + 0.4, stallDepth / 2 - 0.1);
+        fascia.castShadow = true;
+        stall.add(fascia);
+
+        // Corner accent
+        const corner = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.4, 0.4, 0.2, 16, 1, false, 0, Math.PI / 2),
+            matWhite
+        );
+        corner.rotation.x = Math.PI / 2;
+        corner.rotation.z = Math.PI;
+        corner.position.set(-stallWidth / 2 + 0.4, stallHeight + 0.8, stallDepth / 2 - 0.1);
+        stall.add(corner);
+
+        // ── Front Counter ─────────────────────────────────────────────
+        const cW = stallWidth * 0.6, cH = 1.0, cD = 0.8;
+        const counter = box(cW, cH, cD,
+            [matWhite, matWhite, matWhite, matWhite, matFrontCounter, matWhite]);
+        counter.position.set(-stallWidth / 2 + cW / 2 + wallThick, cH / 2, stallDepth / 2 - cD / 2);
+        counter.castShadow = counter.receiveShadow = true;
+        stall.add(counter);
+
+        // ── Right Podium & Rotating Drill Bit ────────────────────────
+        const pW = 1.8, pH = 0.9, pD = 1.0;
+        const podium = box(pW, pH, pD, matWhite);
+        podium.position.set(stallWidth / 2 - pW / 2 - wallThick, pH / 2, stallDepth / 2 - pD / 2);
+        podium.castShadow = podium.receiveShadow = true;
+        stall.add(podium);
+
+        const drillGroup = new THREE.Group();
+        const dBase = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.4, 32), matMetal);
+        dBase.position.y = 0.2; dBase.castShadow = true; drillGroup.add(dBase);
+        for (let i = 0; i < 4; i++) {
+            const g = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.05, 32), matMetal);
+            g.position.y = 0.45 + i * 0.1; g.rotation.z = 0.1; drillGroup.add(g);
+        }
+        const dBody = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.6, 32), matMetal);
+        dBody.position.y = 0.7; dBody.castShadow = true; drillGroup.add(dBody);
+        const dHead = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.26, 0.3, 8), matMetal);
+        dHead.position.y = 1.15; dHead.castShadow = true; drillGroup.add(dHead);
+        for (let i = 0; i < 4; i++) {
+            const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.1), matDkMet);
+            tooth.position.set(Math.cos(i * Math.PI / 2) * 0.18, 1.35, Math.sin(i * Math.PI / 2) * 0.18);
+            drillGroup.add(tooth);
+        }
+        drillGroup.position.set(stallWidth / 2 - pW / 2 - wallThick, pH, stallDepth / 2 - pD / 2);
+        stall.add(drillGroup);
+
+        // ── Table & Chairs ────────────────────────────────────────────
+        const furniture = new THREE.Group();
+        furniture.position.set(-1, 0, 0);
+
+        const tBase = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.05, 32), matWhite);
+        tBase.position.y = 0.025; tBase.castShadow = true;
+        const tLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.7, 16), matMetal);
+        tLeg.position.y = 0.35; tLeg.castShadow = true;
+        const tTop = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.05, 32), matWhite);
+        tTop.position.y = 0.725; tTop.castShadow = true;
+        furniture.add(tBase, tLeg, tTop);
+
+        function chair(x, z, rot) {
+            const g = new THREE.Group();
+            const seat = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.05, 32), matWhite);
+            seat.position.y = 0.45;
+            const leg  = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.45, 16), matMetal);
+            leg.position.y = 0.225;
+            const bb = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.4, 16), matMetal);
+            bb.position.set(-0.2, 0.65, 0);
+            const back = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.4), matWhite);
+            back.position.set(-0.2, 0.75, 0);
+            g.add(seat, leg, bb, back);
+            g.position.set(x, 0, z);
+            g.rotation.y = rot;
+            g.children.forEach(c => c.castShadow = true);
+            return g;
+        }
+        furniture.add(chair(0.8, 0, Math.PI), chair(-0.8, 0, 0));
+        stall.add(furniture);
+
+        // ── Brochure Stand ────────────────────────────────────────────
+        const standMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.5 });
+        const trayMat  = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+        const standG = new THREE.Group();
+        const sBase = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.05, 0.4), standMat);
+        sBase.position.y = 0.025; standG.add(sBase);
+        for (let i = 0; i < 4; i++) {
+            const isL = i % 2 === 0;
+            const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.4), standMat);
+            rod.position.set(isL ? -0.1 : 0.1, 0.2 + i * 0.35, 0);
+            rod.rotation.z = isL ? -0.3 : 0.3;
+            standG.add(rod);
+            const tray = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.4), trayMat);
+            tray.position.set(isL ? 0.05 : -0.05, 0.3 + i * 0.35, 0.1);
+            tray.rotation.x = -Math.PI / 6;
+            standG.add(tray);
+        }
+        standG.position.set(1.5, 0, 1.5);
+        stall.add(standG);
+
+        // ── Track Lights ──────────────────────────────────────────────
+        const lbGeo = new THREE.BoxGeometry(0.15, 0.15, 0.2);
+        const matBlk = new THREE.MeshStandardMaterial({ color: 0x111111 });
+        [-3, -1, 1, 3].forEach(x => {
+            const lb = new THREE.Mesh(lbGeo, matBlk);
+            lb.position.set(x, stallHeight + 0.8, stallDepth / 2 - 0.2);
+            lb.rotation.x = Math.PI / 4;
+            stall.add(lb);
+            const spot = new THREE.SpotLight(0xfff4e0, 1.0);
+            spot.position.set(x, stallHeight + 0.7, stallDepth / 2 - 0.2);
+            spot.angle = Math.PI / 6;
+            spot.penumbra = 0.5;
+            spot.target.position.set(x, 1, 0);
+            stall.add(spot);
+            stall.add(spot.target);
+        });
+
+        // ── Hide Loading ───────────────────────────────────────────────
+        setTimeout(() => {
+            const el = document.getElementById('loading');
+            if (el) el.style.opacity = '0';
+        }, 500);
+
+        // ── Animate ────────────────────────────────────────────────────
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            drillGroup.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

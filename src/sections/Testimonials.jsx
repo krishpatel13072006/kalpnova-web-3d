@@ -63,7 +63,7 @@ export default function Testimonials() {
             TESTIMONIALS
           </span>
 
-          <h2 className="font-heading text-section font-bold text-section text-[#FFE1C5]">
+          <h2 className="font-heading text-section font-bold text-section text-[#FFE1C5] uppercase">
             Trusted by teams who
             <span className="accent"> value clarity</span>
           </h2>
@@ -89,7 +89,7 @@ export default function Testimonials() {
                          hover:border-orange-500/30
                          hover:shadow-[0_0_60px_rgba(226,74,43,0.25)]"
             >
-              <p className="leading-relaxed mb-6 text-[#FFE1C5]">
+              <p className="leading-relaxed mb-6 text-[#FFE1C5] font-heading">
                 “{item.quote}”
               </p>
 

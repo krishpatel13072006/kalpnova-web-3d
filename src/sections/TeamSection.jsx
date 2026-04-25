@@ -496,6 +496,7 @@ function SectionHeader() {
           lineHeight: 1,
           margin: '0 0 1.5rem',
           letterSpacing: '-0.02em',
+          textTransform: 'uppercase',
         }}
       >
         Meet the{' '}

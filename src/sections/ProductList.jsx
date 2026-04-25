@@ -8,7 +8,7 @@ const products = [
   export default function ProductList() {
     return (
       <section className="max-w-6xl mx-auto px-6">
-        <h1 className="font-heading text-section font-bold mb-16 text-[#FFE1C5]">
+        <h1 className="font-heading text-section font-bold mb-16 text-[#FFE1C5] uppercase">
           Our <span className="accent">Products</span>
         </h1>
   
@@ -19,7 +19,7 @@ const products = [
               className="p-8 rounded-2xl bg-[#141414]
                          border border-white/10 "
             >
-              <h3 className="font-heading text-xl font-semibold text-[#FFE1C5]">{p.name}</h3>
+              <h3 className="font-heading text-xl font-semibold text-[#FFE1C5] uppercase">{p.name}</h3>
               <p className="mt-2 text-[#FFE1C5]">{p.desc}</p>
             </div>
           ))}

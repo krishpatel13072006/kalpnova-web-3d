@@ -58,21 +58,21 @@ export default function InsideKalpnova() {
       <div className="z-10 flex flex-col md:flex-row gap-6 w-full max-w-6xl">
         <div onClick={() => navigate('/vision')} className="flex-1 group cursor-pointer border border-white/10 bg-black/60 backdrop-blur p-8 hover:bg-white/5 transition-all duration-500 hover:-translate-y-2">
           <div className="text-emerald-500 font-mono text-[10px] tracking-widest mb-4 uppercase">01 // Neural Panorama</div>
-          <h2 className="font-heading text-2xl font-bold mb-3">Vision 360</h2>
+          <h2 className="font-heading text-2xl font-bold mb-3 uppercase">Vision 360</h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">A 360° immersive cylinder featuring aquatic flora with real-time AI specimen analysis.</p>
           <div className="text-white text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Initialize ⟶</div>
         </div>
 
         <div onClick={() => navigate('/pavilion')} className="flex-1 group cursor-pointer border border-white/10 bg-black/60 backdrop-blur p-8 hover:bg-white/5 transition-all duration-500 hover:-translate-y-2">
           <div className="text-orange-500 font-mono text-[10px] tracking-widest mb-4 uppercase">02 // Kinetic Architecture</div>
-          <h2 className="font-heading text-2xl font-bold mb-3">The Pavilion</h2>
+          <h2 className="font-heading text-2xl font-bold mb-3 uppercase">The Pavilion</h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">A scroll-driven architectural walkthrough guiding the camera through a museum space.</p>
           <div className="text-white text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Initialize ⟶</div>
         </div>
 
         <div onClick={() => navigate('/showcase')} className="flex-1 group cursor-pointer border border-white/10 bg-black/60 backdrop-blur p-8 hover:bg-white/5 transition-all duration-500 hover:-translate-y-2">
           <div className="text-cyan-500 font-mono text-[10px] tracking-widest mb-4 uppercase">03 // Spatial Rooms</div>
-          <h2 className="font-heading text-2xl font-bold mb-3">Virtual Exhibition</h2>
+          <h2 className="font-heading text-2xl font-bold mb-3 uppercase">Virtual Exhibition</h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">A spatial floating gallery environment built to showcase enterprise-level projects and apps.</p>
           <div className="text-white text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Initialize ⟶</div>
         </div>

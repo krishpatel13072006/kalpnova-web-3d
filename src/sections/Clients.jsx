@@ -42,7 +42,7 @@ export default function Clients() {
             CLIENTS
           </span>
 
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#FFE1C5]">
+          <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#FFE1C5] uppercase">
             Trusted by teams
             <span className="text-orange-500"> worldwide</span>
           </h2>

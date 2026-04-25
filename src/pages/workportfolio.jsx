@@ -7,7 +7,6 @@ import { portfolioItems } from '../data/portfolio';
 // ─── Category map: match each project by id to a category ───────────────────
 const categoryMap = {
   8: 'Digital',
-  9: 'Branding',
   10: 'Branding',
   11: 'Branding',
   12: 'Branding',
@@ -15,7 +14,6 @@ const categoryMap = {
   14: 'Digital',
   15: 'Social Media',
   16: 'Branding',
-  18: 'Branding',
   19: 'Social Media',
   20: 'Branding',
   21: 'Social Media',
@@ -89,7 +87,7 @@ const PortfolioCard = memo(({ item }) => {
               <img
                 src={item.heroImage || item.image || '/placeholder.jpg'}
                 alt={item.title}
-                className="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-105"
+                className="object-cover w-full h-full transition-transform duration-1000 ease-out"
                 loading="lazy"
                 decoding="async"
               />

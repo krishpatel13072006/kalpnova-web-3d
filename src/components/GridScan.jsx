@@ -308,6 +308,7 @@ export default function GridScan({
   const bloomRef = useRef(null);
   const chromaRef = useRef(null);
   const rafRef = useRef(null);
+  const isInView = useRef(false);
 
   const [modelsReady, setModelsReady] = useState(false);
   const [uiFaceActive, setUiFaceActive] = useState(false);
@@ -408,12 +409,19 @@ export default function GridScan({
     el.addEventListener('mouseenter', onEnter);
     if (scanOnClick) el.addEventListener('click', onClick);
     el.addEventListener('mouseleave', onLeave);
+
+    const obs = new IntersectionObserver(([entry]) => {
+      isInView.current = entry.isIntersecting;
+    }, { threshold: 0 });
+    obs.observe(el);
+
     return () => {
       el.removeEventListener('mousemove', onMove);
       el.removeEventListener('mouseenter', onEnter);
       el.removeEventListener('mouseleave', onLeave);
       if (scanOnClick) el.removeEventListener('click', onClick);
       if (leaveTimer) clearTimeout(leaveTimer);
+      obs.disconnect();
     };
   }, [uiFaceActive, snapBackDelay, scanOnClick, enableGyro]);
 
@@ -421,9 +429,9 @@ export default function GridScan({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: "high-performance" });
     rendererRef.current = renderer;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.NoToneMapping;
@@ -512,6 +520,11 @@ export default function GridScan({
       const now = performance.now();
       const dt = Math.max(0, Math.min(0.1, (now - last) / 1000));
       last = now;
+
+      if (!isInView.current) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
 
       lookCurrent.current.copy(
         smoothDampVec2(lookCurrent.current, lookTarget.current, lookVel.current, smoothTime, maxSpeed, dt)
@@ -787,7 +800,7 @@ export default function GridScan({
   }, [enableWebcam, modelsReady, depthResponse]);
 
   return (
-    <div ref={containerRef} className={`gridscan${className ? ` ${className}` : ''}`} style={style}>
+    <div ref={containerRef} className={`gridscan will-change-transform${className ? ` ${className}` : ''}`} style={style}>
       {showPreview && (
         <div className="gridscan__preview">
           <video ref={videoRef} muted playsInline autoPlay className="gridscan__video" />

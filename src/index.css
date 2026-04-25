@@ -348,3 +348,58 @@
   scrollbar-width: thin;
   scrollbar-color: #ff6b2b #0b0b0b;
 }
+
+/* =========================
+   PERFORMANCE-OPTIMIZED SCROLL
+   Hardware accelerated for smooth infinite looping
+========================= */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 20px)); /* Half of the container (one set) + half the gap */
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+/* Responsive adjustment for gap in animation */
+@media (min-width: 768px) {
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 40px)); /* Half + half the gap (80px gap / 2 = 40px) */
+    }
+  }
+}
+/* =========================
+   UTILITIES
+========================= */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hardware Acceleration Utilities */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-filter {
+  will-change: filter;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

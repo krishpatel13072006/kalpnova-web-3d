@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Masonry Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* White page background with 24px padding as requested */
+        body {
+            background-color: #ffffff;
+            padding: 24px;
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+        }
+
+        /* CSS Columns Layout */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 16px; /* 16px horizontal gap */
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (max-width: 640px) {
+            .masonry-grid { column-count: 1; }
+        }
+
+        /* Card Wrapper for each image */
+        .masonry-item {
+            break-inside: avoid; /* Prevents splitting across columns */
+            margin-bottom: 16px; /* 16px vertical gap */
+            background-color: #f8fafc; /* Subtle light background */
+            border: 1px solid #f1f5f9;
+            border-radius: 12px; /* Rounded corners for the card */
+            padding: 12px; /* Padding inside the card */
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Image Styling - No cropping, natural aspect ratio */
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px; /* Slight rounding on the image itself */
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="text-center mb-10 mt-4">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-2">Portfolio Gallery</h1>
+        <p class="text-slate-500 font-medium">Responsive Masonry • 16px Gap • Natural Aspect Ratios</p>
+    </header>
+
+    <!-- Main Grid Container -->
+    <main>
+        <div class="masonry-grid">
+            
+            <!-- Brand Book & Agri App Section -->
+            <div class="masonry-item">
+                <img src="Page%201.jpg" alt="Brand Book Cover" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(1).webp" alt="Farmer App Screen" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%202.jpg" alt="About and Mission" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(4).webp" alt="Ecommerce Feature" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%203.jpg" alt="Logo Fusion Concept" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(2).webp" alt="Pest Support Feature" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%204.jpg" alt="Typography" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(5).webp" alt="Fertilizer Support" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%205.webp" alt="Color Palette" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(6).webp" alt="Soil Testing Feature" loading="lazy">
+            </div>
+            
+            <!-- Brand Mockups -->
+            <div class="masonry-item">
+                <img src="Page%206.webp" alt="Logo Variations" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%207.jpg" alt="App Icon on iPhone" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%208.jpg" alt="Merchandise and Van Branding" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%209.jpg" alt="Social Media Mockups" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%2010.jpg" alt="Brand Stationery Mockups" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%2011.jpg" alt="Business Cards" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%2012.jpg" alt="Subway Billboards" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="Page%2013.jpg" alt="Street Billboard Mockup" loading="lazy">
+            </div>
+
+            <!-- Invitations Collection -->
+            <div class="masonry-item">
+                <img src="1%20(8).jpg" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(9)-optimized.webp" alt="Previous Gallery Card" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(10).jpg" alt="Previous Gallery Card 2" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(11).jpg" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1-1.png.webp" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1-2.png.webp" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1-3.png.webp" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1-4.png.webp" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1-5.png.webp" alt="Portrait Layout" loading="lazy">
+            </div>
+            <div class="masonry-item">
+                <img src="1%20(6).jpg" alt="Portrait Layout Wedding" loading="lazy">
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

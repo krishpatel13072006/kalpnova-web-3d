@@ -72,7 +72,8 @@ export default function Contact() {
                        shadow-[0_0_60px_rgba(226,74,43,0.75)]
                        transition-all duration-300
                        hover:-translate-y-1
-                       hover:shadow-[0_0_90px_rgba(226,74,43,1)]"
+                       hover:shadow-[0_0_90px_rgba(226,74,43,1)]
+                       uppercase"
           >
             Book a Free Discovery Call
           </Link>

@@ -56,7 +56,7 @@ export default function Home() {
           {/* TOP CONNECTOR */}
           <div className="flex items-center justify-center gap-4 mb-12 text-white/80">
             <span className="h-px w-20 bg-white/30" />
-            <span className="px-4 py-1 text-xs rounded-full border border-white/30 bg-black/20 backdrop-blur-sm">
+            <span className="px-4 py-1 text-xs rounded-full border border-white/30 bg-black/20 backdrop-blur-sm uppercase">
               ⭐ All in All solution at one place
             </span>
             <span className="h-px w-20 bg-white/30" />

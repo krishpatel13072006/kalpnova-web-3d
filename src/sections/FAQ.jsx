@@ -67,7 +67,7 @@ export default function FAQ() {
                            text-orange-500 font-medium">
             HELP CENTER
           </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#FFE1C5]">
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#FFE1C5] uppercase">
             Frequently asked <span className="text-orange-500 italic">questions</span>
           </h2>
         </div>

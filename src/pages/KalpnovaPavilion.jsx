@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
+import { portfolioItems } from '../data/portfolio';
 
 export default function KalpnovaPavilion() {
   const mountRef = useRef(null);
@@ -16,7 +17,7 @@ export default function KalpnovaPavilion() {
     scene.fog = new THREE.Fog(0xdce5ed, 10, 300);
 
     camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-    
+
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -27,7 +28,7 @@ export default function KalpnovaPavilion() {
     renderer.domElement.style.zIndex = '1';
     renderer.domElement.style.outline = 'none';
 
-    if(mountRef.current) mountRef.current.appendChild(renderer.domElement);
+    if (mountRef.current) mountRef.current.appendChild(renderer.domElement);
     scene.add(museum);
 
     // Setup Managers
@@ -35,7 +36,7 @@ export default function KalpnovaPavilion() {
     const loader = new THREE.TextureLoader(manager);
     const logoUrl = 'https://i.postimg.cc/GhmVGQ8D/download.png';
     const logoTex = loader.load(logoUrl);
-    
+
     const tiledLogoTex = loader.load(logoUrl);
     tiledLogoTex.wrapS = tiledLogoTex.wrapT = THREE.RepeatWrapping;
     tiledLogoTex.repeat.set(3, 3);
@@ -55,20 +56,20 @@ export default function KalpnovaPavilion() {
     };
 
     // Architecture
-    createWall(1, 20, 160, -40, 5, -30); 
-    createWall(1, 20, 160, 40, 5, -30);  
-    createWall(81, 20, 1, 0, 5, -110);   
-    createWall(30, 20, 1, -25, 5, 50); 
-    createWall(30, 20, 1, 25, 5, 50);  
+    createWall(1, 20, 160, -40, 5, -30);
+    createWall(1, 20, 160, 40, 5, -30);
+    createWall(81, 20, 1, 0, 5, -110);
+    createWall(30, 20, 1, -25, 5, 50);
+    createWall(30, 20, 1, 25, 5, 50);
     createWall(1, 20, 50, 0, 5, 0, brandWallMat); // Center Divider
     createWall(81, 1, 161, 0, 15, -30, ceilingMat); // Roof
 
     function addEntranceLogo(x, z) {
-        const geom = new THREE.PlaneGeometry(16, 8);
-        const mat = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, side: THREE.DoubleSide });
-        const mesh = new THREE.Mesh(geom, mat);
-        mesh.position.set(x, 7, z);
-        museum.add(mesh);
+      const geom = new THREE.PlaneGeometry(16, 8);
+      const mat = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, side: THREE.DoubleSide });
+      const mesh = new THREE.Mesh(geom, mat);
+      mesh.position.set(x, 7, z);
+      museum.add(mesh);
     }
     addEntranceLogo(-25, 50.6); // Left Entrance Logo
     addEntranceLogo(25, 50.6);  // Right Entrance Logo
@@ -79,37 +80,72 @@ export default function KalpnovaPavilion() {
     floor.receiveShadow = true;
     museum.add(floor);
 
-    // Exhibits
-    const addExhibit = (x, z, ry, label) => {
+    // Krushak Portfolio Data
+    const krusakProject = portfolioItems.find(p => p.id === 12);
+    const krusakImages = krusakProject.gallery.slice(0, 6);
+    const mainKrusakBanner = krusakProject.image || krusakProject.heroImage;
+
+    // Exhibits - 3 on each side
+    const addExhibit = (x, z, ry, imgUrl) => {
       const group = new THREE.Group();
-      const canvas = document.createElement('canvas');
-      canvas.width = 400; canvas.height = 600;
-      const cCtx = canvas.getContext('2d');
-      cCtx.fillStyle = '#fff'; cCtx.fillRect(0,0,400,600);
-      cCtx.fillStyle = '#1e293b'; cCtx.font = 'bold 60px sans-serif'; cCtx.fillText(label, 40, 120);
-      cCtx.fillStyle = '#94a3b8'; cCtx.font = '24px sans-serif'; cCtx.fillText('COLLECTION 2026', 40, 170);
-      cCtx.strokeStyle = '#ea580c'; cCtx.lineWidth = 15; cCtx.strokeRect(10,10,380,580);
-      
-      const tex = new THREE.CanvasTexture(canvas);
-      tex.needsUpdate = true;
-      const p = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), new THREE.MeshStandardMaterial({ map: tex }));
-      group.add(p);
+      loader.load(imgUrl, (texture) => {
+        const ratio = texture.image.width / texture.image.height;
+        const h = 12; // Slightly smaller to fit 3 comfortably
+        const w = h * ratio;
+        const p = new THREE.Mesh(
+          new THREE.PlaneGeometry(w, h),
+          new THREE.MeshStandardMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            roughness: 0.4
+          })
+        );
+        group.add(p);
+      });
       group.position.set(x, 2.5, z);
       group.rotation.y = ry;
       museum.add(group);
     };
 
-    addExhibit(-39.4, 10, Math.PI/2, 'STRATEGY');
-    addExhibit(-39.4, -20, Math.PI/2, 'DATA');
-    addExhibit(39.4, 10, -Math.PI/2, 'MOTION');
-    addExhibit(39.4, -20, -Math.PI/2, 'PULSE');
+    // Left Wall
+    addExhibit(-39.4, 30, Math.PI / 2, krusakImages[0]);
+    addExhibit(-39.4, -20, Math.PI / 2, krusakImages[1]);
+    addExhibit(-39.4, -70, Math.PI / 2, krusakImages[2]);
 
-    const screen = new THREE.Mesh(
-      new THREE.PlaneGeometry(40, 22.5),
-      new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xea580c, emissiveIntensity: 0.6 })
-    );
-    screen.position.set(0, 5, -109.4);
-    museum.add(screen);
+    // Right Wall
+    addExhibit(39.4, 30, -Math.PI / 2, krusakImages[3]);
+    addExhibit(39.4, -20, -Math.PI / 2, krusakImages[4]);
+    addExhibit(39.4, -70, -Math.PI / 2, krusakImages[5]);
+
+    // Main End Screen (7th Image) - Krushak Logo
+    const krusakLogoUrl = '/clients/krushak.webp';
+    loader.load(krusakLogoUrl, (texture) => {
+      const planeWidth = 50; // Prominent logo size
+      const planeHeight = 25;
+      const imageAspect = texture.image.width / texture.image.height;
+
+      // Calculate dimensions to preserve logo aspect ratio
+      let finalW, finalH;
+      if (imageAspect > (planeWidth / planeHeight)) {
+        finalW = planeWidth;
+        finalH = planeWidth / imageAspect;
+      } else {
+        finalH = planeHeight;
+        finalW = planeHeight * imageAspect;
+      }
+
+      const screen = new THREE.Mesh(
+        new THREE.PlaneGeometry(finalW, finalH),
+        new THREE.MeshStandardMaterial({
+          map: texture,
+          transparent: true,
+          emissive: new THREE.Color(0xffffff),
+          emissiveIntensity: 0.2
+        })
+      );
+      screen.position.set(0, 5, -109.3); // Slightly in front of wall
+      museum.add(screen);
+    });
 
     // Lights
     scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -117,7 +153,7 @@ export default function KalpnovaPavilion() {
     sun.position.set(50, 100, 50);
     sun.castShadow = true;
     scene.add(sun);
-    [[-20, 0], [20, 0], [0, -80]].forEach(([x,z]) => {
+    [[-20, 0], [20, 0], [0, -80]].forEach(([x, z]) => {
       const s = new THREE.PointLight(0xffffff, 0.8, 50);
       s.position.set(x, 10, z);
       museum.add(s);
@@ -125,7 +161,7 @@ export default function KalpnovaPavilion() {
 
     const cam = { x: 0, y: 150, z: 200, rx: -1.2, ry: 0 };
     const targetCam = { x: 0, y: 150, z: 200, rx: -1.2, ry: 0 };
-    
+
     let targetScale = 0.1;
     let targetPosZ = -150;
 
@@ -134,50 +170,50 @@ export default function KalpnovaPavilion() {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(window.scrollY / (scrollHeight || 1), 1));
-      
-      const t = progress * 27; 
 
-      targetScale = t < 4 ? lerp(0.1, 1, t/4) : 1;
-      targetPosZ = t < 4 ? lerp(-150, 0, t/4) : 0;
+      const t = progress * 35; // Increased range for longer hallway
+
+      targetScale = t < 4 ? lerp(0.1, 1, t / 4) : 1;
+      targetPosZ = t < 4 ? lerp(-150, 0, t / 4) : 0;
 
       if (t < 4) {
-         targetCam.y = lerp(150, 1.5, t/4);
-         targetCam.z = lerp(200, 120, t/4);
-         targetCam.rx = lerp(-1.2, 0, t/4);
-         targetCam.x = 0; targetCam.ry = 0;
+        targetCam.y = lerp(150, 1.5, t / 4);
+        targetCam.z = lerp(200, 120, t / 4);
+        targetCam.rx = lerp(-1.2, 0, t / 4);
+        targetCam.x = 0; targetCam.ry = 0;
       } else if (t < 7) {
-         const p = (t-4)/3;
-         targetCam.z = lerp(120, 30, p);
-         targetCam.x = 0; targetCam.ry = 0;
-      } else if (t < 10) {
-         const p = (t-7)/3;
-         targetCam.z = 30;
-         targetCam.x = lerp(0, -20, p);
-         targetCam.ry = lerp(0, Math.PI/2.2, p);
-      } else if (t < 13) {
-         const p = (t-10)/3;
-         targetCam.x = -20; targetCam.ry = Math.PI/2.2;
-         targetCam.z = lerp(30, -30, p);
-      } else if (t < 17) {
-         const p = (t-13)/4;
-         targetCam.z = -30;
-         targetCam.x = lerp(-20, 20, p);
-         targetCam.ry = lerp(Math.PI/2.2, -Math.PI/2.2, p);
-      } else if (t < 20) {
-         const p = (t-17)/3;
-         targetCam.x = 20; targetCam.ry = -Math.PI/2.2;
-         targetCam.z = lerp(-30, 30, p);
-      } else if (t < 23) {
-         const p = (t-20)/3;
-         targetCam.x = lerp(20, 0, p);
-         targetCam.ry = lerp(-Math.PI/2.2, 0, p);
-         targetCam.z = lerp(30, -40, p);
+        const p = (t - 4) / 3;
+        targetCam.z = lerp(120, 40, p);
+        targetCam.x = 0; targetCam.ry = 0;
+      } else if (t < 11) {
+        const p = (t - 7) / 4;
+        targetCam.z = 40;
+        targetCam.x = lerp(0, -20, p);
+        targetCam.ry = lerp(0, Math.PI / 2.2, p);
+      } else if (t < 16) {
+        const p = (t - 11) / 5;
+        targetCam.x = -20; targetCam.ry = Math.PI / 2.2;
+        targetCam.z = lerp(40, -80, p); // Now views all 3 left images
+      } else if (t < 21) {
+        const p = (t - 16) / 5;
+        targetCam.z = -80;
+        targetCam.x = lerp(-20, 20, p);
+        targetCam.ry = lerp(Math.PI / 2.2, -Math.PI / 2.2, p);
+      } else if (t < 26) {
+        const p = (t - 21) / 5;
+        targetCam.x = 20; targetCam.ry = -Math.PI / 2.2;
+        targetCam.z = lerp(-80, 40, p); // Now views all 3 right images
+      } else if (t < 30) {
+        const p = (t - 26) / 4;
+        targetCam.x = lerp(20, 0, p);
+        targetCam.ry = lerp(-Math.PI / 2.2, 0, p);
+        targetCam.z = lerp(40, -40, p);
       } else {
-         const p = Math.min(1, (t-23)/4);
-         targetCam.x = 0; targetCam.ry = 0;
-         targetCam.z = lerp(-40, -100, p);
+        const p = Math.min(1, (t - 30) / 5);
+        targetCam.x = 0; targetCam.ry = 0;
+        targetCam.z = lerp(-40, -100, p);
       }
-      
+
       const prompt = document.getElementById('scroll-prompt');
       if (prompt) {
         prompt.style.opacity = progress > 0.02 ? '0' : '1';
@@ -188,7 +224,7 @@ export default function KalpnovaPavilion() {
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
-      
+
       museum.scale.setScalar(museum.scale.x + (targetScale - museum.scale.x) * 0.05);
       museum.position.z += (targetPosZ - museum.position.z) * 0.05;
 
@@ -202,7 +238,7 @@ export default function KalpnovaPavilion() {
       camera.rotation.order = 'YXZ';
       camera.rotation.x = cam.rx;
       camera.rotation.y = cam.ry;
-      
+
       renderer.render(scene, camera);
     };
     animate();
@@ -231,10 +267,10 @@ export default function KalpnovaPavilion() {
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
       cancelAnimationFrame(animationId);
-      if(renderer) {
+      if (renderer) {
         renderer.dispose();
       }
-      if(mountRef.current && mountRef.current.firstChild) {
+      if (mountRef.current && mountRef.current.firstChild) {
         mountRef.current.innerHTML = '';
       }
     };
@@ -250,16 +286,16 @@ export default function KalpnovaPavilion() {
     <div style={{ background: '#dce5ed', fontFamily: 'sans-serif' }}>
       <button onClick={() => window.location.href = '/insidekalpnova'} style={{ position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 9999, padding: '12px 30px', background: '#ea580c', color: 'white', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px', border: 'none' }}>⟵ BACK TO HUB</button>
       <div className="fixed top-28 left-6 md:left-10 z-[40] font-bold tracking-[0.4em] text-slate-800 uppercase text-xs">Kalpnova // Integrated Pavilion</div>
-      
-      <div 
-        id="scroll-prompt" 
+
+      <div
+        id="scroll-prompt"
         className="fixed top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[45] font-black md:text-7xl lg:text-8xl text-5xl text-black tracking-[0.2em] uppercase transition-opacity duration-700 pointer-events-none whitespace-nowrap w-max"
       >
         SCROLL DOWN
       </div>
 
       <div ref={mountRef} />
-      
+
       <div id="kalp-scroll-container" className="relative z-10 pointer-events-none">
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '300vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
@@ -271,21 +307,21 @@ export default function KalpnovaPavilion() {
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Wing A // Logic</span>
-            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Lateral Analysis</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900 uppercase">Lateral Analysis</h1>
             <p className="text-slate-600 leading-relaxed">Structural foundation of the digital experience.</p>
           </div>
         </section>
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Wing B // Pulse</span>
-            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Creative Flow</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900 uppercase">Creative Flow</h1>
             <p className="text-slate-600 leading-relaxed">Where branding dictates the light and rhythm.</p>
           </div>
         </section>
         <section className="kalp-section flex items-center px-[10%]" style={{ height: '400vh' }}>
           <div className="kalp-content pointer-events-auto" style={contentStyle}>
             <span className="text-orange-600 font-bold text-[0.6rem] tracking-widest uppercase mb-2 block">Main Atrium</span>
-            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900">Unified Sync</h1>
+            <h1 className="font-heading text-4xl font-bold mb-4 tracking-tight text-slate-900 uppercase">Unified Sync</h1>
             <p className="text-slate-600 leading-relaxed">The final destination where all streams unite.</p>
           </div>
         </section>

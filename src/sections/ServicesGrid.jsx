@@ -82,10 +82,10 @@ export default function ServicesGrid() {
       <div className="mb-20 text-center lg:text-left">
         <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
                          rounded-full border border-orange-500/30
-                         text-orange-500 font-medium">
+                         text-orange-500 font-medium uppercase">
           OUR EXPERTISE
         </span>
-        <h2 className="font-heading text-4xl md:text-6xl font-bold text-[#FFE1C5] leading-tight">
+        <h2 className="font-heading text-4xl md:text-6xl font-bold text-[#FFE1C5] leading-tight uppercase">
           What we do <span className="text-orange-500 italic">best</span>
         </h2>
       </div>
@@ -113,24 +113,14 @@ export default function ServicesGrid() {
                 {s.icon}
               </div>
               
-              <h3 className="font-heading text-2xl font-bold mb-4 text-[#FFE1C5] group-hover:text-orange-500 transition-colors">
+              <h3 className="font-heading text-2xl font-bold mb-4 text-[#FFE1C5] group-hover:text-orange-500 transition-colors uppercase">
                 {s.title}
               </h3>
               
-              <p className="text-zinc-400 mb-6 leading-relaxed text-sm md:text-base group-hover:text-zinc-300 transition-colors">
+              <p className="text-zinc-400 mb-2 leading-relaxed text-sm md:text-base group-hover:text-zinc-300 transition-colors">
                 {s.desc}
               </p>
 
-              <div className="space-y-4 pt-4 border-t border-white/5">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.2em] text-orange-500/80 font-bold mb-2">Deliverables</h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed italic">{s.deliverables}</p>
-                </div>
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-bold mb-2">Capabilities</h4>
-                  <p className="text-[10px] text-zinc-500 leading-relaxed uppercase tracking-wider">{s.keywords}</p>
-                </div>
-              </div>
             </div>
 
             {/* Bottom Accent */}

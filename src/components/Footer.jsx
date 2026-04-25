@@ -44,16 +44,16 @@ export default function Footer() {
             NAVIGATION
           </span>
           <nav className="flex flex-col gap-2 text-sm text-[#FFE1C5]">
-            <NavLink to="/" className="hover:text-orange-500 transition">
+            <NavLink to="/" className="hover:text-orange-500 transition uppercase">
               Home
             </NavLink>
-            <NavLink to="/about" className="hover:text-orange-500 transition">
+            <NavLink to="/about" className="hover:text-orange-500 transition uppercase">
               About
             </NavLink>
-            <NavLink to="/services" className="hover:text-orange-500 transition">
+            <NavLink to="/services" className="hover:text-orange-500 transition uppercase">
               Work Portfolio
             </NavLink>
-            <NavLink to="/contact" className="hover:text-orange-500 transition">
+            <NavLink to="/contact" className="hover:text-orange-500 transition uppercase">
               Contact
             </NavLink>
           </nav>
