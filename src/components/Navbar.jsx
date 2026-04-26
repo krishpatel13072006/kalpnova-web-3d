@@ -217,7 +217,7 @@ export default function Navbar() {
     <>
       {/* NAV BAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled || location.pathname === '/pavilion'
+        className={`fixed top-0 left-0 w-full z-50 px-6 ${scrolled || location.pathname === '/pavilion' || location.pathname === '/showcase'
           ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl"
           : "bg-transparent border-b border-transparent py-5"
           }`}
@@ -241,7 +241,7 @@ export default function Navbar() {
 
 
           {/* DESKTOP LINKS */}
-          <div className="hidden md:flex items-center gap-2 text-sm relative z-10 p-1">
+          <div className="hidden md:flex items-center gap-2 text-sm relative z-10 p-1 ml-14">
             {/* The expanded background container */}
             {clickedPath && (
               <motion.div
@@ -252,7 +252,9 @@ export default function Navbar() {
             )}
 
             {links.map((item) => {
-              const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
+              const isActive = item.to === "/" 
+                ? location.pathname === "/" 
+                : (location.pathname.startsWith(item.to) || (item.label === "Work Portfolio" && location.pathname.startsWith("/portfolio")));
               const isClicked = clickedPath === item.to;
 
               let textColorClass = "text-[#FFE1C5] hover:text-orange-400";
@@ -328,7 +330,9 @@ export default function Navbar() {
 
           <div className="text-center space-y-6 flex flex-col items-center">
             {links.map((item, i) => {
-              const isActive = item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to);
+              const isActive = item.to === "/" 
+                ? location.pathname === "/" 
+                : (location.pathname.startsWith(item.to) || (item.label === "Work Portfolio" && location.pathname.startsWith("/portfolio")));
 
               return (
                 <div

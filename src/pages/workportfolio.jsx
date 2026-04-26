@@ -191,39 +191,6 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
             ))}
           </motion.div>
 
-          {/* ── COMING SOON SECTION ─────────────────────────────────── */}
-          {comingSoonItems.length > 0 && activeCategory === 'All' && (
-            <div className="mt-32">
-              <motion.div
-                variants={fadeInUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="mb-12"
-              >
-                <p className="text-[10px] font-black uppercase text-gray-500 mb-3 tracking-[0.3em]">
-                  Next Projects
-                </p>
-                <h2 className="font-heading text-4xl md:text-6xl font-black uppercase text-white/30 italic">
-                  Coming <span className="text-white/10">Soon</span>
-                </h2>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 opacity-60">
-                {comingSoonItems.map((item) => (
-                  <div key={item.id} className="group flex flex-col border border-white/5 rounded-3xl p-6 bg-white/[0.02] grayscale hover:grayscale-0 transition-all duration-700">
-                     <div className="w-full aspect-video rounded-2xl overflow-hidden bg-[#111] mb-6 flex items-center justify-center border border-white/5">
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-[#ff6b2b]/40 transition-colors">Under Development</span>
-                     </div>
-                     <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 mb-3 block">{item.category || 'Project'}</span>
-                     <h3 className="font-heading text-xl font-black text-white/40 uppercase mb-2">{item.client || item.title}</h3>
-                     <p className="text-[10px] text-gray-600 uppercase font-bold">{item.type}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* ── CONTACT SECTION ─────────────────────────────────────── */}
           <section className="mt-24 pt-12 border-t border-white/5 relative z-10">
             <motion.div

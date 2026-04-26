@@ -319,6 +319,28 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
     </div>
   );
 
+  const renderThumbnailGrid = (items, onImageClick) => (
+    <div
+      className="columns-1 sm:columns-2 lg:columns-3"
+      style={{ columnGap: '20px' }}
+    >
+      {items.map((item, idx) => (
+        <div 
+          key={idx} 
+          className="mb-[20px] break-inside-avoid cursor-pointer group overflow-hidden"
+          onClick={() => onImageClick(item.src)}
+        >
+          <img
+            src={item.src}
+            alt="Thumbnail Gallery Content"
+            loading="lazy"
+            className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   const renderLioncut = (items, onImageClick) => (
     <div
       className="columns-1 md:columns-2 lg:columns-3"
@@ -341,45 +363,27 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
     </div>
   );
 
-  const renderLotusSalon = (items, onImageClick) => {
-    const col1 = items.filter(item => item.src.includes('1 (')); 
-    const col2 = items.filter(item =>
-      item.src.endsWith('/1.jpg') ||
-      item.src.endsWith('/2.jpg') ||
-      item.src.endsWith('/3.jpg')
-    );
-    const col3 = items.filter(item =>
-      item.src.endsWith('/4.jpg') ||
-      item.src.endsWith('/5.jpg') ||
-      item.src.endsWith('/6.jpg')
-    );
-
-    return (
-      <div className="flex flex-col md:flex-row gap-[20px] w-full max-w-[1800px] mx-auto">
-        <div className="flex flex-col gap-[20px] flex-1">
-          {col1.map((item, idx) => (
-            <div key={idx} className="overflow-hidden">
-              {renderTileWithClick(item.src, 'w-full h-auto block rounded-[4px]', 'object-contain', onImageClick)}
-            </div>
-          ))}
+  const renderLotusSalon = (items, onImageClick) => (
+    <div
+      className="columns-1 sm:columns-2 lg:columns-3"
+      style={{ columnGap: '20px' }}
+    >
+      {items.map((item, idx) => (
+        <div 
+          key={idx} 
+          className="mb-[20px] break-inside-avoid cursor-pointer group overflow-hidden"
+          onClick={() => onImageClick(item.src)}
+        >
+          <img
+            src={item.src}
+            alt="Lotus Salon Gallery Content"
+            loading="lazy"
+            className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+          />
         </div>
-        <div className="flex flex-col gap-[20px] flex-1">
-          {col2.map((item, idx) => (
-            <div key={idx} className="overflow-hidden">
-              {renderTileWithClick(item.src, 'w-full h-auto block rounded-[4px]', 'object-contain', onImageClick)}
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col gap-[20px] flex-1">
-          {col3.map((item, idx) => (
-            <div key={idx} className="overflow-hidden">
-              {renderTileWithClick(item.src, 'w-full h-auto block rounded-[4px]', 'object-contain', onImageClick)}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+      ))}
+    </div>
+  );
   useEffect(() => {
     if (!images?.length) return;
     setReady(false);
@@ -445,6 +449,8 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
               renderLotusSalon(classified, openLightbox)
             ) : layout === "schoolg" ? (
               renderSchoolG(classified, openLightbox)
+            ) : layout === "thumbnail" ? (
+              renderThumbnailGrid(classified, openLightbox)
             ) : (
               rows.map((row, rowIdx) => (
                 <div key={rowIdx}>

@@ -1,290 +1,85 @@
-import React, { useState, useRef, useEffect, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useTexture } from "@react-three/drei";
+import React, { useState, useRef, Suspense, useEffect, useMemo } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useTexture, Text, Environment, Sparkles, useCursor, OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
 import SEO from "../components/SEO";
-import {
-  Text,
-  Image,
-  Environment,
-  Sparkles,
-  useCursor,
-  Float,
-  OrbitControls,
-  PerspectiveCamera,
-  Html
-} from '@react-three/drei';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import { portfolioItems } from '../data/portfolio';
 
-// --- 1. RELIABLE DATA CONFIGURATION ---
-// I am using placehold.co with dark colors to match the "CGI" aesthetic.
-const projects = [
-  {
-    id: 1,
-    title: "ECOLIVE",
-    subtitle: "Delivery Module",
-    description: "A complete logistics solution connecting vendors with local delivery partners.",
-    tech: "REACT • NODE.JS • POSTGRESQL",
-    // Dark grey background with Cyan text
-    imgUrl: "https://i.postimg.cc/FHw6pdw1/image.png",
-    posters: {
-      back: "https://i.postimg.cc/QtFky07v/image.png",
-      left: "https://i.postimg.cc/FHw6pdw1/image.png",
-      right: "https://i.postimg.cc/T18mHGfX/image.png",
-      front: "https://i.postimg.cc/QtFky07v/image.png",
-    },
+// --- 1. DATA CONFIGURATION ---
+const THEME_COLORS = ["#ff6b2b", "#00d8ff", "#ff0055", "#ffaa00", "#00ff88", "#8800ff"];
 
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    color: "#00d8ff"
-  },
-  {
-    id: 2,
-    title: "ANDROID",
-    subtitle: "Native Architecture",
-    description: "High-performance native application built for scalability and offline usage.",
-    tech: "KOTLIN • JETPACK COMPOSE • FIREBASE",
-    // Dark grey background with Pink text
-    imgUrl: "https://i.postimg.cc/QtFky07v/image.png",
-    posters: {
-      back: "https://i.postimg.cc/FHw6pdw1/image.png",
-      left: "https://i.postimg.cc/QtFky07v/image.png",
-      right: "https://i.postimg.cc/T18mHGfX/image.png",
-      front: "https://i.postimg.cc/FHw6pdw1/image.png",
-    },
-    // position: [-3.5, 0, 0.5],
-    position: [-2.8, 0, 0.5],
-    rotation: [0, 0.4, 0],
-    color: "#ff0055"
-  },
-  {
-    id: 3,
-    title: "SYSTEMS",
-    subtitle: "Enterprise Tech",
-    description: "Internal tooling for managing large-scale data operations and security.",
-    tech: "PYTHON • DOCKER • AWS",
-    // Dark grey background with Orange text
-    imgUrl: "https://i.postimg.cc/T18mHGfX/image.png",
-    posters: {
-      back: "https://i.postimg.cc/T18mHGfX/image.png",
-      left: "https://i.postimg.cc/FHw6pdw1/image.png",
-      right: "https://i.postimg.cc/QtFky07v/image.png",
-      front: "https://i.postimg.cc/T18mHGfX/image.png",
-    },
-    // position: [3.5, 0, 0.5],
-    position: [2.8, 0, 0.5],
-    rotation: [0, -0.4, 0],
-    color: "#ffaa00"
-  }
-];
+// --- 2. COMPONENTS ---
 
-// --- 2. LOADING SCREEN ---
 function Loader() {
   return (
     <Html center>
-      <div style={{ color: '#00d8ff', fontFamily: '"Eurostile Round", sans-serif', fontWeight: 'bold', letterSpacing: '2px' }}>
-        INITIALIZING...
+      <div style={{ color: 'white', background: 'rgba(0,0,0,0.95)', padding: '20px 40px', borderRadius: '15px', border: '1px solid #333', textAlign: 'center' }}>
+        <h2 style={{ margin: 0, fontSize: '16px', letterSpacing: '2px', color: '#ff6b2b' }}>KALPNOVA</h2>
+        <p style={{ margin: '5px 0 0 0', opacity: 0.7, fontSize: '11px' }}>PREPARING SHOWCASE...</p>
       </div>
     </Html>
   );
 }
 
-// wall poster
-function WallPoster({
-  title,
-  url,
-  position,
-  rotation = [0, 0, 0],
-  size = [3.5, 5],
-  accent = "#ffffff",
-}) {
-  const texture = useTexture(url);
-
+function WallPoster({ url, position, rotation = [0, 0, 0], size = [4, 2.5] }) {
+  if (!url) return null;
+  const texture = useTexture(encodeURI(url));
   return (
-    <group position={position} rotation={rotation}>
-      {/* Heading */}
-      <Text
-        position={[0, size[1] / 2 + 0.6, 0.15]}
-        fontSize={0.28}
-        color={accent}
-        letterSpacing={0.08}
-      >
-        {title}
-      </Text>
-
-      {/* Frame */}
-      <mesh position={[0, 0, -0.08]}>
-        <planeGeometry args={[size[0] + 0.4, size[1] + 0.4]} />
-        <meshStandardMaterial
-          color="#2a2a2a"
-          roughness={0.4}
-          metalness={0.6}
-        />
-      </mesh>
-
-      {/* Poster (UNLIT, clean, readable) */}
-      <mesh>
-        <planeGeometry args={size} />
-        <meshBasicMaterial
-          map={texture}
-          toneMapped={false}
-        />
-      </mesh>
-
-      {/* Soft gallery accent */}
-      <spotLight
-        position={[0, size[1] / 2 + 1.8, 3]}
-        angle={0.55}
-        penumbra={1}
-        intensity={0.6}
-        color={accent}
-      />
-    </group>
+    <mesh position={position} rotation={rotation}>
+      <planeGeometry args={size} />
+      <meshBasicMaterial map={texture} toneMapped={false} />
+    </mesh>
   );
 }
 
 function ProjectRoom({ project }) {
-  const { posters, color, title } = project;
+  const { gallery, color, image } = project;
+  const displayImages = gallery && gallery.length > 0 ? gallery : [image];
+  const limitedImages = displayImages.slice(0, 12);
 
   return (
     <group>
-      {/* Room Shell */}
       <mesh>
-        <boxGeometry args={[12, 7, 12]} />
-        <meshStandardMaterial
-          color="#050505"
-          side={THREE.BackSide}
-          roughness={0.3}
-          metalness={0.8}
-        />
+        <boxGeometry args={[16, 8, 16]} />
+        <meshStandardMaterial color="#020202" side={THREE.BackSide} />
       </mesh>
-
-      {/* Floor */}
-      <gridHelper
-        args={[12, 12, 0x333333, 0x111111]}
-        position={[0, -3.4, 0]}
-      />
-
-      {/* BACK WALL */}
-      <WallPoster
-        title={`${title} — Overview`}
-        url={posters.back}
-        position={[0, 0, -5.85]}
-        size={[8, 5]}
-        accent={color}
-      />
-
-      {/* LEFT WALL */}
-      <WallPoster
-        title="Architecture"
-        url={posters.left}
-        position={[-5.85, 0, 0]}
-        rotation={[0, Math.PI / 2, 0]}
-        accent={color}
-      />
-
-      {/* RIGHT WALL */}
-      <WallPoster
-        title="Technology Stack"
-        url={posters.right}
-        position={[5.85, 0, 0]}
-        rotation={[0, -Math.PI / 2, 0]}
-        accent={color}
-      />
-
-      {/* FRONT WALL */}
-      <WallPoster
-        title="Concept & Vision"
-        url={posters.front}
-        position={[0, 0, 5.85]}
-        rotation={[0, Math.PI, 0]}
-        size={[4, 3]}
-        accent={color}
-      />
-
-      {/* Ambient room light */}
-      <ambientLight intensity={0.4} />
-
-      {/* Ceiling fill */}
-      <pointLight position={[0, 3, 0]} intensity={1.2} />
+      <gridHelper args={[16, 16, 0x222222, 0x111111]} position={[0, -3.9, 0]} />
+      <group position={[0, 0, -7.8]}>
+        {limitedImages.slice(0, 3).map((img, i) => (
+          <WallPoster key={`back-${i}`} url={img} position={[(i - 1) * 5, 0, 0]} />
+        ))}
+      </group>
+      <group position={[-7.8, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+        {limitedImages.slice(3, 6).map((img, i) => (
+          <WallPoster key={`left-${i}`} url={img} position={[(i - 1) * 5, 0, 0]} />
+        ))}
+      </group>
+      <group position={[7.8, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+        {limitedImages.slice(6, 9).map((img, i) => (
+          <WallPoster key={`right-${i}`} url={img} position={[(i - 1) * 5, 0, 0]} />
+        ))}
+      </group>
+      <group position={[0, 0, 7.8]} rotation={[0, Math.PI, 0]}>
+        {limitedImages.slice(9, 12).map((img, i) => (
+          <WallPoster key={`front-${i}`} url={img} position={[(i - 1) * 5, 0, 0]} />
+        ))}
+      </group>
+      <ambientLight intensity={1.5} />
+      <pointLight position={[0, 4, 0]} intensity={3} color={color} />
     </group>
   );
 }
 
-
-// --- 3. ROOM COMPONENT ---
-// function ProjectRoom({ project }) {
-//   return (
-//     <group>
-//       {/* Room Shell */}
-//       <mesh rotation={[0, 0, 0]}>
-//         <boxGeometry args={[12, 7, 12]} />
-//         <meshStandardMaterial color="#050505" side={THREE.BackSide} roughness={0.3} metalness={0.8} />
-//       </mesh>
-
-//       {/* Grid Floor */}
-//       <gridHelper args={[12, 12, 0x444444, 0x111111]} position={[0, -3.4, 0]} />
-
-//       {/* CENTER SCREEN (Main Image) */}
-//       <group position={[0, 0, -5.9]}>
-//         <Image url={project.imgUrl} scale={[8, 5]} transparent />
-//         <Text position={[0, -3, 0.1]} fontSize={0.2} color={project.color} letterSpacing={0.1}>
-//           INTERACTIVE TERMINAL // {project.title}
-//         </Text>
-//       </group>
-
-//       {/* LEFT WALL (Info) */}
-//       <group position={[-5.9, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-//         <Text position={[0, 1.5, 0.1]} fontSize={0.8} color="white" anchorX="center" font="https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxM.woff">
-//           {project.title}
-//         </Text>
-//         <Text position={[0, 0.5, 0.1]} fontSize={0.3} color={project.color} anchorX="center">
-//           {project.subtitle}
-//         </Text>
-//         <Text position={[0, -1, 0.1]} fontSize={0.25} color="#cccccc" anchorX="center" maxWidth={5} lineHeight={1.6}>
-//           {project.description}
-//         </Text>
-//       </group>
-
-//       {/* RIGHT WALL (Tech Stack) */}
-//       <group position={[5.9, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-//         <Text position={[0, 1.5, 0.1]} fontSize={0.4} color="white">
-//           SYSTEM SPEC
-//         </Text>
-//         <mesh position={[0, 1.2, 0]}>
-//           <boxGeometry args={[4, 0.05, 0.1]} />
-//           <meshBasicMaterial color={project.color} />
-//         </mesh>
-//         <Text position={[0, 0, 0.1]} fontSize={0.3} color="#aaaaaa" anchorX="center" maxWidth={4}>
-//           {project.tech}
-//         </Text>
-//       </group>
-
-//       {/* Lighting */}
-//       <pointLight position={[0, 3, 0]} intensity={1.5} distance={10} color="white" />
-//       <pointLight position={[-5, 0, 0]} intensity={2} distance={8} color={project.color} />
-//       <pointLight position={[5, 0, 0]} intensity={2} distance={8} color={project.color} />
-//     </group>
-//   );
-// }
-
-// --- 4. GALLERY CARD ---
 function GalleryCard({ project, onSelect, ...props }) {
   const ref = useRef();
   const [hovered, setHover] = useState(false);
   useCursor(hovered);
+  const texture = useTexture(encodeURI(project.imgUrl));
 
-  useFrame((state) => {
+  useFrame(() => {
     if (ref.current) {
-      const targetScale = hovered ? 1.15 : 1;
+      const targetScale = hovered ? 1.08 : 1;
       ref.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
-
-      // Look at mouse
-      // const x = state.pointer.x * 0.2;
-      const x = state.pointer.x * 0.12;
-      const y = state.pointer.y * 0.2;
-      ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, x + props.rotation[1], 0.1);
-      ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, -y, 0.1);
     }
   });
 
@@ -294,133 +89,168 @@ function GalleryCard({ project, onSelect, ...props }) {
       {...props}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
-      onClick={() => onSelect(project)}
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        onSelect(project);
+      }}
     >
-      <Image
-        url={project.imgUrl}
-        scale={[2.2, 1.45]}
-        opacity={0.85}
-        toneMapped={false}
-      />
-
-      {/* Glow frame behind image */}
-      <mesh position={[0, 0, -0.02]}>
-        <planeGeometry args={[2.55, 1.75]} />
-        <meshBasicMaterial color={hovered ? project.color : "#222"} />
+      <mesh position={[0, -0.4, -0.05]}>
+        <planeGeometry args={[5.0, 6.0]} />
+        <meshStandardMaterial color={hovered ? "#121212" : "#080808"} />
       </mesh>
-
-      <Text position={[0, -1.0, 0.1]} fontSize={0.15} color="white" font="https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxM.woff">
-        {project.title}
+      <mesh position={[0, 1.0, 0.02]}>
+        <planeGeometry args={[4.2, 2.6]} />
+        <meshBasicMaterial map={texture} toneMapped={false} />
+      </mesh>
+      <Text position={[0, -1.6, 0.1]} fontSize={0.3} color="white" fontWeight="black">
+        {project.shortName}
+      </Text>
+      <Text position={[0, -2.1, 0.1]} fontSize={0.14} color={project.color} letterSpacing={0.1}>
+        {project.category?.toUpperCase() || "PROJECT"}
       </Text>
     </group>
   );
 }
 
-// --- 5. MAIN COMPONENT ---
-export default function VirtualExhibition() {
-  const [activeProject, setActiveProject] = useState(null);
+function ProjectsGrid({ onSelectProject, setScrollProgress }) {
+  const { width } = useThree().size;
+  const scrollY = useRef(0);
+  const groupRef = useRef();
 
-  // Simple, safe inline styles
-  const containerStyle = { width: '100%', height: '100vh', background: '#000' };
-  const headerStyle = { position: 'absolute', top: 40, left: 40, zIndex: 10, pointerEvents: 'none' };
-  const btnStyle = {
-    position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)',
-    zIndex: 20, padding: '12px 30px', background: 'white', border: 'none',
-    color: 'black', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px'
-  };
+  // Responsive column logic
+  const cols = width < 600 ? 1 : width < 1050 ? 2 : 3;
+  const spacingX = width < 600 ? 0 : width < 1050 ? 6.5 : 6.5;
+  const spacingY = 6.2; 
+
+  const projects = useMemo(() => {
+    return portfolioItems
+      .filter(p => !p.isComingSoon)
+      .map((p, idx) => {
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        const x = (col - (cols - 1) / 2) * spacingX;
+        const y = -row * spacingY + 2;
+        const shortName = (p.client?.split('|')[0]?.split('(')[0]?.trim() || p.title).toUpperCase();
+        return {
+          ...p,
+          shortName,
+          color: THEME_COLORS[idx % THEME_COLORS.length],
+          position: [x, y, 0],
+          imgUrl: p.image || p.heroImage,
+        };
+      });
+  }, [cols, spacingX]);
+
+  // Scroll handling — prevent page scroll ONLY when within the 3D grid range
+  useEffect(() => {
+    const container = document.getElementById('virtual-exhibition-container');
+    if (!container) return;
+
+    const handleWheel = (e) => {
+      const totalRows = Math.ceil(projects.length / cols);
+      const maxScroll = (totalRows - 1) * spacingY;
+      
+      // Strict boundaries
+      const isAtTop = scrollY.current >= 1.95;
+      const isAtBottom = scrollY.current <= -maxScroll + 2.05;
+
+      // Determine if we should hijack
+      const scrollingUpAtTop = e.deltaY < 0 && isAtTop;
+      const scrollingDownAtBottom = e.deltaY > 0 && isAtBottom;
+
+      if (scrollingUpAtTop || scrollingDownAtBottom) {
+        // Let it pass to main page
+        return;
+      }
+
+      // Hijack and navigate 3D
+      if (e.cancelable) e.preventDefault();
+      e.stopPropagation();
+      
+      scrollY.current -= e.deltaY * 0.005; // Slower, more controlled scroll
+      scrollY.current = THREE.MathUtils.clamp(scrollY.current, -maxScroll + 2, 2);
+      
+      const currentProgress = (2 - scrollY.current) / (maxScroll || 1);
+      setScrollProgress(currentProgress);
+    };
+    
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, [projects.length, cols, spacingY, setScrollProgress]);
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, -scrollY.current, 0.1);
+    }
+  });
 
   return (
-    <div style={containerStyle}>
-      <SEO 
-        title="Virtual Showcase"
-        description="Experience an immersive 3D gallery showcasing Kalpnova's premium high-impact web, app, and enterprise solutions."
-        url="/showcase"
-      />
-      {/* <div style={headerStyle}>
-        <h1 style={{ margin: 0, fontSize: '3rem', color: 'white', fontFamily: 'sans-serif' }}>KALPNOVA</h1>
-        <p style={{ color: activeProject ? activeProject.color : '#fff', margin: 0, fontFamily: 'monospace' }}>
-          {activeProject ? `// ACCESSING: ${activeProject.title}` : '// SELECT MODULE'}
-        </p>
-      </div> */}
+    <group ref={groupRef}>
+      {projects.map((proj) => (
+        <GalleryCard key={proj.id} project={proj} onSelect={onSelectProject} position={proj.position} />
+      ))}
+    </group>
+  );
+}
 
-      {activeProject ? (
-        <button onClick={() => setActiveProject(null)} style={btnStyle}>
-          RETURN TO GALLERY
-        </button>
-      ) : (
-        <button onClick={() => window.location.href = '/insidekalpnova'} style={btnStyle}>
-          ⟵ BACK TO HUB
-        </button>
-      )}
+export default function VirtualExhibition() {
+  const [activeProject, setActiveProject] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-      <Canvas>
-        <color attach="background" args={['#050505']} />
+  return (
+    <div id="virtual-exhibition-container" style={{ width: '100%', height: '100vh', background: '#000', position: 'relative', overflow: 'hidden', touchAction: 'none' }}>
+      <SEO title="Virtual Showcase" description="Immersive 3D gallery." url="/showcase" />
 
-        {/* Safe Loader */}
+      <div style={{ position: 'absolute', left: 40, top: '50%', transform: 'translateY(-50%) rotate(-180deg)', zIndex: 100, writingMode: 'vertical-rl', textAlign: 'center' }}>
+         <h1 style={{ color: 'white', fontSize: '11px', letterSpacing: '8px', opacity: 0.3, margin: 0, fontWeight: 'normal', textTransform: 'uppercase' }}>VIRTUAL EXHIBITION</h1>
+      </div>
+
+      <div style={{ position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 100, display: 'flex', gap: '20px' }}>
+        {activeProject ? (
+          <button onClick={() => setActiveProject(null)} style={{ padding: '12px 30px', background: 'white', color: 'black', border: 'none', borderRadius: '40px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>
+            BACK TO GALLERY
+          </button>
+        ) : (
+          <button onClick={() => window.location.href = '/insidekalpnova'} style={{ padding: '12px 24px', background: 'transparent', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '30px', cursor: 'pointer', fontSize: '11px' }}>
+            EXIT
+          </button>
+        )}
+      </div>
+
+      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 15], fov: 50 }}>
+        <color attach="background" args={['#000000']} />
         <Suspense fallback={<Loader />}>
-
-          {/* Post Processing */}
-          <EffectComposer disableNormalPass>
-            {/* <Bloom luminanceThreshold={0.1} mipmapBlur intensity={1.5} radius={0.5} /> */}
-            <Bloom
-              luminanceThreshold={0.6}
-              intensity={0.6}
-              radius={0.4}
-            />
-            <Vignette eskil={false} offset={0.1} darkness={1.1} />
-          </EffectComposer>
-
           {activeProject ? (
-            <>
-              <PerspectiveCamera
-                makeDefault
-                position={[0, 0, 8]}
-                fov={38}
-              />
+            <group key={activeProject.id}>
+              <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={50} />
               <ProjectRoom project={activeProject} />
-              <OrbitControls enableZoom={false} enablePan={false} />
-            </>
+              <OrbitControls enableZoom={true} enablePan={true} />
+            </group>
           ) : (
-            // GALLERY MODE
-            <>
-              <ambientLight intensity={0.5} />
-              <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} color="#00d8ff" />
-              <pointLight position={[-10, -10, -10]} intensity={2} color="#ff0055" />
-
-              <Sparkles count={120} scale={10} size={3} speed={0.4} opacity={0.5} color="#ffffff" />
-
-              {/* <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
-               */}
-              <Float speed={2} rotationIntensity={0} floatIntensity={0.15}>
-                <group position={[0, -0.2, 0]}>
-                  {projects.map((proj) => (
-                    <GalleryCard
-                      key={proj.id}
-                      project={proj}
-                      onSelect={setActiveProject}
-                      position={proj.position}
-                      rotation={proj.rotation}
-                    />
-                  ))}
-                </group>
-              </Float>
-              <Environment preset="city" />
-              {/* <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} /> */}
-              <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={60} />
-              <OrbitControls
-                enableZoom={false}
-                enablePan={false}
-                rotateSpeed={0.6}
-                dampingFactor={0.08}
-                enableDamping
-                maxPolarAngle={Math.PI / 2}
-                minPolarAngle={Math.PI / 2}
-              />
-
-            </>
+            <group>
+              <ambientLight intensity={0.7} />
+              <pointLight position={[10, 10, 10]} intensity={1.5} />
+              <Sparkles count={40} scale={20} size={1} color="white" speed={0.2} />
+              <ProjectsGrid onSelectProject={setActiveProject} setScrollProgress={setScrollProgress} />
+              <Environment preset="night" />
+              <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+            </group>
           )}
         </Suspense>
       </Canvas>
+      
+      {!activeProject && (
+        <div style={{ position: 'absolute', right: '10px', top: '20%', height: '60%', width: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', zIndex: 100 }}>
+          <div style={{ 
+            width: '100%', 
+            height: '40px', 
+            background: 'rgba(255,255,255,0.3)', 
+            borderRadius: '10px', 
+            transform: `translateY(${scrollProgress * (window.innerHeight * 0.6 - 40)}px)`,
+            transition: 'transform 0.1s ease-out'
+          }} />
+        </div>
+      )}
     </div>
   );
 }
