@@ -82,12 +82,10 @@ const RelatedWorksMarquee = ({ othersProjects }) => {
     if (!el) return;
 
     const handleWheel = (e) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        // Already horizontal
-        return;
-      }
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
       e.preventDefault();
-      el.scrollLeft += e.deltaY;
+      // Smooth manual scroll injection
+      el.scrollLeft += e.deltaY * 0.5;
     };
 
     el.addEventListener('wheel', handleWheel, { passive: false });
@@ -120,6 +118,10 @@ const RelatedWorksMarquee = ({ othersProjects }) => {
       onTouchStart={() => setIsInteracting(true)}
       onTouchEnd={() => setIsInteracting(false)}
     >
+      {/* Edge Fades */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
+
       <div
         ref={scrollRef}
         onScroll={handleScroll}
@@ -154,7 +156,7 @@ const ProjectDetail = () => {
   const project = useMemo(() => portfolioItems.find(p => p.id === parseInt(id)), [id]);
 
   const othersProjects = useMemo(() => {
-    return portfolioItems.filter(p => p.id !== parseInt(id));
+    return portfolioItems.filter(p => p.id !== parseInt(id) && !p.isComingSoon);
   }, [id]);
 
   useEffect(() => {
@@ -224,16 +226,14 @@ const ProjectDetail = () => {
       {/* --- HERO BANNER --- */}
       <section className="w-full px-4 md:px-6 mb-16 mt-8 relative z-10">
         <div
-          className={`max-w-[1440px] mx-auto relative h-[400px] md:h-[600px] lg:h-[750px] overflow-hidden flex items-center justify-center bg-[#0a0a0a] rounded-[1.5rem] md:rounded-[2rem] border shadow-2xl transition-all duration-500 border-white/5 shadow-2xl group`}
+          className={`max-w-[1440px] mx-auto relative h-[300px] sm:h-[400px] md:h-[600px] lg:h-[750px] overflow-hidden flex items-center justify-center bg-[#0a0a0a] rounded-[1.5rem] md:rounded-[2rem] border shadow-2xl transition-all duration-500 border-white/5 shadow-2xl group`}
         >
           <img
             src={project.heroImage}
-            className="w-full h-full object-cover block"
+            className={`w-full h-full block ${project.id === 17 ? 'object-contain' : 'object-cover'}`}
             alt={project.title}
           />
           <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40 from-[#0b0b0b]"></div>
-
-
         </div>
       </section>
 
@@ -325,29 +325,6 @@ const ProjectDetail = () => {
             </motion.div>
           )}
 
-          {project.deliverables && (
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={Array.isArray(project.deliverables) ? 'md:col-span-2 mt-4 md:mt-8' : ''}>
-              <h3 className="font-heading text-lg font-black mb-6 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Deliverables</h3>
-              {Array.isArray(project.deliverables) ? (
-                <div className={`p-6 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border transition-all duration-500 bg-gradient-to-br from-[#111] to-[#0a0a0a] border-white/5 hover:border-[#ff6b2b]/50 group`}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                    {project.deliverables.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-4 group">
-                        <span className="w-6 h-6 mt-1 flex items-center justify-center rounded-full bg-[#1a1a1a] border border-white/10 group-hover:border-[#ff6b2b]/50 group-hover:bg-[#ff6b2b]/10 transition-all duration-300 text-green-500 shrink-0 text-sm">
-                          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span className={`text-base md:text-lg font-medium leading-snug transition-colors duration-500 text-gray-300 group-hover:text-white`}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <p className={`text-base md:text-lg leading-relaxed transition-colors duration-500 ${themeStyles.subText} whitespace-pre-wrap`}>
-                  {project.deliverables}
-                </p>
-              )}
-            </motion.div>
-          )}
 
           <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] border transition-all duration-500 ${themeStyles.card} hover:border-[#ff6b2b]/50 group`}>
             <h3 className="font-heading text-xl md:text-2xl font-black mb-6 uppercase flex items-center gap-4 transition-colors duration-500 text-white">
@@ -355,7 +332,7 @@ const ProjectDetail = () => {
               Impact
             </h3>
             <p className="text-lg md:text-2xl leading-relaxed font-medium transition-colors duration-500 text-gray-300">
-              {project.endorsement}
+              {project.endorsement || (typeof project.perceptionShift === 'string' ? project.perceptionShift : (project.perceptionShift[0]?.desc || "Exceptional results delivered through strategic design and execution."))}
             </p>
           </motion.div>
         </div>
@@ -374,12 +351,12 @@ const ProjectDetail = () => {
             <div className="md:col-span-4 space-y-6">
               <div>
                 <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase transition-colors duration-500 text-[#ff6b2b]">Sector</h3>
-                <p className="text-xl font-bold transition-colors duration-500 text-white tracking-wide">{project.industry.toUpperCase()}</p>
+                <p className="text-xl font-bold transition-colors duration-500 text-white tracking-wide">{project.industry.toLowerCase()}</p>
               </div>
               {project.targetAudience && (
                 <div>
                   <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Target Audience</h3>
-                  <p className="text-xl font-bold transition-colors duration-500 text-white">{project.targetAudience.toUpperCase()}</p>
+                  <p className="text-xl font-bold transition-colors duration-500 text-white">{project.targetAudience.toLowerCase()}</p>
                 </div>
               )}
             </div>
@@ -396,9 +373,9 @@ const ProjectDetail = () => {
             </motion.div>
             <div className="w-full h-[500px] md:h-[680px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl relative">
               <iframe
-                src="/clients/lioncut/3D stall.html"
+                src="/clients/lioncut/3D stall.html?v=1.2"
                 title="Lioncut 3D Exhibition Stall"
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 bg-[#0b0b0b]"
                 loading="lazy"
                 allow="accelerometer; autoplay"
               />

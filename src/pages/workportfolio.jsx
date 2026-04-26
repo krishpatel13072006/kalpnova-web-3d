@@ -5,31 +5,15 @@ import { ArrowUpRight } from 'lucide-react';
 import { portfolioItems } from '../data/portfolio';
 
 // ─── Category map: match each project by id to a category ───────────────────
-const categoryMap = {
-  8: 'Digital',
-  10: 'Branding',
-  11: 'Branding',
-  12: 'Branding',
-  13: 'Packaging',
-  14: 'Digital',
-  15: 'Social Media',
-  16: 'Branding',
-  19: 'Social Media',
-  20: 'Branding',
-  21: 'Social Media',
-  22: 'Branding',
-  23: 'Branding',
-};
-
-const CATEGORIES = ['All', 'Branding', 'Packaging', 'Social Media', 'Digital'];
+const CATEGORIES = ['All', 'Branding', 'Printing', 'Social Media', 'Social Media and Branding'];
 
 // ─── Category description strings ────────────────────────────────────────────
 const categoryDescriptions = {
   All: 'We craft end-to-end brand experiences — from deep strategy and sharp identity to print, digital, and motion.',
   Branding: 'Branding goes beyond logos and colours. It\'s about defining your brand\'s personality. We build each brand from the ground up, shaping it into a distinct character that communicates clearly who you are.',
-  Packaging: 'Great packaging is a silent salesperson. We design packaging that commands shelf presence, tells a story, and converts browsers into buyers.',
+  Printing: 'Precision print solutions for the industrial and commercial sector. From complex technical invitations to large-format displays, we ensure every detail is sharp, professional, and impactful.',
   'Social Media': 'Scroll-stopping creatives and content systems built for engagement. Every post is a strategic asset — designed to grow brand recall and drive real interaction.',
-  Digital: 'High-performance digital experiences: websites, apps, and dashboards crafted for clarity, speed, and conversion. We turn complex problems into elegant solutions.',
+  'Social Media and Branding': 'Complete digital and visual identity ecosystems. We bridge the gap between core brand strategy and everyday social engagement, building cohesive presence across all platforms.',
 };
 
 // ─── Animation Presets (Exact original parameters) ───────────────────────────
@@ -103,7 +87,7 @@ const PortfolioCard = memo(({ item }) => {
         {/* Category pill */}
         <div className="px-2 mb-2">
           <span className="text-[9px] font-black uppercase tracking-widest text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
-            {categoryMap[item.id] || 'Work'}
+            {item.category || 'Work'}
           </span>
         </div>
 
@@ -125,10 +109,16 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const HeadingTag = headingLevel;
 
+  const { availableItems, comingSoonItems } = useMemo(() => {
+    const available = portfolioItems.filter(item => !item.isComingSoon && (item.image || item.heroImage));
+    const comingSoon = portfolioItems.filter(item => item.isComingSoon || (!item.image && !item.heroImage));
+    return { availableItems: available, comingSoonItems: comingSoon };
+  }, []);
+
   const filteredItems = useMemo(() => {
-    if (activeCategory === 'All') return portfolioItems;
-    return portfolioItems.filter(item => categoryMap[item.id] === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === 'All') return availableItems;
+    return availableItems.filter(item => item.category === activeCategory);
+  }, [activeCategory, availableItems]);
 
   return (
     <div className="w-full min-h-screen bg-[#0b0b0b] text-[#f4f4f4]  relative overflow-x-hidden pt-24 md:pt-32 selection:bg-[#ff6b2b] selection:text-white">
@@ -200,6 +190,39 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               <PortfolioCard key={item.id} item={item} />
             ))}
           </motion.div>
+
+          {/* ── COMING SOON SECTION ─────────────────────────────────── */}
+          {comingSoonItems.length > 0 && activeCategory === 'All' && (
+            <div className="mt-32">
+              <motion.div
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="mb-12"
+              >
+                <p className="text-[10px] font-black uppercase text-gray-500 mb-3 tracking-[0.3em]">
+                  Next Projects
+                </p>
+                <h2 className="font-heading text-4xl md:text-6xl font-black uppercase text-white/30 italic">
+                  Coming <span className="text-white/10">Soon</span>
+                </h2>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 opacity-60">
+                {comingSoonItems.map((item) => (
+                  <div key={item.id} className="group flex flex-col border border-white/5 rounded-3xl p-6 bg-white/[0.02] grayscale hover:grayscale-0 transition-all duration-700">
+                     <div className="w-full aspect-video rounded-2xl overflow-hidden bg-[#111] mb-6 flex items-center justify-center border border-white/5">
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-[#ff6b2b]/40 transition-colors">Under Development</span>
+                     </div>
+                     <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 mb-3 block">{item.category || 'Project'}</span>
+                     <h3 className="font-heading text-xl font-black text-white/40 uppercase mb-2">{item.client || item.title}</h3>
+                     <p className="text-[10px] text-gray-600 uppercase font-bold">{item.type}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* ── CONTACT SECTION ─────────────────────────────────────── */}
           <section className="mt-24 pt-12 border-t border-white/5 relative z-10">

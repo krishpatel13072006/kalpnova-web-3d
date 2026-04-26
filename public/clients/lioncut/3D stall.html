@@ -148,23 +148,29 @@
         const TL = new THREE.TextureLoader();
 
         function loadMat(path, roughness = 0.65) {
-            const tex = TL.load(path, () => { tex.needsUpdate = true; renderer.render(scene, camera); });
-            tex.encoding = THREE.sRGBEncoding;
-            tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-            return new THREE.MeshStandardMaterial({ map: tex, roughness });
+            const tex = TL.load(path, (t) => {
+                t.encoding = THREE.sRGBEncoding;
+                t.anisotropy = 16;
+                t.minFilter = THREE.LinearFilter;
+                t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+                t.needsUpdate = true;
+                renderer.render(scene, camera);
+            });
+            return new THREE.MeshStandardMaterial({ 
+                map: tex, 
+                roughness: roughness,
+                metalness: 0.1,
+                side: THREE.DoubleSide
+            });
         }
 
         // Map each print file to its wall:
-        //  Banner_Print.webp      → Fascia (top header board)
-        //  wall_3_Print.webp      → Back wall (main facing wall)
-        //  rightwall_print.webp   → Right side wall inner face
-        //  Table_Print.webp       → Left side wall inner face
-        //  Table_Small_Print.webp → Front counter face
-        const matFascia       = loadMat('Banner_Print.webp',      0.55);
-        const matBackWall     = loadMat('wall_3_Print.webp',       0.65);
-        const matRightWall    = loadMat('rightwall_print.webp',    0.65);
-        const matLeftWall     = loadMat('Table_Print.webp',        0.65);
-        const matFrontCounter = loadMat('Table_Small_Print.webp',  0.55);
+        const matFascia       = loadMat('backwall.webp',   0.55); // Banner image
+        const matBackWall     = loadMat('backwall.webp',   0.4); // Lower roughness for better visibility
+        const matRightWall    = loadMat('rightwall.webp',         0.65);
+        const matLeftWall     = loadMat('leftwall.webp',          0.65);
+        const matFrontCounter = loadMat('Table_Print.webp',       0.55);
+        const matRightPodium  = loadMat('Table_Small_Print.webp', 0.55);
 
         // ── Helpers ────────────────────────────────────────────────────
         function box(w, h, d, mats) {
@@ -238,7 +244,7 @@
 
         // ── Right Podium & Rotating Drill Bit ────────────────────────
         const pW = 1.8, pH = 0.9, pD = 1.0;
-        const podium = box(pW, pH, pD, matWhite);
+        const podium = box(pW, pH, pD, [matWhite, matWhite, matWhite, matWhite, matRightPodium, matWhite]);
         podium.position.set(stallWidth / 2 - pW / 2 - wallThick, pH / 2, stallDepth / 2 - pD / 2);
         podium.castShadow = podium.receiveShadow = true;
         stall.add(podium);
