@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { portfolioItems } from '../data/portfolio';
 
 // ─── Category map: match each project by id to a category ───────────────────
-const CATEGORIES = ['All', 'Branding', 'Printing', 'Social Media', 'Social Media and Branding'];
+const CATEGORIES = ['All', 'Branding', 'Printing', 'Social Media'];
 
 // ─── Category description strings ────────────────────────────────────────────
 const categoryDescriptions = {
@@ -13,7 +13,6 @@ const categoryDescriptions = {
   Branding: 'Branding goes beyond logos and colours. It\'s about defining your brand\'s personality. We build each brand from the ground up, shaping it into a distinct character that communicates clearly who you are.',
   Printing: 'Precision print solutions for the industrial and commercial sector. From complex technical invitations to large-format displays, we ensure every detail is sharp, professional, and impactful.',
   'Social Media': 'Scroll-stopping creatives and content systems built for engagement. Every post is a strategic asset — designed to grow brand recall and drive real interaction.',
-  'Social Media and Branding': 'Complete digital and visual identity ecosystems. We bridge the gap between core brand strategy and everyday social engagement, building cohesive presence across all platforms.',
 };
 
 // ─── Animation Presets (Exact original parameters) ───────────────────────────
@@ -76,7 +75,7 @@ const PortfolioCard = memo(({ item }) => {
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                <span className="text-[#ff6b2b] font-bold text-sm tracking-widest uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <span className="text-[#ff6b2b] font-bold text-sm uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   View Case Study →
                 </span>
               </div>
@@ -86,7 +85,7 @@ const PortfolioCard = memo(({ item }) => {
 
         {/* Category pill */}
         <div className="px-2 mb-2">
-          <span className="text-[9px] font-black uppercase tracking-widest text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
+          <span className="text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
             {item.category || 'Work'}
           </span>
         </div>
@@ -130,7 +129,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
             variants={fadeInUp} initial="hidden" animate="visible"
             className="pt-0 pb-8 flex flex-col"
           >
-            <p className="text-[10px] font-black uppercase text-[#ff6b2b] mb-3">
+            <p className="text-sm font-black uppercase text-[#ff6b2b] mb-3">
               Work Portfolio
             </p>
             <HeadingTag className="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none text-white">
@@ -147,7 +146,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest border transition-all duration-300
+                className={`px-5 py-2 rounded-full text-xs font-black uppercase border transition-all duration-300
                   ${activeCategory === cat
                     ? 'bg-[#ff6b2b] border-[#ff6b2b] text-white shadow-[0_0_20px_rgba(255,107,43,0.4)]'
                     : 'bg-transparent border-white/20 text-white/60 hover:border-white/50 hover:text-white'
@@ -168,7 +167,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               transition={{ duration: 0.35 }}
               className="mb-12 md:mb-16 flex flex-col gap-4 border-b border-white/5 pb-10"
             >
-              <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none text-white shrink-0 italic">
+              <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-none text-white shrink-0 italic">
                 {activeCategory}
               </h2>
               <p className="text-sm md:text-base text-white/50 max-w-xl leading-relaxed">
@@ -200,27 +199,27 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               viewport={{ once: true, amount: 0.1 }}
               className="space-y-8"
             >
-              <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-normal">
+              <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight uppercase">
                 Got big plans for your brand or a <br className="hidden md:block" /> new project?{' '}
                 <span className="text-[#ff6b2b]">Let's chat!</span>
               </h2>
               <div className="space-y-12 pt-6">
                 <div className="flex flex-col gap-6">
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">Business Inquiries</p>
-                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20discussing%20a%20project%20with%20Kalpnova" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                    <p className="text-xs uppercase text-[#ff6b2b] mb-2">Business Inquiries</p>
+                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20discussing%20a%20project%20with%20Kalpnova" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                       Let's Talk Business <ArrowUpRight size={20} />
                     </a>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">Career</p>
-                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20joining%20the%20Kalpnova%20team" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                    <p className="text-xs uppercase text-[#ff6b2b] mb-2">Career</p>
+                    <a href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20joining%20the%20Kalpnova%20team" target="_blank" rel="noopener noreferrer" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                       Join Our Team <ArrowUpRight size={20} />
                     </a>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-[#ff6b2b] mb-2">General</p>
-                    <Link to="/contact" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors tracking-tight flex items-center gap-2">
+                    <p className="text-xs uppercase text-[#ff6b2b] mb-2">General</p>
+                    <Link to="/contact" className="text-lg md:text-2xl font-bold text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                       Contact Us <ArrowUpRight size={20} />
                     </Link>
                   </div>

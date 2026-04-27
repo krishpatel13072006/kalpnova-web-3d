@@ -6,8 +6,8 @@ export const portfolioItems = [
     client: "BoostIQ | Sports Nutrition Brand",
     type: "Product Catalog Design, Print & Digital Media",
     category: "Printing",
-    image: "/clients/BoostIQ/1.jpg",
-    heroImage: "/clients/BoostIQ/1.jpg",
+    image: "/clients/BoostIQ/banner.webp",
+    heroImage: "/clients/BoostIQ/banner.webp",
     tags: "Product Catalog Design, Print & Digital Media",
     targetAudience: "Gym Enthusiasts & Workout Athletes",
     brandOverview: "BoostIQ is a performance-driven nutraceuticals brand offering science-backed supplements for gym enthusiasts and fitness athletes. They needed a comprehensive product catalog system that educates while maintaining premium shelf appeal.",
@@ -43,13 +43,13 @@ export const portfolioItems = [
         badge: "Enterprise Grade"
       }
     ],
-    billboardImage: "/clients/BoostIQ/2.jpg",
+    billboardImage: "/clients/BoostIQ/banner.webp",
     billboardTitle: "Performance-Driven Catalog Strategy",
-    videoThumbnail: "/clients/BoostIQ/3.jpg",
+    videoThumbnail: "/clients/BoostIQ/3.webp",
     videoText: "BoostIQ | Performance-Driven Catalog Design...",
     services: "Catalog Design, Layout Strategy, Brand Consistency",
     industry: "Sports Nutrition / E-commerce",
-    galleryLayout: "2-col",
+    galleryLayout: "3-col",
     stats: [
       { label: "SKUs Managed", value: "50+" },
       { label: "Market Reach", value: "National" },
@@ -61,7 +61,19 @@ export const portfolioItems = [
       "/clients/BoostIQ/3.jpg",
       "/clients/BoostIQ/4.jpg",
       "/clients/BoostIQ/5.jpg",
-      "/clients/BoostIQ/6.jpg"
+      "/clients/BoostIQ/6.jpg",
+      "/clients/BoostIQ/1.webp",
+      "/clients/BoostIQ/2.webp",
+      "/clients/BoostIQ/3.webp",
+      "/clients/BoostIQ/4.webp",
+      "/clients/BoostIQ/5.webp",
+      "/clients/BoostIQ/6.webp",
+      "/clients/BoostIQ/7.webp",
+      "/clients/BoostIQ/8.webp",
+      "/clients/BoostIQ/9.webp",
+      "/clients/BoostIQ/10.webp",
+      "/clients/BoostIQ/11.webp",
+      "/clients/BoostIQ/12.webp"
     ]
   },
 
@@ -289,7 +301,7 @@ export const portfolioItems = [
     title: "Brand Identity & Social Media Design for Digital Innovation Agency",
     client: "Pixal Plus",
     type: "Digital Strategy, UI/UX, Dev",
-    category: "Social Media and Branding",
+    category: "Social Media",
     image: "/clients/Pixal Plus/pixel plus banner.webp",
     heroImage: "/clients/Pixal Plus/pixel plus banner.webp",
     tags: "Digital Strategy, UI/UX, Dev",

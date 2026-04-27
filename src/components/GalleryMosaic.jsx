@@ -159,6 +159,25 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
     );
   };
 
+  const renderTrio = (items, imgClass, onImageClick) => {
+    const rows = [];
+    for (let i = 0; i < items.length; i += 3) rows.push(items.slice(i, i + 3));
+
+    return (
+      <div className="space-y-[16px]">
+        {rows.map((row, ri) => (
+          <div key={ri} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] items-start">
+            {row.map((item, idx) => (
+              <div key={idx} className="overflow-hidden">
+                {renderTileWithClick(item.src, 'w-full', imgClass, onImageClick)}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const renderMasonry = (items, imgClass, onImageClick) => (
     <div
       className="columns-2 md:columns-3"
@@ -451,6 +470,10 @@ const GalleryMosaic = ({ images, layout = "auto" }) => {
               renderSchoolG(classified, openLightbox)
             ) : layout === "thumbnail" ? (
               renderThumbnailGrid(classified, openLightbox)
+            ) : layout === "2-col" ? (
+              renderDuo(classified, 'object-contain', openLightbox)
+            ) : layout === "3-col" ? (
+              renderTrio(classified, 'object-contain', openLightbox)
             ) : (
               rows.map((row, rowIdx) => (
                 <div key={rowIdx}>

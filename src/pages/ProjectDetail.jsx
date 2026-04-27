@@ -28,7 +28,7 @@ const ProjectCard = ({ proj }) => (
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-            <span className="text-[#ff6b2b] font-bold text-sm tracking-widest uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+            <span className="text-[#ff6b2b] font-bold text-sm uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               View Case Study →
             </span>
           </div>
@@ -36,7 +36,7 @@ const ProjectCard = ({ proj }) => (
       </div>
     </div>
     <div className="px-2 mb-2">
-      <span className="text-[9px] font-black uppercase tracking-widest text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
+      <span className="text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
         {proj.category || 'Work'}
       </span>
     </div>
@@ -202,7 +202,7 @@ const ProjectDetail = () => {
           >
             <Link to="/portfolio" className="flex items-center gap-2 mb-4 hover:translate-x-[-4px] transition-transform text-[#ff6b2b]">
               <ArrowLeft size={16} />
-              <span className="text-[10px] font-bold uppercase">Back to Portfolio</span>
+              <span className="text-sm font-bold uppercase">Back to Portfolio</span>
             </Link>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase leading-[0.9] transition-colors duration-500 text-white">
               {project.title}
@@ -276,7 +276,7 @@ const ProjectDetail = () => {
 
           {project.perceptionShift && (
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={Array.isArray(project.perceptionShift) ? 'md:col-span-2 mt-4 md:mt-8' : ''}>
-              <h3 className="font-heading text-xl md:text-2xl font-black mb-6 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">
+              <h3 className="font-heading text-xl md:text-2xl font-black mb-6 uppercase border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">
                 {project.perceptionShiftTitle || "Impact"}
               </h3>
               {Array.isArray(project.perceptionShift) ? (
@@ -285,7 +285,7 @@ const ProjectDetail = () => {
                     <div key={idx} className={`p-6 md:p-8 rounded-[1.5rem] border transition-all duration-500 ${themeStyles.card} hover:border-[#ff6b2b]/50 group`}>
                       <div className="flex items-center gap-4 mb-4">
                         <span className="text-3xl transition-all duration-500">{item.icon}</span>
-                        <h4 className="font-heading text-xl font-bold text-white tracking-tight leading-tight">{item.title}</h4>
+                        <h4 className="font-heading text-xl font-bold text-white leading-tight">{item.title}</h4>
                       </div>
                       <p className={`text-base leading-relaxed transition-colors duration-500 ${themeStyles.subText}`}>
                         {item.desc}
@@ -303,7 +303,7 @@ const ProjectDetail = () => {
 
           {project.creativeExecution && (
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={Array.isArray(project.creativeExecution) ? 'md:col-span-2 mt-4 md:mt-8' : ''}>
-              <h3 className="font-heading text-lg font-black mb-6 uppercase tracking-widest border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Creative Execution</h3>
+              <h3 className="font-heading text-lg font-black mb-6 uppercase border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">Creative Execution</h3>
               {Array.isArray(project.creativeExecution) ? (
                 <div className={`p-6 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border transition-all duration-500 bg-gradient-to-br from-[#111] to-[#0a0a0a] border-white/5 hover:border-[#ff6b2b]/50 group`}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
@@ -326,12 +326,11 @@ const ProjectDetail = () => {
           )}
 
 
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] border transition-all duration-500 ${themeStyles.card} hover:border-[#ff6b2b]/50 group`}>
-            <h3 className="font-heading text-xl md:text-2xl font-black mb-6 uppercase flex items-center gap-4 transition-colors duration-500 text-white">
-              <span className="w-8 md:w-12 h-px bg-[#ff6b2b]"></span>
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <h3 className="font-heading text-xl md:text-2xl font-black mb-6 uppercase border-l-4 pl-4 transition-colors duration-500 text-white border-[#ff6b2b]">
               Impact
             </h3>
-            <p className="text-lg md:text-2xl leading-relaxed font-medium transition-colors duration-500 text-gray-300">
+            <p className="text-base md:text-lg leading-relaxed transition-colors duration-500 text-gray-400">
               {project.endorsement || (typeof project.perceptionShift === 'string' ? project.perceptionShift : (project.perceptionShift[0]?.desc || "Exceptional results delivered through strategic design and execution."))}
             </p>
           </motion.div>
@@ -344,18 +343,18 @@ const ProjectDetail = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
             <div className="md:col-span-8">
               <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase transition-colors duration-500 text-[#ff6b2b]">Services Provided</h3>
-              <p className="text-lg md:text-xl font-bold leading-relaxed tracking-tight transition-colors duration-500 text-white">
+              <p className="text-lg md:text-xl font-bold leading-relaxed transition-colors duration-500 text-white">
                 {project.services}
               </p>
             </div>
             <div className="md:col-span-4 space-y-6">
               <div>
                 <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase transition-colors duration-500 text-[#ff6b2b]">Sector</h3>
-                <p className="text-xl font-bold transition-colors duration-500 text-white tracking-wide">{project.industry.toLowerCase()}</p>
+                <p className="text-xl font-bold transition-colors duration-500 text-white">{project.industry.toLowerCase()}</p>
               </div>
               {project.targetAudience && (
                 <div>
-                  <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase tracking-[0.3em] transition-colors duration-500 text-[#ff6b2b]">Target Audience</h3>
+                  <h3 className="font-heading text-base md:text-lg font-black mb-3 md:mb-4 uppercase transition-colors duration-500 text-[#ff6b2b]">Target Audience</h3>
                   <p className="text-xl font-bold transition-colors duration-500 text-white">{project.targetAudience.toLowerCase()}</p>
                 </div>
               )}
@@ -367,7 +366,7 @@ const ProjectDetail = () => {
         {project.id === 17 && (
           <section className="mt-24 md:mt-32">
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#ff6b2b] block mb-3">Interactive 3D Preview</span>
+              <span className="text-[10px] font-black uppercase text-[#ff6b2b] block mb-3">Interactive 3D Preview</span>
               <h2 className="font-heading text-2xl md:text-4xl font-black uppercase text-white">Exhibition <span className="text-gray-700 italic">Stall</span></h2>
               <p className="text-sm text-gray-500 mt-3">Drag to rotate · Scroll to zoom · Right-click to pan</p>
             </motion.div>
@@ -391,7 +390,7 @@ const ProjectDetail = () => {
               href={project.appUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 px-10 py-5 bg-[#ff6b2b] text-white rounded-full font-bold text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-[#ff6b2b] transition-all duration-300 shadow-[0_0_30px_rgba(255,107,43,0.3)] hover:shadow-[0_0_50px_rgba(255,107,43,0.6)] group scale-105"
+              className="inline-flex items-center gap-4 px-10 py-5 bg-[#ff6b2b] text-white rounded-full font-bold text-sm uppercase hover:bg-white hover:text-[#ff6b2b] transition-all duration-300 shadow-[0_0_30px_rgba(255,107,43,0.3)] hover:shadow-[0_0_50px_rgba(255,107,43,0.6)] group scale-105"
             >
               Download Application
               <ArrowUpRight size={20} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -403,16 +402,16 @@ const ProjectDetail = () => {
         <section className="mt-24 pt-24 border-t border-white/5 relative z-10 overflow-hidden">
           <div className="flex items-center justify-between mb-16 px-6">
             <div className="space-y-4">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#ff6b2b]">
+              <span className="text-[10px] font-black uppercase text-[#ff6b2b]">
                 Next Chapter
               </span>
               <h2 className="font-heading text-4xl md:text-7xl font-black uppercase text-white">
-                Related <span className="text-gray-700 italic">Works</span>
+                Related <span className="text-[#ff6b2b] italic">Works</span>
               </h2>
             </div>
             <Link
               to="/portfolio"
-              className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white/50 hover:text-[#ff6b2b] transition-colors"
+              className="group flex items-center gap-3 text-xs font-black uppercase text-white/50 hover:text-[#ff6b2b] transition-colors"
             >
               View Full Portfolio
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -438,7 +437,7 @@ const ProjectDetail = () => {
             <div className="space-y-8 md:space-y-12 pt-4 md:pt-6">
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Business Inquiries</p>
+                  <p className={`text-xs uppercase mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Business Inquiries</p>
                   <a
                     href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20discussing%20a%20project%20with%20Kalpnova"
                     target="_blank"
@@ -450,7 +449,7 @@ const ProjectDetail = () => {
                 </div>
 
                 <div>
-                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Career</p>
+                  <p className={`text-xs uppercase mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>Career</p>
                   <a
                     href="https://wa.me/919662479165?text=Hi%20I%27m%20interested%20in%20joining%20the%20Kalpnova%20team"
                     target="_blank"
@@ -462,7 +461,7 @@ const ProjectDetail = () => {
                 </div>
 
                 <div>
-                  <p className={`text-xs uppercase tracking-widest mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>General</p>
+                  <p className={`text-xs uppercase mb-2 ${isLight ? 'text-[#e31e24]' : 'text-[#ff6b2b]'}`}>General</p>
                   <Link
                     to="/contact"
                     className={`text-lg md:text-2xl font-bold transition-all duration-500 flex items-center gap-2 ${isLight ? 'text-zinc-500 hover:text-[#e31e24]' : 'text-gray-400 hover:text-white'}`}

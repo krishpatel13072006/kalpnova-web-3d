@@ -91,7 +91,19 @@ function GalleryCard({ project, onSelect, ...props }) {
       onPointerOut={() => setHover(false)}
       onPointerDown={(e) => {
         e.stopPropagation();
-        onSelect(project);
+        // Record start position to distinguish between tap and scroll
+        ref.current.userData.pointerDownPos = { x: e.clientX, y: e.clientY };
+      }}
+      onPointerUp={(e) => {
+        e.stopPropagation();
+        const downPos = ref.current.userData.pointerDownPos;
+        if (downPos) {
+          const dist = Math.sqrt(Math.pow(e.clientX - downPos.x, 2) + Math.pow(e.clientY - downPos.y, 2));
+          // If moved less than 10px, it's a click
+          if (dist < 10) {
+            onSelect(project);
+          }
+        }
       }}
     >
       <mesh position={[0, -0.4, -0.05]}>
@@ -150,32 +162,58 @@ function ProjectsGrid({ onSelectProject, setScrollProgress }) {
       const totalRows = Math.ceil(projects.length / cols);
       const maxScroll = (totalRows - 1) * spacingY;
       
-      // Strict boundaries
       const isAtTop = scrollY.current >= 1.95;
       const isAtBottom = scrollY.current <= -maxScroll + 2.05;
 
-      // Determine if we should hijack
-      const scrollingUpAtTop = e.deltaY < 0 && isAtTop;
-      const scrollingDownAtBottom = e.deltaY > 0 && isAtBottom;
+      if ((e.deltaY < 0 && isAtTop) || (e.deltaY > 0 && isAtBottom)) return;
 
-      if (scrollingUpAtTop || scrollingDownAtBottom) {
-        // Let it pass to main page
-        return;
-      }
-
-      // Hijack and navigate 3D
       if (e.cancelable) e.preventDefault();
       e.stopPropagation();
       
-      scrollY.current -= e.deltaY * 0.005; // Slower, more controlled scroll
+      scrollY.current -= e.deltaY * 0.005;
       scrollY.current = THREE.MathUtils.clamp(scrollY.current, -maxScroll + 2, 2);
       
       const currentProgress = (2 - scrollY.current) / (maxScroll || 1);
       setScrollProgress(currentProgress);
     };
+
+    let touchStartY = 0;
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchY;
+      touchStartY = touchY;
+
+      const totalRows = Math.ceil(projects.length / cols);
+      const maxScroll = (totalRows - 1) * spacingY;
+
+      const isAtTop = scrollY.current >= 1.95;
+      const isAtBottom = scrollY.current <= -maxScroll + 2.05;
+
+      if ((deltaY < 0 && isAtTop) || (deltaY > 0 && isAtBottom)) return;
+
+      if (e.cancelable) e.preventDefault();
+      e.stopPropagation();
+
+      scrollY.current -= deltaY * 0.015; // Adjusted sensitivity for touch
+      scrollY.current = THREE.MathUtils.clamp(scrollY.current, -maxScroll + 2, 2);
+
+      const currentProgress = (2 - scrollY.current) / (maxScroll || 1);
+      setScrollProgress(currentProgress);
+    };
     
     container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
+    container.addEventListener('touchstart', handleTouchStart, { passive: false });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
   }, [projects.length, cols, spacingY, setScrollProgress]);
 
   useFrame(() => {
@@ -205,14 +243,45 @@ export default function VirtualExhibition() {
          <h1 style={{ color: 'white', fontSize: '11px', letterSpacing: '8px', opacity: 0.3, margin: 0, fontWeight: 'normal', textTransform: 'uppercase' }}>VIRTUAL EXHIBITION</h1>
       </div>
 
-      <div style={{ position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)', zIndex: 100, display: 'flex', gap: '20px' }}>
+      {/* Top Left Navigation (Below Navbar) */}
+      <div style={{ position: 'absolute', left: '40px', top: '120px', zIndex: 100 }}>
         {activeProject ? (
-          <button onClick={() => setActiveProject(null)} style={{ padding: '12px 30px', background: 'white', color: 'black', border: 'none', borderRadius: '40px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>
-            BACK TO GALLERY
+          <button 
+            onClick={() => setActiveProject(null)} 
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              color: '#ff6b2b', 
+              fontSize: '14px', 
+              fontWeight: '900', 
+              textTransform: 'uppercase', 
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: 0
+            }}
+          >
+            ← BACK TO GALLERY
           </button>
         ) : (
-          <button onClick={() => window.location.href = '/insidekalpnova'} style={{ padding: '12px 24px', background: 'transparent', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '30px', cursor: 'pointer', fontSize: '11px' }}>
-            EXIT
+          <button 
+            onClick={() => window.location.href = '/insidekalpnova'} 
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              color: '#ff6b2b', 
+              fontSize: '14px', 
+              fontWeight: '900', 
+              textTransform: 'uppercase', 
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: 0
+            }}
+          >
+            ← EXIT SHOWCASE
           </button>
         )}
       </div>
