@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx puppeteer browsers install chrome && vite build",
-    "postbuild": "node scripts/prerender.cjs",
+    "build": "vite build",
+    "build:local": "npx puppeteer browsers install chrome && vite build && node scripts/prerender.cjs",
+    "postbuild": "node -e \"if(!process.env.VERCEL) { try { require('./scripts/prerender.cjs') } catch(e) {} }\"",
     "lint": "eslint .",
     "preview": "vite preview"
   },
