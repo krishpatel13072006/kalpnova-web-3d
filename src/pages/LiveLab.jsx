@@ -111,7 +111,7 @@ export default function LiveLab() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase transition-all duration-300 border ${
+                className={`inline-flex items-center justify-center px-5 h-8 pt-[2px] rounded-full text-[10px] font-bold uppercase transition-all duration-300 border ${
                   activeCategory === cat 
                   ? 'bg-orange-500 border-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.3)]' 
                   : 'bg-white/5 border-white/10 text-zinc-500 hover:border-white/20 hover:text-white'
@@ -156,7 +156,7 @@ export default function LiveLab() {
                   {/* PROJECT INFO - SEO TEXT BLOCK (TOP) */}
                   <div className="w-full max-w-4xl">
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-[10px] font-black py-1 px-3 bg-orange-500/10 text-orange-500 rounded-full uppercase border border-orange-500/20">
+                      <span className="inline-flex items-center justify-center h-6 pt-[2px] px-3 bg-orange-500/10 text-orange-500 rounded-full text-[10px] font-black uppercase border border-orange-500/20">
                         {site.type} System
                       </span>
                     </div>

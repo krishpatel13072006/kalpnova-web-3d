@@ -57,9 +57,9 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER */}
         <div className="max-w-2xl">
-          <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
+          <span className="inline-flex items-center justify-center mb-4 px-4 h-8 text-xs tracking-widest
                            rounded-full border border-orange-500/30
-                           text-orange-500">
+                           text-orange-500 uppercase font-bold pt-[2px]">
             TESTIMONIALS
           </span>
 
@@ -87,13 +87,14 @@ export default function Testimonials() {
                          transition-all duration-300
                          hover:-translate-y-2
                          hover:border-orange-500/30
-                         hover:shadow-[0_0_60px_rgba(226,74,43,0.25)]"
+                         hover:shadow-[0_0_60px_rgba(226,74,43,0.25)]
+                         flex flex-col h-full"
             >
-              <p className="leading-relaxed mb-6 text-[#FFE1C5] font-heading">
+              <p className="leading-relaxed mb-6 text-[#FFE1C5] font-heading flex-grow text-justify">
                 “{item.quote}”
               </p>
 
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-white/10 mt-auto">
                 <div className="font-semibold text-[#FFE1C5]">
                   {item.name}
                 </div>

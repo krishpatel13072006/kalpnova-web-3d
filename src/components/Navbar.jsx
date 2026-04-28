@@ -252,8 +252,8 @@ export default function Navbar() {
             )}
 
             {links.map((item) => {
-              const isActive = item.to === "/" 
-                ? location.pathname === "/" 
+              const isActive = item.to === "/"
+                ? location.pathname === "/"
                 : (location.pathname.startsWith(item.to) || (item.label === "Work Portfolio" && location.pathname.startsWith("/portfolio")));
               const isClicked = clickedPath === item.to;
 
@@ -291,7 +291,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <a
               href="/insidekalpnova"
-              className="hidden md:inline-flex items-center gap-2
+              className="hidden md:inline-flex items-center justify-center
               px-5 py-2 rounded-full
               bg-gradient-to-r from-[#FF8A00] to-[#E24A2B]
               text-[#FFE1C5] text-sm font-medium
@@ -299,7 +299,6 @@ export default function Navbar() {
               active:scale-[0.97] transition"
             >
               Inside Kalpnova
-              <span className="text-xs"></span>
             </a>
 
 
@@ -330,8 +329,8 @@ export default function Navbar() {
 
           <div className="text-center space-y-6 flex flex-col items-center">
             {links.map((item, i) => {
-              const isActive = item.to === "/" 
-                ? location.pathname === "/" 
+              const isActive = item.to === "/"
+                ? location.pathname === "/"
                 : (location.pathname.startsWith(item.to) || (item.label === "Work Portfolio" && location.pathname.startsWith("/portfolio")));
 
               return (
@@ -361,7 +360,7 @@ export default function Navbar() {
                 transform: mounted ? "translateY(0)" : "translateY(40px)",
                 transition: `all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) ${0.1 + links.length * 0.12}s`
               }}
-              className="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-[#FF8A00] to-[#E24A2B] text-[#FFE1C5] text-xl font-medium shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-[#FF8A00] to-[#E24A2B] text-[#FFE1C5] text-xl font-medium shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
             >
               Inside Kalpnova
             </div>

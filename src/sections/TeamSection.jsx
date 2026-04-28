@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useAnimationFrame } from 'framer-motion';
-import TimelineButterfly from '../components/TimelineButterfly';
+
 
 // ─── Social Icon SVGs ────────────────────────────────────────────────────────
 
@@ -330,8 +330,11 @@ function MemberCard({ member, index, activeCard, setActiveCard }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
+                height: '2rem',
                 gap: 8,
-                padding: '6px 16px',
+                padding: '0 16px',
+                paddingTop: 2,
                 borderRadius: 100,
                 background: `linear-gradient(135deg, ${accent}22, ${member.accentTo}11)`,
                 border: `1px solid ${accent}40`,
@@ -370,21 +373,6 @@ function MemberCard({ member, index, activeCard, setActiveCard }) {
               
               {/* Pink Butterfly Name Hopper placed safely inside an inline span */}
               <span style={{ display: 'inline-block', position: 'relative', width: 0, height: 0, marginLeft: '10px' }}>
-                {activeCard === index && (
-                  <motion.div
-                    layoutId="name-hopper"
-                    transition={{ type: 'spring', damping: 12, stiffness: 40 }}
-                    style={{
-                      position: 'absolute',
-                      bottom: '5px',
-                      left: '0px',
-                      zIndex: 20,
-                      rotate: 25,
-                    }}
-                  >
-                    <TimelineButterfly scale={0.45} />
-                  </motion.div>
-                )}
               </span>
             </h3>
           </motion.div>
@@ -420,6 +408,7 @@ function MemberCard({ member, index, activeCard, setActiveCard }) {
                 margin: 0,
                 paddingLeft: '1.2rem',
                 borderLeft: `3px solid ${accent}`,
+                textAlign: 'justify'
               }}
             >
               {member.quote}
@@ -434,6 +423,7 @@ function MemberCard({ member, index, activeCard, setActiveCard }) {
                 color: 'rgba(255,225,197,0.65)',
                 lineHeight: 1.8,
                 margin: 0,
+                textAlign: 'justify'
               }}
             >
               {member.bio}

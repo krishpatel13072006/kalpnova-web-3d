@@ -12,7 +12,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative mt-32 border-t border-white/10">
+    <footer className="relative mt-0 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 md:grid-cols-3">
         {/* BRAND */}
         <div className="space-y-4">
@@ -33,7 +33,7 @@ export default function Footer() {
           </button>
 
           <p className="text-sm max-w-xs text-[#FFE1C5]">
-            Stop Looking Random. Start Looking Premium. <br/><br/>
+            Stop Looking Random. Start Looking Premium. <br /><br />
             Kalpnova Design Studio — Ahmedabad, Gujarat, India
           </p>
         </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "../lib/gsap";
 import PinnedStory from "../sections/PinnedStory";
 import Services from "../sections/ServicesGrid";
-import Contact from "../sections/Contact";
+
 import Testimonials from "../sections/Testimonials";
 import Clients from "../sections/Clients";
 import AboutCards from "../components/AboutCards";
@@ -56,7 +56,7 @@ export default function Home() {
           {/* TOP CONNECTOR */}
           <div className="flex items-center justify-center gap-4 mb-12 text-white/80">
             <span className="h-px w-20 bg-white/30" />
-            <span className="px-4 py-1 text-xs rounded-full border border-white/30 bg-black/20 backdrop-blur-sm uppercase">
+            <span className="inline-flex items-center justify-center px-6 h-8 text-xs rounded-full border border-white/30 bg-black/20 backdrop-blur-sm uppercase pt-[2px]">
               ⭐ All in All solution at one place
             </span>
             <span className="h-px w-20 bg-white/30" />
@@ -97,7 +97,8 @@ export default function Home() {
               rel="noopener noreferrer"
               className="relative z-[9999] px-7 py-3 rounded-full
     bg-zinc-950 border border-white/10 text-white shadow-xl
-    hover:bg-[#222] hover:border-white/30 transition text-center"
+    hover:bg-[#222] hover:border-white/30 transition 
+    inline-flex items-center justify-center text-center min-w-[180px]"
             >
               Chat Now
             </a>
@@ -105,7 +106,8 @@ export default function Home() {
               href="/services"
               className="relative z-[9999] px-7 py-3 rounded-full
   bg-white text-black font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)]
-  hover:scale-[1.04] transition text-center"
+  hover:scale-[1.04] transition 
+  inline-flex items-center justify-center text-center min-w-[180px]"
             >
               Our Services
             </a>
@@ -151,8 +153,7 @@ export default function Home() {
       <Testimonials />
       <div className="py-12 md:py-20" />
       <AboutCards />
-      {/* CONTACT */}
-      <Contact />
+
 
     </>
   );

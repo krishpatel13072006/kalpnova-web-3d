@@ -43,7 +43,7 @@ const FoldingGallery = ({
         </div>
 
         {/* Dynamic Status Badge */}
-        <div className="flex items-center gap-3 text-xs md:text-sm font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-white/10 bg-white/5 w-fit">
+        <div className="inline-flex items-center justify-center gap-3 text-xs md:text-sm font-bold uppercase tracking-widest px-4 h-9 rounded-full border border-white/10 bg-white/5 w-fit pt-[2px]">
           {isHovered ? (
             <>
               <Pause size={14} className="text-zinc-500" />

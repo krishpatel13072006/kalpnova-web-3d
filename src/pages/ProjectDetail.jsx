@@ -36,7 +36,7 @@ const ProjectCard = ({ proj }) => (
       </div>
     </div>
     <div className="px-2 mb-2">
-      <span className="text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
+      <span className="inline-flex items-center justify-center h-5 pt-[1px] text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5">
         {proj.category || 'Work'}
       </span>
     </div>

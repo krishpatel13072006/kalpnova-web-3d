@@ -83,9 +83,8 @@ const PortfolioCard = memo(({ item }) => {
           </div>
         </div>
 
-        {/* Category pill */}
         <div className="px-2 mb-2">
-          <span className="text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5 py-0.5">
+          <span className="inline-flex items-center justify-center h-5 pt-[1px] text-[9px] font-black uppercase text-[#ff6b2b] border border-[#ff6b2b]/30 rounded-full px-2.5">
             {item.category || 'Work'}
           </span>
         </div>
@@ -146,7 +145,7 @@ export default function WorkPortfolio({ headingLevel = "h1" }) {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-xs font-black uppercase border transition-all duration-300
+                className={`inline-flex items-center justify-center px-5 h-8 pt-[2px] rounded-full text-xs font-black uppercase border transition-all duration-300
                   ${activeCategory === cat
                     ? 'bg-[#ff6b2b] border-[#ff6b2b] text-white shadow-[0_0_20px_rgba(255,107,43,0.4)]'
                     : 'bg-transparent border-white/20 text-white/60 hover:border-white/50 hover:text-white'

@@ -1,7 +1,7 @@
 import WorkPortfolio from "./workportfolio";
 import SEO from "../components/SEO";
 import FAQ from "../sections/FAQ";
-import Contact from "../sections/Contact";
+
 import { motion } from "framer-motion";
 
 export default function Services() {
@@ -24,9 +24,9 @@ export default function Services() {
             animate={{ opacity: 1, y: 0 }}
             className="flex justify-center mb-8"
           >
-            <span className="px-5 py-1.5 text-[10px] tracking-[0.3em] rounded-full border border-orange-500/20 
+            <span className="inline-flex items-center justify-center px-5 h-8 text-[10px] tracking-[0.3em] rounded-full border border-orange-500/20 
                              bg-orange-500/5 text-orange-500 font-bold uppercase backdrop-blur-sm
-                             shadow-[0_0_20px_rgba(255,107,43,0.1)]">
+                             shadow-[0_0_20px_rgba(255,107,43,0.1)] pt-[2px]">
               Capabilities
             </span>
           </motion.div>
@@ -58,8 +58,7 @@ export default function Services() {
       {/* FAQ SECTION */}
       <FAQ />
 
-      {/* CTA SECTION */}
-      <Contact />
+
     </main>
   );
 }

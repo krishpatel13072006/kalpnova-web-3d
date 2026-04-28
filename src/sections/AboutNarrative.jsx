@@ -8,9 +8,9 @@ export default function AboutNarrative() {
     <section className="max-w-7xl mx-auto px-6 py-24">
       {/* HEADER */}
       <div className="text-center mb-24">
-        <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
+        <span className="inline-flex items-center justify-center mb-4 px-4 h-8 text-xs tracking-widest
                          rounded-full border border-orange-500/30
-                         text-orange-500">
+                         text-orange-500 pt-[2px]">
           ABOUT US
         </span>
 

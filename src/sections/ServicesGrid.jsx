@@ -80,9 +80,9 @@ export default function ServicesGrid() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative">
       <div className="mb-20 text-center lg:text-left">
-        <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
+        <span className="inline-flex items-center justify-center mb-4 px-4 h-8 text-xs tracking-widest
                          rounded-full border border-orange-500/30
-                         text-orange-500 font-medium uppercase">
+                         text-orange-500 font-bold uppercase pt-[2px]">
           OUR EXPERTISE
         </span>
         <h2 className="font-heading text-4xl md:text-6xl font-bold text-[#FFE1C5] leading-tight uppercase">
@@ -117,7 +117,7 @@ export default function ServicesGrid() {
                 {s.title}
               </h3>
               
-              <p className="text-zinc-400 mb-2 leading-relaxed text-sm md:text-base group-hover:text-zinc-300 transition-colors">
+              <p className="text-zinc-400 mb-2 leading-relaxed text-sm md:text-base group-hover:text-zinc-300 transition-colors text-justify">
                 {s.desc}
               </p>
 

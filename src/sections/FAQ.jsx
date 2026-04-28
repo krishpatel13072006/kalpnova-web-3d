@@ -45,7 +45,7 @@ function FAQItem({ faq, isOpen, toggle }) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
           >
-            <div className="pb-8 text-zinc-400 leading-relaxed italic text-sm md:text-base max-w-3xl">
+            <div className="pb-8 text-zinc-400 leading-relaxed italic text-sm md:text-base max-w-3xl text-justify">
               {faq.a}
             </div>
           </motion.div>
@@ -60,11 +60,11 @@ export default function FAQ() {
 
   return (
     <section className="py-24 px-6 bg-[#0B0B0C] border-t border-white/5">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="inline-block mb-4 px-4 py-1 text-xs tracking-widest
+          <span className="inline-flex items-center justify-center mb-4 px-4 h-8 text-xs tracking-widest
                            rounded-full border border-orange-500/30
-                           text-orange-500 font-medium">
+                           text-orange-500 font-bold uppercase pt-[2px]">
             HELP CENTER
           </span>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#FFE1C5] uppercase">

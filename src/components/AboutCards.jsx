@@ -115,7 +115,7 @@ const AboutCards = () => {
 
               {/* Card Bottom Half */}
               <div className="p-6 pt-4 flex-grow">
-                <p className="text-sm text-zinc-800 leading-relaxed font-normal">
+                <p className="text-sm text-zinc-800 leading-relaxed font-normal text-justify">
                   {card.description}
                 </p>
               </div>
