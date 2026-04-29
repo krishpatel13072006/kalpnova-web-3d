@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#0a0a0a] text-neutral-200">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Adaptive Gallery & 3D Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base typography and layout */
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; background-color: #050505; }
+        
+        /* =========================================
+           1. GRID GALLERY STYLES
+           ========================================= */
+        .gallery-box {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #111;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .box-label {
+            position: absolute; bottom: 1rem; left: 1rem;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(8px);
+            color: #fcd34d; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 0.35rem 0.8rem; border-radius: 9999px; z-index: 50;
+            pointer-events: none; border: 1px solid rgba(252, 211, 77, 0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .anim-slide {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            will-change: transform, opacity; display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+
+        .anim-slide::before {
+            content: ""; position: absolute; inset: -15%;
+            background-image: var(--bg-img); background-size: cover; background-position: center;
+            filter: blur(25px) brightness(0.3); z-index: 0; transform: scale(1.1);
+        }
+
+        .anim-slide img.content-img {
+            position: relative; max-width: 90%; max-height: 90%; object-fit: contain; z-index: 10;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); border-radius: 4px;
+        }
+
+        /* Gallery Animations */
+        .crossfade .anim-slide { opacity: 0; animation: crossfadeAnim 9s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes crossfadeAnim { 0%, 11% { opacity: 0; } 22%, 33.33% { opacity: 1; } 44%, 100% { opacity: 0; } }
+
+        .animate-scroll { display: flex; flex-direction: column; width: 100%; animation: scrollY 20s linear infinite; }
+        .scroll-item {
+            position: relative; width: 100%; aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; overflow: hidden; flex-shrink: 0;
+        }
+        .scroll-item::before {
+            content: ""; position: absolute; inset: -15%; background-image: var(--bg-img); background-size: cover; background-position: center; filter: blur(25px) brightness(0.3); z-index: 0; transform: scale(1.1);
+        }
+        .scroll-item img.content-img { position: relative; max-width: 90%; max-height: 90%; object-fit: contain; z-index: 10; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); border-radius: 4px; }
+        @keyframes scrollY { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+        .slide-lr .anim-slide { transform: translateX(-100%); animation: slideLRAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+        @keyframes slideLRAnim { 0%, 11.11% { transform: translateX(-100%); opacity: 0; } 11.12% { opacity: 1; } 22.22%, 33.33% { transform: translateX(0); opacity: 1; } 44.44%, 100% { transform: translateX(100%); opacity: 1; } }
+
+        .slide-rl .anim-slide { transform: translateX(100%); animation: slideRLAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+        @keyframes slideRLAnim { 0%, 11.11% { transform: translateX(100%); opacity: 0; } 11.12% { opacity: 1; } 22.22%, 33.33% { transform: translateX(0); opacity: 1; } 44.44%, 100% { transform: translateX(-100%); opacity: 1; } }
+
+        .ken-burns .anim-slide { opacity: 0; transform: scale(1); animation: kenBurnsAnim 9s infinite ease-in-out; }
+        @keyframes kenBurnsAnim { 0% { opacity: 0; transform: scale(1); } 5%, 33.33% { opacity: 1; } 38.33%, 100% { opacity: 0; transform: scale(1.12); } }
+
+        .slide-tb .anim-slide { transform: translateY(-100%); animation: slideTBAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+        @keyframes slideTBAnim { 0%, 11.11% { transform: translateY(-100%); opacity: 0; } 11.12% { opacity: 1;} 22.22%, 33.33% { transform: translateY(0); opacity: 1;} 44.44%, 100% { transform: translateY(100%); opacity: 1;} }
+
+        .slide-bt .anim-slide { transform: translateY(100%); animation: slideBTAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+        @keyframes slideBTAnim { 0%, 11.11% { transform: translateY(100%); opacity: 0; } 11.12% { opacity: 1;} 22.22%, 33.33% { transform: translateY(0); opacity: 1;} 44.44%, 100% { transform: translateY(-100%); opacity: 1;} }
+
+        .zoom-pulse .anim-slide { opacity: 0; transform: scale(1); animation: zoomPulseAnim 9s infinite linear; }
+        @keyframes zoomPulseAnim { 0% { opacity: 1; transform: scale(1); z-index: 10; } 33.33% { opacity: 1; transform: scale(1.08); z-index: 10; } 33.34%, 100% { opacity: 0; transform: scale(1.08); z-index: 1; } }
+
+        .delay-0 { animation-delay: 0s !important; } .delay-3 { animation-delay: 3s !important; } .delay-6 { animation-delay: 6s !important; }
+
+        /* =========================================
+           2. FIRST LOOK 3D BOOK SHOWCASE
+           ========================================= */
+        .book-scene {
+            perspective: 2500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 4rem 0;
+        }
+
+        .book {
+            position: relative;
+            /* 2:1 aspect ratio to fit two square-ish pages side by side */
+            width: 90vw;
+            max-width: 1400px;
+            height: 45vw;
+            max-height: 700px;
+            transform-style: preserve-3d;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9);
+            border-radius: 8px;
+        }
+
+        /* Dynamic Spine Separator Line */
+        .spine-overlay {
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 60px; /* narrowed for a cleaner crease */
+            transform: translateX(-50%);
+            /* Sharper, less blurred gradient for the crease */
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0,0,0,0) 40%, 
+                rgba(0,0,0,0.85) 50%, 
+                rgba(0,0,0,0) 60%, 
+                transparent 100%
+            );
+            z-index: 1000;
+            pointer-events: none;
+            
+            /* Hidden by default, smoothly transitions when active */
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        /* When the JS adds the 'is-flipping' class to the book container, the spine appears */
+        .book.is-flipping .spine-overlay {
+            opacity: 1;
+        }
+
+        .book-sheet {
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%; height: 100%;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            /* 1.8s page turn duration */
+            transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            will-change: transform;
+        }
+
+        .book-sheet.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .book-face {
+            position: absolute;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            background-size: 200% 100%;
+            background-repeat: no-repeat;
+            transition: filter 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Removed static inset shadows to prevent dark blurry background in center */
+        .book-face.front {
+            background-position: right center;
+            border-radius: 0 8px 8px 0;
+            filter: brightness(1);
+        }
+
+        .book-face.back {
+            transform: rotateY(180deg);
+            background-position: left center;
+            border-radius: 8px 0 0 8px;
+            filter: brightness(0.4);
+        }
+
+        .book-sheet.flipped .front { filter: brightness(0.4); }
+        .book-sheet.flipped .back { filter: brightness(1); }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-500 selection:text-neutral-900">
+
+    <header class="w-full py-16 px-6 flex flex-col items-center justify-center text-center relative z-10 border-b border-white/5">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-400 to-amber-200 mb-4">
+            BOOSTIQ SHOWCASE
+        </h1>
+        <p class="text-neutral-400 max-w-2xl text-sm md:text-base font-light tracking-wide">
+            Scroll down to view the realistic 3D Catalog Layout. <br/>
+            Intelligently maps both multi-page spreads and single portraits.
+        </p>
+    </header>
+
+    <!-- SECTION 1: Grid Gallery TOP (2x2 layout) -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="gallery-grid-top" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <!-- Populated via JS -->
+        </div>
+    </section>
+
+    <!-- SECTION 2: 3D Book Showcase -->
+    <section class="w-full relative overflow-hidden flex flex-col items-center border-y border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,1)] bg-[#050505]">
+        <div class="text-center mt-12 mb-4 relative z-10">
+            <h2 class="text-2xl tracking-widest text-amber-500 font-light uppercase">The Catalog</h2>
+            <p class="text-neutral-500 text-sm mt-2 max-w-xl mx-auto px-4">
+                Continuous Multi-Spread 3D Visualization
+            </p>
+        </div>
+
+        <div class="book-scene">
+            <div id="3d-book" class="book">
+                <div class="spine-overlay"></div>
+                <!-- Book pages generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Grid Gallery BOTTOM (2x2 layout) -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="gallery-grid-bottom" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <!-- Populated via JS -->
+        </div>
+    </section>
+
+    <footer class="text-center py-12 text-neutral-600 text-sm tracking-widest">
+        &copy; 2026 BOOSTIQ NUTRITION.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ==========================================
+            // 1. GRID GALLERY DATA (Split across Top and Bottom 2x2 Grids)
+            // ==========================================
+            const gridContainerTop = document.getElementById('gallery-grid-top');
+            const gridContainerBottom = document.getElementById('gallery-grid-bottom');
+            
+            // Using the uploaded portrait/square Boostiq product images
+            const boostiqProducts = [
+                '7.jpg', '8.jpg', '9.jpg', '10.jpg', '12.jpg'
+            ];
+
+            // 8 specific boxes to fill out the two sections beautifully
+            const boxes = [
+                { type: 'crossfade', title: 'Crossfade', imgs: [boostiqProducts[0], boostiqProducts[1], boostiqProducts[2]] },
+                { type: 'infinite-scroll', title: 'Infinite Scroll', imgs: [boostiqProducts[3], boostiqProducts[4], boostiqProducts[0]] },
+                { type: 'slide-lr', title: 'Slide L-to-R', imgs: [boostiqProducts[1], boostiqProducts[2], boostiqProducts[3]] },
+                { type: 'ken-burns', title: 'Ken Burns', imgs: [boostiqProducts[4], boostiqProducts[0], boostiqProducts[1]] },
+                { type: 'slide-rl', title: 'Slide R-to-L', imgs: [boostiqProducts[2], boostiqProducts[3], boostiqProducts[4]] },
+                { type: 'slide-tb', title: 'Slide T-to-B', imgs: [boostiqProducts[0], boostiqProducts[1], boostiqProducts[2]] },
+                { type: 'slide-bt', title: 'Slide B-to-T', imgs: [boostiqProducts[3], boostiqProducts[4], boostiqProducts[0]] },
+                { type: 'zoom-pulse', title: 'Zoom Pulse', imgs: [boostiqProducts[1], boostiqProducts[2], boostiqProducts[3]] }
+            ];
+
+            boxes.forEach((box, index) => {
+                const boxEl = document.createElement('div');
+                boxEl.className = `gallery-box ${box.type}`;
+                const label = document.createElement('div'); label.className = 'box-label'; label.textContent = box.title;
+                boxEl.appendChild(label);
+
+                if (box.type === 'infinite-scroll') {
+                    const track = document.createElement('div'); track.className = 'animate-scroll';
+                    const scrollImgs = [...box.imgs, ...box.imgs]; // double for seamless infinite loop
+                    scrollImgs.forEach(imgUrl => {
+                        const item = document.createElement('div'); item.className = 'scroll-item'; item.style.setProperty('--bg-img', `url(${imgUrl})`);
+                        const img = document.createElement('img'); img.src = imgUrl; img.className = 'content-img'; item.appendChild(img); track.appendChild(item);
+                    });
+                    boxEl.appendChild(track);
+                } else {
+                    box.imgs.forEach((imgUrl, imgIndex) => {
+                        const slide = document.createElement('div'); slide.className = `anim-slide delay-${imgIndex * 3}`; slide.style.setProperty('--bg-img', `url(${imgUrl})`);
+                        const img = document.createElement('img'); img.src = imgUrl; img.className = 'content-img'; slide.appendChild(img); boxEl.appendChild(slide);
+                    });
+                }
+                
+                // First 4 go to top grid, next 4 go to bottom grid
+                if (index < 4) {
+                    gridContainerTop.appendChild(boxEl);
+                } else {
+                    gridContainerBottom.appendChild(boxEl);
+                }
+            });
+
+            // ==========================================
+            // 2. FIRST LOOK 3D BOOK LOGIC
+            // ==========================================
+            const bookContainer = document.getElementById('3d-book');
+            
+            // Utilizing the uploaded landscape spreads for the book layout
+            const bookImages = [
+                '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'
+            ];
+
+            const N = bookImages.length;
+            const sheets = [];
+
+            // Create Base Left Page
+            // Removed shadow-[inset...] utility to keep image 100% clean and clear
+            const baseLeft = document.createElement('div');
+            baseLeft.className = 'absolute top-0 left-0 w-1/2 h-full rounded-l-[8px] z-0 bg-cover';
+            baseLeft.style.backgroundImage = `url(${bookImages[0]})`;
+            baseLeft.style.backgroundPosition = 'left center';
+            baseLeft.style.backgroundSize = '200% 100%';
+            bookContainer.appendChild(baseLeft);
+
+            // Create Base Right Page
+            // Removed shadow-[inset...] utility
+            const baseRight = document.createElement('div');
+            baseRight.className = 'absolute top-0 right-0 w-1/2 h-full rounded-r-[8px] z-0 bg-cover';
+            baseRight.style.backgroundImage = `url(${bookImages[N-1]})`;
+            baseRight.style.backgroundPosition = 'right center';
+            baseRight.style.backgroundSize = '200% 100%';
+            bookContainer.appendChild(baseRight);
+
+            // Create Flipping Sheets
+            for (let i = 0; i < N - 1; i++) {
+                const sheet = document.createElement('div');
+                sheet.className = 'book-sheet';
+                sheet.style.zIndex = N - i; 
+                
+                const front = document.createElement('div');
+                front.className = 'book-face front';
+                front.style.backgroundImage = `url(${bookImages[i]})`;
+                
+                const back = document.createElement('div');
+                back.className = 'book-face back';
+                back.style.backgroundImage = `url(${bookImages[i+1]})`;
+                
+                sheet.appendChild(front);
+                sheet.appendChild(back);
+                bookContainer.appendChild(sheet);
+                sheets.push(sheet);
+            }
+
+            // Book Animation Logic
+            let currentSpread = 0;
+            const flipInterval = 4500; 
+
+            function nextSpread() {
+                // Show the spine line right as the turn starts
+                bookContainer.classList.add('is-flipping');
+
+                if (currentSpread < N - 1) {
+                    const sheet = sheets[currentSpread];
+                    
+                    // Trigger the 3D flip
+                    sheet.classList.add('flipped');
+                    
+                    // Halfway through rotation, swap Z-index
+                    setTimeout(() => {
+                        sheet.style.zIndex = currentSpread + 1;
+                    }, 900); 
+
+                    // Remove the spine separator exactly when the 1.8s page flip completes
+                    setTimeout(() => {
+                        bookContainer.classList.remove('is-flipping');
+                    }, 1800);
+                    
+                    currentSpread++;
+                } else {
+                    // Loop reached end. Instantly snap back to start.
+                    sheets.forEach((s, idx) => {
+                        s.style.transition = 'none'; 
+                        s.classList.remove('flipped');
+                        s.style.zIndex = N - idx;
+                        s.querySelector('.front').style.transition = 'none';
+                        s.querySelector('.back').style.transition = 'none';
+                    });
+                    
+                    // Force browser reflow to apply instant changes
+                    void bookContainer.offsetWidth;
+                    
+                    // Re-enable transitions
+                    sheets.forEach(s => {
+                        s.style.transition = '';
+                        s.querySelector('.front').style.transition = '';
+                        s.querySelector('.back').style.transition = '';
+                    });
+                    
+                    currentSpread = 0;
+                    bookContainer.classList.remove('is-flipping'); // keep hidden on instant reset
+                }
+            }
+
+            // Start Book Loop
+            setInterval(nextSpread, flipInterval);
+        });
+    </script>
+</body>
+</html>

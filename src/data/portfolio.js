@@ -571,44 +571,7 @@ export const portfolioItems = [
       "/clients/thumbnail/ram navmi 2024.webp"
     ]
   },
-  {
-    id: 22,
-    isComingSoon: true,
-    title: "Impactful Branding & Outdoor Hoardings",
-    client: "Various",
-    type: "Branding, Print Media, Large Format",
-    category: "Coming Soon",
-    image: "/clients/Branding and horders/Branding and Horders (1).webp",
-    heroImage: "/clients/Branding and horders/Branding and Horders (1).webp",
-    tags: "Branding, Hoardings, Outdoor Ads",
-    brandOverview: "Large-scale branding and hoarding designs that dominate outdoor landscapes with clear, high-impact brand messaging.",
-    challenge: "Designing for massive scale while ensuring perfect legibility and visual weight from a distance.",
-    perceptionShift: "Transforming busy urban spaces into opportunities for iconic brand presence.",
-    endorsement: "Redefined street-level brand visibility for multiple regional and national clients.",
-    graphics: [
-      { title: "MACRO SCALE.", img: "https://cdn-icons-png.flaticon.com/512/1048/1048953.webp", subtitle: "Built for distance.", badge: "Hoarding" },
-      { title: "STRIKING VISUALS.", img: "https://cdn-icons-png.flaticon.com/512/3256/3256248.webp", subtitle: "Grab attention.", badge: "Outdoor Ads" },
-      { title: "BRAND AUTHORITY.", img: "https://cdn-icons-png.flaticon.com/512/3062/3062295.webp", subtitle: "Clear messaging.", badge: "Visibility" }
-    ],
-    billboardImage: "/clients/Branding and horders/Branding and Horders (9).webp",
-    billboardTitle: "Outdoor Branding Excellence",
-    videoThumbnail: "/clients/Branding and horders/Branding and Horders (4).webp",
-    videoText: "Branding & Hoardings | Dominating the Landscape...",
-    services: "Branding, Print Media",
-    industry: "Advertising & Branding",
-    stats: [{ label: "Impressions", value: "Million+" }, { label: "Brand Recall", value: "Tier 1" }, { label: "Precision", value: "Vector" }],
-    gallery: [
-      "/clients/Branding and horders/Branding and Horders (1).webp",
-      "/clients/Branding and horders/Branding and Horders (2).webp",
-      "/clients/Branding and horders/Branding and Horders (3).webp",
-      "/clients/Branding and horders/Branding and Horders (4).webp",
-      "/clients/Branding and horders/Branding and Horders (5).webp",
-      "/clients/Branding and horders/Branding and Horders (6).webp",
-      "/clients/Branding and horders/Branding and Horders (7).webp",
-      "/clients/Branding and horders/Branding and Horders (8).webp",
-      "/clients/Branding and horders/Branding and Horders (9).webp"
-    ]
-  },
+
   {
     id: 23,
     title: "Swachh Bharat Campaign Print Design",

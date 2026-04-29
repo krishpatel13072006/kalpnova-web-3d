@@ -19,6 +19,8 @@ import WorkPortfolio from './pages/workportfolio';
 import ProjectDetail from './pages/ProjectDetail';
 import Vision360 from './pages/Vision360';
 import KalpnovaPavilion from './pages/KalpnovaPavilion';
+import ThumbnailShowcasePage from './pages/ThumbnailShowcasePage';
+
 import { ThemeProvider } from './context/ThemeContext';
 
 const PageTransition = ({ children }) => (
@@ -56,6 +58,8 @@ export default function App() {
           <Route path="/pavilion" element={<PageTransition><KalpnovaPavilion /></PageTransition>} />
           <Route path="/portfolio" element={<PageTransition><WorkPortfolio /></PageTransition>} />
           <Route path="/portfolio/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
+          <Route path="/thumbnail-showcase" element={<PageTransition><ThumbnailShowcasePage /></PageTransition>} />
+
         </Routes>
       </AnimatePresence>
 

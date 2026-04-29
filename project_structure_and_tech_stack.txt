@@ -1,0 +1,64 @@
+# Kalpnova Web 3D: Project Blueprint & Technical Documentation
+
+## 🚀 Tech Stack (Frameworks, Tools & Technologies)
+
+### Core Frameworks
+- **React 19**: The primary UI library for building the component-based architecture.
+- **Vite 7**: The build tool and development server, providing fast HMR (Hot Module Replacement).
+- **React Router Dom 7**: Handles the application's routing and dynamic project page logic.
+
+### 3D Graphics & Rendering
+- **Three.js**: The underlying engine for 3D web graphics.
+- **@react-three/fiber**: A React-based bridge for Three.js.
+- **@react-three/drei**: Useful helpers and abstractions for React Three Fiber.
+- **@react-three/postprocessing**: Advanced visual effects like bloom, noise, and depth of field.
+- **OGL**: A minimal WebGL library used alongside Three.js for specific high-performance visual elements.
+
+### Animation & Interaction
+- **GSAP (GreenSock Animation Platform)**: Powering high-end, scroll-triggered animations and text entrances.
+- **Framer Motion**: Used for declarative page transitions and smooth UI interactions.
+- **Lenis**: A lightweight smooth-scrolling library used to enhance the cinematic feel of the site.
+
+### Styling & UI Design
+- **Tailwind CSS**: Utility-first CSS framework for rapid and consistent styling.
+- **Lucide React**: Modern and minimal icon set.
+- **Grain Overlay**: A custom global pixel-noise layer for tactile, cinematic texture.
+- **Theme System**: Custom context-based theme management (likely supporting dark/light modes or color shifts).
+
+### SEO & Performance
+- **React Helmet Async**: Manages metadata and SEO tags for each page.
+- **Puppeteer**: Used for headless browser-based prerendering (via `scripts/prerender.cjs`) to improve SEO and social sharing.
+- **Sharp**: Optimized image processing for high-performance asset loading.
+
+---
+
+## 🏗 Website Structure
+
+### Directory Organization
+- `/src/pages`: Contains the main route components (Home, Portfolio, Services, etc.).
+- `/src/components`: Reusable UI elements (Navbar, Footer, SmoothScroll, etc.).
+- `/src/sections`: Specific modular segments used within pages (e.g., Hero, ServicesGrid).
+- `/src/data`: Centralized data store for portfolio items and content.
+- `/src/context`: React Context providers (Theme, etc.).
+- `/src/lib`: Utility functions and third-party library initializations.
+- `/scripts`: Custom build-time automation (Image optimization, Prerendering).
+
+### Page Blueprints
+1. **Home (`/`)**: High-impact landing page with GSAP animations, services overview, and trust-building sections.
+2. **Work Portfolio (`/portfolio`)**: A "digital archive" using a folder-style UI metaphor for project navigation.
+3. **Project Details (`/portfolio/:id`)**: Dynamic case study layout showcasing challenges, strategies, and measurable impact.
+4. **Services (`/services`)**: Detailed breakdown of business offerings with interactive elements.
+5. **Vision 360 (`/vision`)**: Likely a specialized page for 3D/VR showcasing.
+6. **Live Lab (`/live`)**: Real-time or experimental feature showcase.
+7. **Kalpnova Pavilion (`/pavilion`)**: Interactive 3D environment/showroom.
+8. **Virtual Exhibition (`/showcase`)**: Gallery of digital exhibition spaces.
+9. **About (`/about`)**: Brand story and mission.
+10. **Contact (`/contact`)**: Lead generation point with custom forms.
+
+---
+
+## 📐 Design Blueprints & Visual Logic
+- **Visual Identity**: Deep black base (`#0B0B0C`) with orange accent glows (`#ff6b2b`).
+- **Typography**: Clean, high-contrast sans-serif type for a premium "Apple-like" or "Industrial-Tech" aesthetic.
+- **Layout Logic**: Modular 60px grid system, interactive line patterns, and glassmorphism (translucent) effects.
+- **User Experience**: Cinematic smooth scrolling, coordinated entrance animations, and tactile feedback (grain noise).

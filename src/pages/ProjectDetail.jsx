@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Play, ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
 import { portfolioItems } from '../data/portfolio';
 import GalleryMosaic from '../components/GalleryMosaic';
+import ThumbnailShowcase from '../components/ThumbnailShowcase';
+
 
 /**
  * SUB-COMPONENTS
@@ -207,6 +209,12 @@ const ProjectDetail = () => {
             <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase leading-[0.9] transition-colors duration-500 text-white">
               {project.title}
             </h1>
+            {project.id === 21 && (
+              <Link to="/thumbnail-showcase" className="mt-4 inline-flex items-center gap-2 text-[#ff6b2b] hover:text-white transition-colors group">
+                <span className="text-xs font-bold uppercase tracking-widest">View Interactive Showcase</span>
+                <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            )}
             <div className={`w-24 h-[3px] mt-6 transition-colors duration-500 ${themeStyles.accentBg}`}></div>
           </motion.div>
 
@@ -378,6 +386,19 @@ const ProjectDetail = () => {
                 loading="lazy"
                 allow="accelerometer; autoplay"
               />
+            </div>
+          </section>
+        )}
+
+        {project.id === 21 && (
+          <section className="mt-24 md:mt-32">
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8">
+              <span className="text-[10px] font-black uppercase text-[#ff6b2b] block mb-3">Interactive Showcase</span>
+              <h2 className="font-heading text-2xl md:text-4xl font-black uppercase text-white">3D Catalog <span className="text-gray-700 italic">& Gallery</span></h2>
+              <p className="text-sm text-gray-500 mt-3">Explore high-converting thumbnail strategies through our 3D layout</p>
+            </motion.div>
+            <div className="w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl relative">
+              <ThumbnailShowcase />
             </div>
           </section>
         )}

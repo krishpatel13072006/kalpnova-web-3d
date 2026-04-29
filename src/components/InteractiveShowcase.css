@@ -1,0 +1,149 @@
+/* ThumbnailShowcase.css */
+
+.gallery-box {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.box-label {
+    position: absolute; bottom: 1rem; left: 1rem;
+    background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(8px);
+    color: #fcd34d; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 0.35rem 0.8rem; border-radius: 9999px; z-index: 50;
+    pointer-events: none; border: 1px solid rgba(252, 211, 77, 0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.anim-slide {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    will-change: transform, opacity; display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+}
+
+.anim-slide img.content-img {
+    position: relative; width: 100%; height: 100%; object-fit: contain; z-index: 10;
+}
+
+/* Gallery Animations */
+.crossfade .anim-slide { opacity: 0; animation: crossfadeAnim 9s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes crossfadeAnim { 0%, 11% { opacity: 0; } 22%, 33.33% { opacity: 1; } 44%, 100% { opacity: 0; } }
+
+.animate-scroll { display: flex; flex-direction: column; width: 100%; animation: scrollY 1.2s linear infinite; }
+.scroll-item {
+    position: relative; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; flex-shrink: 0;
+}
+.scroll-item img.content-img { position: relative; width: 100%; height: auto; object-fit: contain; z-index: 10; }
+@keyframes scrollY { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+.slide-lr .anim-slide { transform: translateX(-100%); animation: slideLRAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+@keyframes slideLRAnim { 0%, 11.11% { transform: translateX(-100%); opacity: 0; } 11.12% { opacity: 1; } 22.22%, 33.33% { transform: translateX(0); opacity: 1; } 44.44%, 100% { transform: translateX(100%); opacity: 1; } }
+
+.slide-rl .anim-slide { transform: translateX(100%); animation: slideRLAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+@keyframes slideRLAnim { 0%, 11.11% { transform: translateX(100%); opacity: 0; } 11.12% { opacity: 1; } 22.22%, 33.33% { transform: translateX(0); opacity: 1; } 44.44%, 100% { transform: translateX(-100%); opacity: 1; } }
+
+.ken-burns .anim-slide { opacity: 0; transform: scale(1); animation: kenBurnsAnim 9s infinite ease-in-out; }
+@keyframes kenBurnsAnim { 0% { opacity: 0; transform: scale(1); } 5%, 33.33% { opacity: 1; } 38.33%, 100% { opacity: 0; transform: scale(1.12); } }
+
+.slide-tb .anim-slide { transform: translateY(-100%); animation: slideTBAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+@keyframes slideTBAnim { 0%, 11.11% { transform: translateY(-100%); opacity: 0; } 11.12% { opacity: 1;} 22.22%, 33.33% { transform: translateY(0); opacity: 1;} 44.44%, 100% { transform: translateY(100%); opacity: 1;} }
+
+.slide-bt .anim-slide { transform: translateY(100%); animation: slideBTAnim 9s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+@keyframes slideBTAnim { 0%, 11.11% { transform: translateY(100%); opacity: 0; } 11.12% { opacity: 1;} 22.22%, 33.33% { transform: translateY(0); opacity: 1;} 44.44%, 100% { transform: translateY(-100%); opacity: 1;} }
+
+.zoom-pulse .anim-slide { opacity: 0; transform: scale(1); animation: zoomPulseAnim 9s infinite linear; }
+@keyframes zoomPulseAnim { 0% { opacity: 1; transform: scale(1); z-index: 10; } 33.33% { opacity: 1; transform: scale(1.08); z-index: 10; } 33.34%, 100% { opacity: 0; transform: scale(1.08); z-index: 1; } }
+
+.delay-0 { animation-delay: 0s !important; } .delay-3 { animation-delay: 3s !important; } .delay-6 { animation-delay: 6s !important; }
+
+/* =========================================
+   2. FIRST LOOK 3D BOOK SHOWCASE
+   ========================================= */
+.book-scene {
+    perspective: 2500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem 0;
+}
+
+.book {
+    position: relative;
+    /* 2:1 aspect ratio to fit two square-ish pages side by side */
+    width: 90vw;
+    max-width: 1400px;
+    height: 45vw;
+    max-height: 700px;
+    transform-style: preserve-3d;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9);
+    border-radius: 8px;
+}
+
+/* Dynamic Spine Separator Line */
+.spine-overlay {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 60px; /* narrowed for a cleaner crease */
+    transform: translateX(-50%);
+    /* Sharper, less blurred gradient for the crease */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0,0,0,0) 40%, 
+        rgba(0,0,0,0.85) 50%, 
+        rgba(0,0,0,0) 60%, 
+        transparent 100%
+    );
+    z-index: 1000;
+    pointer-events: none;
+    
+    /* Hidden by default, smoothly transitions when active */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* When the JS adds the 'is-flipping' class to the book container, the spine appears */
+.book.is-flipping .spine-overlay {
+    opacity: 1;
+}
+
+.book-sheet {
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%; height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    /* 1.8s page turn duration */
+    transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform;
+}
+
+.book-sheet.flipped {
+    transform: rotateY(-180deg);
+}
+
+.book-face {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    transition: filter 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Removed static inset shadows to prevent dark blurry background in center */
+.book-face.front {
+    background-position: right center;
+    border-radius: 0 8px 8px 0;
+    filter: brightness(1);
+}
+
+.book-face.back {
+    transform: rotateY(180deg);
+    background-position: left center;
+    border-radius: 8px 0 0 8px;
+    filter: brightness(0.4);
+}
+
+.book-sheet.flipped .front { filter: brightness(0.4); }
+.book-sheet.flipped .back { filter: brightness(1); }
